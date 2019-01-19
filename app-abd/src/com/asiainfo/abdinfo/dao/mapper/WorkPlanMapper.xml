@@ -1,0 +1,24 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.abdinfo.dao.WorkPlanMapper">
+
+	<insert id="addWorkPlan">
+		INSERT INTO work_plan
+           (department,staffCode,staffName,date,actconcom,createDate)
+     VALUES
+           (#{department},#{staffCode},#{staffName},#{date},#{actconcom},#{createDate})
+	</insert>
+	<!-- 第二次插入之前删除上一次提交的数据 -->
+	<delete id="delwkl">
+		delete from work_plan where staffCode=#{usercode} and date=#{nowtime}
+	</delete>
+	<!-- 删除单条数据 -->
+	<delete id="deleteById">
+		delete from work_plan where id=#{id}
+	</delete>
+	
+	<select id="findnowday" resultType="com.asiainfo.abdinfo.po.WorkPlan">
+		select id as id,department,staffCode,staffName,date,actconcom,DATE_FORMAT(createDate,'%H:%i:%S') as createDate
+		from work_plan where staffCode=#{usercode} and date=#{nowday}
+	</select>
+</mapper>

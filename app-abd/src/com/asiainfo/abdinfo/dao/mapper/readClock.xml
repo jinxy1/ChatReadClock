@@ -1,0 +1,131 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.abdinfo.dao.ReadClockDao">
+	<!-- mybatis中最关键的标签：resultMap -->
+
+	<!-- 计划读书日期为应该读的书 -->
+
+	<select id="findReadIndex" parameterType="java.util.Map"
+		resultType="com.asiainfo.abdinfo.po.ReadClock">
+		select rp.staffCode,
+		dp.姓名 as staffName,
+		dp.岗位 as staffJobs,
+		bb.id as
+		bookID,
+		bb.clockBook,
+		rp.clockDate,
+		rd.clockDay,
+		rd.clockDirectory,
+		REPLACE(REPLACE(content,CHAR(10),'\n'),CHAR(13),'\n') content,
+		dp.部门 as
+		department,
+		rp.actualReading,
+		rp.ReadingFeeling,
+		rp.actualReading,
+		rp.num
+		from
+		Reading_plancontent rp
+		left join
+		Reading_detail rd on
+		rp.ChapterId=rd.id
+		left join
+		books bb on rd.BookId=bb.id
+		left join
+		datacenter_personnel dp on rp.staffCode=dp.人员编码
+		where
+		rp.staffCode=#{staffCode}
+		<if test="clockDate != null">
+			and rp.clockDate=#{clockDate}
+		</if>
+
+		<if test="beginClockDate !=null and endClockDate !=null">
+			and clockDate <![CDATA[>=]]>
+			#{beginClockDate} and clockDate<![CDATA[<=]]>#{endClockDate}
+		</if>
+
+		<if test="clockDirectory !=null">
+			and rd.clockDirectory=#{clockDirectory}
+		</if>
+
+	</select>
+
+
+	<!-- count(rp.读书时间) 以读 rp.章节ID 需读 bb.书名 读的本书 -->
+	<select id="findCount" parameterType="java.util.Map"
+		resultType="com.asiainfo.abdinfo.po.ReadCount">
+		select count(DISTINCT rp.actualReading) as readEnd,
+		count(DISTINCT rp.ChapterId) as
+		needRead,
+		count(DISTINCT bb.clockBook)
+		as alreadyBook
+		from
+		Reading_plancontent rp , BOOKS bb
+		where
+		rp.staffCode=#{staffCode}
+	</select>
+
+	<!-- 判断有多少人上线 -->
+	<select id="findCountPeople" parameterType="java.util.Map"
+		resultType="String">
+		select count(*) from Reading_plancontent
+		where clockDate=#{clockDate} AND ReadingFeeling !=''
+	</select>
+
+	<!-- 更新数据即插入数据 -->
+	<update id="updateBook" parameterType="java.util.Map">
+		UPDATE
+		Reading_plancontent
+		SET actualReading =
+		now(),timeLength=#{timeLength},ReadingFeeling=#{feeling},num=#{num}
+		WHERE staffCode=#{staffCode}
+		and clockDate=#{clockDate}
+	</update>
+
+   
+   <!-- 查询日历的数据 -->
+	<select id="selectCalendar" parameterType="java.util.Map" resultType="java.util.Map">
+		select clockDate,ISNULL(ReadingFeeling) AS readFeel
+		from reading_plancontent  
+		where staffCode=#{staffCode} AND clockDate like concat(#{yearMonth},'%')
+	</select>
+	
+	<!-- 查询读书心得积分的数据 -->
+	<select id="selectIntegralRead" resultType="String">
+	select integral from reading_plancontent where staffCode=#{staffCode} AND clockDate=#{clockDate}
+	</select>
+	
+	
+	<!-- 获取总积分 -->
+	<sql id="baseIcon">
+		select sum(a) FROM (
+		select count(praise) as a  from praise  where Be_praised_code=#{staffCode}   <!-- 点赞 -->
+		union all
+		select count(fabulous)*2 as a from fabulous  where Be_fabuloused_code=#{staffCode}  <!-- 超赞 -->
+		union all
+		select SUM(integral) from reading_plancontent WHERE staffCode=#{staffCode} AND integral is not null  <!--  读书打卡 -->
+		union ALL
+		select count(actconcom) from work_plan WHERE staffCode=#{staffCode}         <!--  日计划 -->
+		) bb
+	</sql>
+	
+	
+	
+	<!-- 绘制积分图案 -->
+	<select id="selectIconLevel" resultType="String">
+	select icon_level from startIntegral 
+	where  (<include refid="baseIcon"/>) &gt;=min_start  and  (<include refid="baseIcon"/>)&lt;max_start
+	</select>
+
+
+
+
+
+
+
+
+</mapper>
+
+
+
+
+

@@ -1,0 +1,57 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.abdinfo.dao.ITipsDao">
+
+	<resultMap type="com.asiainfo.abdinfo.po.User" id="user">
+       <result property="staffCode" column="人员编码" />
+       <result property="staffName" column="姓名" />
+       <result property="department" column="部门"/>
+       <result property="DataLevel" column="数据级别"/>
+    </resultMap>
+	
+	<!-- 插入日感想 -->
+	<insert id="addTipsDailyfeeling" parameterType="java.util.Map">
+		insert into Reading_reflection(department,types,content,staffCode,date,createTime) 
+		values (#{department},#{type},#{content},#{staffCode},#{time},now())
+	</insert>
+	<!-- 感恩的具体人 -->
+	<insert id="addTipsOwes_content" parameterType="java.util.Map">
+		insert into owes_content (department,staffCode,date,owePerson,oweDetails,id,staffCodeOther,createTime) VALUES
+		(#{department},#{staffCode},#{time},#{per},#{detail},#{id},#{staffCodeOther},now())
+	</insert>
+	<!-- 更新读书感悟等信息 -->
+	<update id="updateTipsDailyfeeling" parameterType="java.util.Map">
+		update Reading_reflection set content=#{content},createTime=now()
+		where types=#{type} and date=#{time} and staffCode=#{staffCode}
+	</update>
+	
+	<!-- 更新自主内容 -->
+	<update id="updateCustomContent" parameterType="java.util.Map">
+		update custom_reflection set Customtype=#{customtype},Customcontent=#{customcontent},createtime=curdate()
+		where date=#{time} and staffCode=#{staffCode} 
+	</update>
+	
+	
+	<!-- 更新感恩人信息 -->
+	<update id="updateTipsOwes_content" parameterType="java.util.Map">
+		update owes_content set owePerson=#{per},oweDetails=#{detail},staffCodeOther=#{staffCodeOther},createTime=now()
+		where date=#{time} and staffCode=#{staffCode} and id=#{id}
+	</update>
+	<!-- 删除感恩人 -->
+	<delete id="deleteTipsOwes_content">
+		delete from owes_content where new_id=#{id}
+	</delete>
+	<!-- 再次提交删除之前的感恩信息，添加当前的感恩信息 -->
+	<delete id="deleteOwes_content">
+		delete from owes_content where staffCode=#{staffCode} and date=#{date}
+	</delete>
+	<!-- 查询个人信息 -->
+	<select id="findTips" parameterType="java.util.Map"  resultMap="user">
+		<if test="staffCode==null" >
+			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel
+		</if>
+		<if test="staffCode!=null">
+			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel where 人员编码=#{staffCode}
+		</if>
+	</select>
+</mapper>
