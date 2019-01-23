@@ -10,7 +10,7 @@
 		<result column="clockBook" property="clockBook" />
 		<result column="rid" property="rid" />
 	</resultMap>
-
+	<!-- 点击封面获取书单内容 -->
 	<select id="findLinkage" parameterType="java.util.Map"
 		resultType="Linkage">
 		select aa.ID,aa.PID,aa.clockDate,aa.clockBook,(select

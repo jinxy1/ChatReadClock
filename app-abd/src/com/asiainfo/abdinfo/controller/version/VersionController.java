@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.asiainfo.abdinfo.service.IVersionService;
-
+/**控制版本的显示隐藏*/
 @Controller
 public class VersionController {
 

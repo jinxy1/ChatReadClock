@@ -22,7 +22,7 @@ public class TipsController {
 	
 	@Resource
 	private ITipsService tipsService;
-	/**六项精进页面的添加请求*/
+	/**添加工作总结、感想、感恩、反省读书感悟等内容*/
 	@RequestMapping(value="/addtips.do")
 	@ResponseBody
 	public Map<String, Integer> addTips( HttpServletRequest request,HttpServletResponse response) throws ParseException{

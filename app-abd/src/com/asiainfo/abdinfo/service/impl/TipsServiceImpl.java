@@ -26,7 +26,7 @@ public class TipsServiceImpl implements ITipsService{
 	
 	@Resource
 	private ISixDiligenceDao sixDiligenceDao;
-	
+	/**添加今日感想、反省、善行、工作总结等内容*/
 	@Override
 	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map) {
 		
@@ -85,23 +85,6 @@ public class TipsServiceImpl implements ITipsService{
 			num1=tipsDao.addTipsOwes_content(map);
 		};
 		
-		//更新感恩人功能
-		/*else {
-			for (Object object : jsonArray) {
-				String str=object.toString();
-				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-				String per=menus.getPers();
-				String detail=menus.getDetail();
-				Integer id=menus.getId();
-				String staffCodeOther=menus.getStaffCodeOther();
-				map.put("per", per);
-				map.put("detail", detail);
-				map.put("id", id);
-				map.put("staffCodeOther", staffCodeOther);
-				num1=tipsDao.updateTipsOwes_content(map);
-			};
-		}*/
-		
 		Map<String, Integer> numMap=new HashMap<String, Integer>();
 		numMap.put("num", num);
 		numMap.put("num1", num1);
@@ -113,11 +96,13 @@ public class TipsServiceImpl implements ITipsService{
 	public List<User> findTips(Map<String, Object> map) {
 		return tipsDao.findTips(map);
 	}
+	/**根据id删除感恩人信息*/
 	@Override
 	public int deleteTipsOwes_content(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return tipsDao.deleteTipsOwes_content(map);
 	}
+	/**根据id删除工作总结*/
 	@Override
 	public int deleteWork(Map<String, Object> map) {
 		// TODO Auto-generated method stub

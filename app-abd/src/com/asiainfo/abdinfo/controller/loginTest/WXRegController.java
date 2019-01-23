@@ -38,7 +38,7 @@ public class WXRegController {
 	
 	@Autowired
 	private UserService userService;
-	
+	/**登录*/
 	@ResponseBody
 	@RequestMapping(value="/reg.do",method=RequestMethod.POST)
 	public String regController(HttpServletRequest request, HttpServletResponse response,HttpSession session){
@@ -69,7 +69,7 @@ public class WXRegController {
 	
 	/**
 	 * 
-	 * 尝试
+	 * 查询当天的读书内容信息
 	 * @param request
 	 * @param response
 	 */
@@ -86,6 +86,7 @@ public class WXRegController {
 			}
 		}
 	 
+	 /**根据openId查询用户信息*/
 	 @ResponseBody
 	 @RequestMapping(value = "/newUser.do")
 		public void getNewUser( HttpServletRequest request, HttpServletResponse response) {

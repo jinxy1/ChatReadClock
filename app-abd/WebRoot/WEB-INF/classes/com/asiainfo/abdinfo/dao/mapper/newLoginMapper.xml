@@ -7,7 +7,7 @@
 		<result property="openId" column="openId" />
 		
     </resultMap>
-
+	<!-- 更加openId查询用户信息 -->
 	<select id="findUser" parameterType="java.util.Map"
 		 resultMap="findUser">
 		select * from USERTABLE where openId=#{openId}
@@ -20,7 +20,7 @@
 		values
 		(#{openId},#{nickName},#{gender},#{city},#{province},#{country},#{avatarUrl})
 	</insert>
-	
+	<!-- 根据人员编码删除用户信息 -->
 	<delete id="deleteUser" parameterType="java.util.Map">
 	delete from USERTABLE where 员工编码=#{userId}; 
 	</delete>
@@ -40,19 +40,19 @@
 		国家 as country,
 		头像 as avatarUrl  from USERTABLE where 员工编码=#{userId}; 
 	</select>
-
+	<!-- 更加openID更新用户信息-->
 	<update id="updateUser" parameterType="java.util.Map">
 		UPDATE USERTABLE set
 		员工编码=#{userId} , 密码=#{password},头像=#{avatarUrl} where openid=#{openId}
 	</update>
-	
-		<update id="updateUserNewe" parameterType="java.util.Map">
+	<!-- 更加openID更新用户的人员编码和密码 -->
+	<update id="updateUserNewe" parameterType="java.util.Map">
 		UPDATE USERTABLE set
 		员工编码=#{userId} , 密码=#{password} where openid=#{openId}
 	</update>
 	
 	
-
+	<!-- 根据openID查找用户信息 -->
 	<select id="findNewUser" parameterType="String"
 		resultType="com.asiainfo.abdinfo.po.NewLoginBean.NewLogin">
 		select
@@ -70,7 +70,7 @@
 	</select>
    
    
-   
+   <!-- 查找首页的读书感悟、点赞等信息 -->
 	<select id="findAllFeeling" parameterType="java.util.Map" resultType="ListAllFeeling">
 	SELECT
 		rr.id,
@@ -106,7 +106,7 @@
 		</if>
 		order by rr.actualReading desc
 	</select>
-
+	<!-- 根据人员编码查找用户信息 -->
 	<select id="findbaseByCode" parameterType="java.util.Map"
 		resultType="ListAllFeeling">
 		select

@@ -3,17 +3,19 @@ package com.asiainfo.abdinfo.controller.readClock;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.asiainfo.abdinfo.common.CurrentTime;
 import com.asiainfo.abdinfo.common.EmojiUtil;
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
-import com.asiainfo.abdinfo.po.Announcement;
 import com.asiainfo.abdinfo.po.PageBean;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.po.NewLoginBean.NewLogin;
@@ -35,7 +37,7 @@ public class ReadClockController {
 	private NewLoginService newLoginService;
 	
 	/**
-	 * 数据的展示
+	 * 在readclock页面和"我的"页面查询读书感悟
 	 * @param request
 	 * @param response
 	 */
@@ -50,6 +52,7 @@ public class ReadClockController {
 	
 	/**
 	 * 数据的插入即更新
+	 * 填写读书感悟
 	 * @param request
 	 * @param response
 	 */
@@ -75,6 +78,7 @@ public class ReadClockController {
 	
 	/**
 	 * 列表展现
+	 * 展示读书页面中已读和需读的内容
 	 * @param request
 	 * @param response
 	 */
@@ -90,15 +94,8 @@ public class ReadClockController {
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
 	}
 	
-	@RequestMapping(value="/annountList.do")
-	public void ListAnno(HttpServletRequest request,HttpServletResponse response){
-		List<Announcement> lists=readClockService.getAnnount();
-		ResponseUtils.renderJson(response, JsonUtils.toJson(lists));
-	}
-	
-	
 	/**
-	 * 展示读书心得列表
+	 * 展示首页面读书心得列表
 	 * @param request
 	 * @param response
 	 * @param dep
@@ -119,6 +116,7 @@ public class ReadClockController {
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));	
 	}
 	
+	/**在my页面查询头像、姓名和部门*/
 	@ResponseBody
 	@RequestMapping(value="/findbaseByCode.do")
 	public void findbaseByCode(HttpServletRequest request,HttpServletResponse response){
