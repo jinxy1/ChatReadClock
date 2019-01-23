@@ -54,4 +54,21 @@
 			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel where 人员编码=#{staffCode}
 		</if>
 	</select>
+	<!-- 插入工作总结 -->
+	<insert id="addWorkPlan">
+		INSERT INTO work_plan
+           (department,staffCode,staffName,date,actconcom,createDate)
+     VALUES
+           (#{department},#{staffCode},'',#{date},#{work},now())
+	</insert>
+	
+	<!-- 第二次插入之前删除上一次提交的数据 -->
+	<delete id="delwkl">
+		delete from work_plan where staffCode=#{staffCode} and date=#{date}
+	</delete>
+	
+	<!-- 删除单条工作总结 -->
+	<delete id="deleteById">
+		delete from work_plan where id=#{id}
+	</delete>
 </mapper>

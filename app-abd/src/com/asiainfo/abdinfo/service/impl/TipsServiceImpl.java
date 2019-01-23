@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.asiainfo.abdinfo.dao.ISixDiligenceDao;
@@ -30,8 +31,14 @@ public class TipsServiceImpl implements ITipsService{
 	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map) {
 		
 		List<SixDiligence> sixDiligences=sixDiligenceDao.findSixDiligence(map);
-		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));
-		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));
+		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
+		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));//感恩内容
+		JSONArray workArray=JSONArray.parseArray((String)map.get("workList"));//总结内容
+		tipsDao.delwkl(map);;
+		for (Object object : workArray) {
+			map.put("work", object.toString());
+			tipsDao.addWorkPlan(map);
+		}
 		String customStr=(String)map.get("customcontent");
 		int num=0;
 		int num1=0;
@@ -110,6 +117,11 @@ public class TipsServiceImpl implements ITipsService{
 	public int deleteTipsOwes_content(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return tipsDao.deleteTipsOwes_content(map);
+	}
+	@Override
+	public int deleteWork(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return tipsDao.deleteById(map);
 	}
 
 	

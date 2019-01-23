@@ -16,12 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
-import com.asiainfo.abdinfo.po.Massage;
 import com.asiainfo.abdinfo.po.PageBean;
 import com.asiainfo.abdinfo.service.IMassageService;
 import com.asiainfo.abdinfo.service.IStutasService;
 import com.asiainfo.abdinfo.utils.mybatis.paginator.domain.PageBounds;
-
+/**信息流*/
 @Controller
 public class MassageController{
 	
@@ -29,7 +28,7 @@ public class MassageController{
 	private IMassageService iMassageService;
 	@Resource
 	private IStutasService stutasService;
-	
+	/**查询信息流*/
 	@RequestMapping(value="massage.do")
 	@ResponseBody
 	public void findMassage(HttpServletRequest request, HttpServletResponse response,HttpSession session){
@@ -47,7 +46,7 @@ public class MassageController{
 		date.put("massage", massage);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(date));
 	}
-	
+	/**更新信息流状态*/
 	@RequestMapping(value="updateStutas.do")
 	@ResponseBody
 	public void updateMassage(HttpServletRequest request, HttpServletResponse response,HttpSession session){
@@ -57,7 +56,7 @@ public class MassageController{
 		int date=iMassageService.updateMassage(map);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(date));
 	}
-	
+	/**统计未读信息流个数*/
 	@RequestMapping(value="massageCount.do")
 	@ResponseBody
 	public void findMassageCount(HttpServletRequest request, HttpServletResponse response,HttpSession session){

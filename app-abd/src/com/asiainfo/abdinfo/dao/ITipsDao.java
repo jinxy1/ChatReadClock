@@ -20,5 +20,8 @@ public interface ITipsDao {
 	public int deleteTipsOwes_content(Map<String, Object> map);
 	public int updateCustomContent(Map<String, Object> map);//更新自主内容
 	public int deleteOwes_content(Map<String, Object> map);//删除当前感恩信息添加新的感恩信息
+	public void delwkl(Map<String, Object> map);//删除工作总结
+	public void addWorkPlan(Map<String, Object> map);//添加工作总结
+	public int deleteById(Map<String, Object> map);//删除单条工作总结
 
 }

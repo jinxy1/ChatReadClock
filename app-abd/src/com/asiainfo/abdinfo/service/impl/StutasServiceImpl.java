@@ -14,7 +14,7 @@ public class StutasServiceImpl implements IStutasService{
 	
 	@Autowired
 	private IStutasDao stutaDao;
-	
+	/**将点赞超赞收藏信息添加到数据库*/
 	@Override
 	public int addStutas(ListAllFeeling listAllFeeling) {
 
@@ -55,19 +55,19 @@ public class StutasServiceImpl implements IStutasService{
 		}
 		return 1;
 	}
-	
+	/**查询全部收藏信息*/
 	@Override
 	public List<ListAllFeeling> selectEnshrines(String staffCode) {
 		// TODO Auto-generated method stub
 		return stutaDao.selectEnshrines(staffCode);
 	}
-
+	/**根据id删除收藏信息*/
 	@Override
 	public int deleteEnshrineById(Map<String, Object> map) {
 		
 		return stutaDao.deleteEnshrineById(map);
 	}
-
+	/**查询当天个人超赞数量*/
 	@Override
 	public Integer selectFabulousNum(Map<String, Object> map) {
 		

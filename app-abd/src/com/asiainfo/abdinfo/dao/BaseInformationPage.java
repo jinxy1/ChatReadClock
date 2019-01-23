@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Param;
 
 import com.asiainfo.abdinfo.po.BaseInformation;
-
+/**貌似没有用*/
 public interface BaseInformationPage {
 	
 	

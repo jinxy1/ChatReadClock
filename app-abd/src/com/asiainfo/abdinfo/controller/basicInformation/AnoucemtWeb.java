@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.service.AnoucemtService;
-
+/**公告内容的控制器*/
 @Controller
 public class AnoucemtWeb {
 
