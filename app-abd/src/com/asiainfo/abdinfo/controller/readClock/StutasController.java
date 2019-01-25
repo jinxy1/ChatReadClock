@@ -17,12 +17,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.po.NewLoginBean.ListAllFeeling;
 import com.asiainfo.abdinfo.service.IStutasService;
-
+/**点赞、超赞、收藏的操作*/
 @Controller
 public class StutasController {
 	@Resource
 	private IStutasService stutasService;
-	
+	/**將点赞、超赞、收藏添加到数据库*/
 	@RequestMapping(value="/addStutas.do")
 	@ResponseBody
 	public void stutas(HttpServletRequest request,HttpServletResponse response){
@@ -40,7 +40,7 @@ public class StutasController {
 		}
 		ResponseUtils.renderJson(response, result);
 	}
-	
+	/**查询所有的收藏信息*/
 	@RequestMapping(value="/enshrines.do")
 	@ResponseBody 
 	public List<ListAllFeeling> enshrines(HttpServletRequest request,HttpServletResponse response){
@@ -51,7 +51,7 @@ public class StutasController {
 		ResponseUtils.renderJson(response, );*/
 		return list;
 	}
-	
+	/**根据id删除收藏信息*/
 	@RequestMapping(value="/deleteEnshrine.do")
 	@ResponseBody 
 	public int deleteEnshrines(HttpServletRequest request,HttpServletResponse response){

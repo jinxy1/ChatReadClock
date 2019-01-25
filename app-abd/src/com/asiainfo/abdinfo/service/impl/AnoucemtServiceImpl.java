@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.asiainfo.abdinfo.dao.AnoucemtDao;
 import com.asiainfo.abdinfo.po.Announcement;
 import com.asiainfo.abdinfo.service.AnoucemtService;
+/**公告内容的实现类*/
 @Service("AnoucemtService")
 public class AnoucemtServiceImpl implements AnoucemtService{
 

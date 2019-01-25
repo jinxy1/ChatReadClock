@@ -2,10 +2,8 @@ package com.asiainfo.abdinfo.controller.tips;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -20,14 +18,13 @@ import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.po.PageBean;
 import com.asiainfo.abdinfo.service.ISixDiligenceService;
 import com.asiainfo.abdinfo.utils.mybatis.paginator.domain.PageBounds;
-import com.ibm.db2.jcc.a.a;
 
 @Controller
 public class SixDiligenceController {
 	
 	@Resource 
 	private ISixDiligenceService sixDiligenceService;
-	
+	/**查询个人当天工作总结、感想、善行、反省、感恩其他*/
 	@RequestMapping(value="/sixDiligence.do")
 	public void findSixDiligence(HttpServletRequest request,HttpServletResponse response) throws ParseException{
 		
@@ -49,6 +46,7 @@ public class SixDiligenceController {
 		ResponseUtils.renderJson(response, JsonUtils.toJson(data));
 	}
 	
+	/**查询我的页面查找读书感悟*/
 	@RequestMapping(value="/readingFeeling.do")
 	public void findReadingFeeling(HttpServletRequest request,HttpServletResponse response) throws ParseException{
 		
@@ -67,7 +65,7 @@ public class SixDiligenceController {
 		PageBean list=sixDiligenceService.findReadingFeeling(map,pb);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
 	}
-	
+	/**在我的查找工作总结，日感想，善行，感恩，反省的内容*/
 	@RequestMapping(value="/works.do")
 	public void findWorks(HttpServletRequest request,HttpServletResponse response) throws ParseException{
 		
@@ -85,5 +83,11 @@ public class SixDiligenceController {
 		PageBounds pb = new PageBounds(page,limit);
 		PageBean list=sixDiligenceService.findTips(map, pb);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
+	}
+	/**查询部门或者事业部的日总结、感想等内容*/
+	@RequestMapping("/findbydaydep.do")
+	public void findbydaydep(HttpServletRequest request,HttpServletResponse response,String usercode,String nowday,String bumen){
+		Map<String, Object> perlist=sixDiligenceService.findbydaydiligence(usercode, nowday,bumen);
+		ResponseUtils.renderJson(response, JsonUtils.toJson(perlist));
 	}
 }

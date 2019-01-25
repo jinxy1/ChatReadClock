@@ -14,11 +14,13 @@ public interface ITipsDao {
 	 * @return
 	 */
 	public int addTipsOwes_content(Map<String, Object> map);
-	public List<User> findTips(Map<String, Object> map);
-	public int updateTipsDailyfeeling(Map<String, Object> map);
-	public int updateTipsOwes_content(Map<String, Object> map);
-	public int deleteTipsOwes_content(Map<String, Object> map);
-	public int updateCustomContent(Map<String, Object> map);//更新自主内容
-	public int deleteOwes_content(Map<String, Object> map);//删除当前感恩信息添加新的感恩信息
+	public List<User> findTips(Map<String, Object> map);/**查询个人信息或者公司的全部信息*/
+	public int updateTipsDailyfeeling(Map<String, Object> map);/**更新感想、反省等信息 */
+	public int deleteTipsOwes_content(Map<String, Object> map);/**根据id删除感恩人信息*/
+	public int updateCustomContent(Map<String, Object> map);/**更新自主内容*/
+	public int deleteOwes_content(Map<String, Object> map);/**再次提交删除之前的感恩信息，添加当前的感恩信息*/
+	public void delwkl(Map<String, Object> map);/**再次提交删除之前工作总结*/
+	public void addWorkPlan(Map<String, Object> map);/**添加工作总结*/
+	public int deleteById(Map<String, Object> map);/**删除单条工作总结*/
 
 }

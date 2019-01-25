@@ -10,4 +10,5 @@ public interface ITipsService {
 	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map);
 	public List<User> findTips(Map<String, Object> map);
 	public int deleteTipsOwes_content(Map<String, Object> map);
+	public int deleteWork(Map<String, Object> map);
 }

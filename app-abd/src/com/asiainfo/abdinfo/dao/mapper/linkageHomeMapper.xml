@@ -10,27 +10,30 @@
 		<result column="clockBook" property="clockBook" />
 		<result column="rid" property="rid" />
 	</resultMap>
-
-
-
-
-
-	<select id="findLinkage" parameterType="java.util.Map" resultType="Linkage">
-		select aa.ID,aa.PID,aa.clockDate,aa.clockBook,(select count(1) from 	Reading_plancontent B  join
-		Reading_detail rd1 on B.ChapterId=rd1.id where 	b.staffCode=#{staffCode}
-and b.clockDate&lt;=aa.clockDate AND rd1.bookId=aa.bookId
-) rid from (select 0 bookId,ID,0 AS PID,'' AS clockDate,CONCAT('',clockBook) AS clockBook from books
+	<!-- 点击封面获取书单内容 -->
+	<select id="findLinkage" parameterType="java.util.Map"
+		resultType="Linkage">
+		select aa.ID,aa.PID,aa.clockDate,aa.clockBook,(select
+		count(1) from Reading_plancontent B join
+		Reading_detail rd1 on
+		B.ChapterId=rd1.id where b.staffCode=#{staffCode}
+		and b.clockDate&lt;=aa.clockDate AND rd1.bookId=aa.bookId
+		) rid from (select 0 bookId,ID,0 AS PID,'' AS
+		clockDate,CONCAT('',clockBook) AS clockBook from books
 		UNION ALL
-		select rd.bookId,
+		select
+		rd.bookId,
 		@rowno:=@rowno+1 as ID ,
 		bb.id as bookID,
-		rp.clockDate as clockDate,
-    CONCAT(rp.clockDate,'  ', rd.clockDirectory) AS DATACLOCK
+		rp.clockDate as
+		clockDate,
+		CONCAT(rp.clockDate,' ', rd.clockDirectory) AS DATACLOCK
 		from
 		(select @rowno:=100) t join
 		Reading_plancontent rp on 1=1
 		left join
-		Reading_detail rd on rp.ChapterId=rd.id
+		Reading_detail rd on
+		rp.ChapterId=rd.id
 		left join
 		books bb on
 		rd.bookId=bb.id
@@ -38,8 +41,8 @@ and b.clockDate&lt;=aa.clockDate AND rd1.bookId=aa.bookId
 		datacenter_personnel dp on
 		rp.staffCode=dp.人员编码
 		where
-		rp.staffCode=#{staffCode}  and rd.bookID is not null
-    ORDER BY clockDate) aa  ORDER BY aa.id
+		rp.staffCode=#{staffCode} and rd.bookID is not null
+		ORDER BY clockDate) aa ORDER BY aa.id
 	</select>
 
 

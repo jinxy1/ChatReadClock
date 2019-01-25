@@ -19,7 +19,7 @@
 		insert into owes_content (department,staffCode,date,owePerson,oweDetails,id,staffCodeOther,createTime) VALUES
 		(#{department},#{staffCode},#{time},#{per},#{detail},#{id},#{staffCodeOther},now())
 	</insert>
-	<!-- 更新读书感悟等信息 -->
+	<!-- 更新感想、反省等信息 -->
 	<update id="updateTipsDailyfeeling" parameterType="java.util.Map">
 		update Reading_reflection set content=#{content},createTime=now()
 		where types=#{type} and date=#{time} and staffCode=#{staffCode}
@@ -31,13 +31,7 @@
 		where date=#{time} and staffCode=#{staffCode} 
 	</update>
 	
-	
-	<!-- 更新感恩人信息 -->
-	<update id="updateTipsOwes_content" parameterType="java.util.Map">
-		update owes_content set owePerson=#{per},oweDetails=#{detail},staffCodeOther=#{staffCodeOther},createTime=now()
-		where date=#{time} and staffCode=#{staffCode} and id=#{id}
-	</update>
-	<!-- 删除感恩人 -->
+	<!-- 根据id删除感恩人 -->
 	<delete id="deleteTipsOwes_content">
 		delete from owes_content where new_id=#{id}
 	</delete>
@@ -54,4 +48,21 @@
 			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel where 人员编码=#{staffCode}
 		</if>
 	</select>
+	<!-- 插入工作总结 -->
+	<insert id="addWorkPlan">
+		INSERT INTO work_plan
+           (department,staffCode,staffName,date,actconcom,createDate)
+     VALUES
+           (#{department},#{staffCode},'',#{date},#{work},now())
+	</insert>
+	
+	<!-- 第二次插入之前删除上一次提交的数据 -->
+	<delete id="delwkl">
+		delete from work_plan where staffCode=#{staffCode} and date=#{date}
+	</delete>
+	
+	<!-- 删除单条工作总结 -->
+	<delete id="deleteById">
+		delete from work_plan where id=#{id}
+	</delete>
 </mapper>

@@ -16,13 +16,13 @@ import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.po.Train;
 import com.asiainfo.abdinfo.service.ITrianService;
-
+/**培训模块*/
 @Controller
 public class TrainController {
 
 	@Resource
 	private ITrianService trianService;
-	
+	/**查询培训内容*/
 	@RequestMapping(value="train.do")
 	@ResponseBody
 	public void findTrian(HttpServletRequest request,HttpServletResponse response){
@@ -34,6 +34,8 @@ public class TrainController {
 		List<Train> trains=trianService.findTrain(map);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(trains));
 	}
+	
+	/**更新培训感想*/
 	@RequestMapping(value="updateTrain.do")
 	@ResponseBody
 	public int updateTrian(String content,String p_ID,String staffCode,HttpServletResponse response){

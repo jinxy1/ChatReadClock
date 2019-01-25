@@ -22,7 +22,7 @@ public class TipsController {
 	
 	@Resource
 	private ITipsService tipsService;
-	/**六项精进页面的添加请求*/
+	/**添加工作总结、感想、感恩、反省读书感悟等内容*/
 	@RequestMapping(value="/addtips.do")
 	@ResponseBody
 	public Map<String, Integer> addTips( HttpServletRequest request,HttpServletResponse response) throws ParseException{
@@ -32,6 +32,7 @@ public class TipsController {
 		String menus=request.getParameter("menus");//感恩人的信息
 		String time=request.getParameter("date");
 		String customcontent=request.getParameter("customcontent");//自主填写内容
+		String workList=request.getParameter("workList");//总结内容
 		/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
 		String time=df.format(new Date());
 		Date date=df.parse(time);*/
@@ -43,6 +44,7 @@ public class TipsController {
 		map.put("staffCode", staffCode);
 		map.put("menus", menus);
 		map.put("customcontent", customcontent);
+		map.put("workList", workList);
 		Map<String, Integer> numMap = new HashMap<String, Integer>();
 		try {
 			numMap = tipsService.addTipsDailyfeeling(map);
@@ -80,6 +82,17 @@ public class TipsController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id",id);
 		tipsService.deleteTipsOwes_content(map);
+		
+	}
+	/**根据id删除工作总计*/
+	@RequestMapping(value="/deleteWorkById.do")
+	@ResponseBody
+	public void deleteWork(HttpServletRequest request,HttpServletResponse response){
+		String idstr=request.getParameter("id");
+		Integer id= Integer.parseInt(idstr);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id",id);
+		tipsService.deleteWork(map);
 		
 	}
 }

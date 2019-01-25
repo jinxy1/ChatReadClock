@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.asiainfo.abdinfo.dao.ISixDiligenceDao;
@@ -25,13 +26,19 @@ public class TipsServiceImpl implements ITipsService{
 	
 	@Resource
 	private ISixDiligenceDao sixDiligenceDao;
-	
+	/**添加今日感想、反省、善行、工作总结等内容*/
 	@Override
 	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map) {
 		
 		List<SixDiligence> sixDiligences=sixDiligenceDao.findSixDiligence(map);
-		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));
-		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));
+		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
+		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));//感恩内容
+		JSONArray workArray=JSONArray.parseArray((String)map.get("workList"));//总结内容
+		tipsDao.delwkl(map);;
+		for (Object object : workArray) {
+			map.put("work", object.toString());
+			tipsDao.addWorkPlan(map);
+		}
 		String customStr=(String)map.get("customcontent");
 		int num=0;
 		int num1=0;
@@ -78,23 +85,6 @@ public class TipsServiceImpl implements ITipsService{
 			num1=tipsDao.addTipsOwes_content(map);
 		};
 		
-		//更新感恩人功能
-		/*else {
-			for (Object object : jsonArray) {
-				String str=object.toString();
-				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-				String per=menus.getPers();
-				String detail=menus.getDetail();
-				Integer id=menus.getId();
-				String staffCodeOther=menus.getStaffCodeOther();
-				map.put("per", per);
-				map.put("detail", detail);
-				map.put("id", id);
-				map.put("staffCodeOther", staffCodeOther);
-				num1=tipsDao.updateTipsOwes_content(map);
-			};
-		}*/
-		
 		Map<String, Integer> numMap=new HashMap<String, Integer>();
 		numMap.put("num", num);
 		numMap.put("num1", num1);
@@ -106,10 +96,17 @@ public class TipsServiceImpl implements ITipsService{
 	public List<User> findTips(Map<String, Object> map) {
 		return tipsDao.findTips(map);
 	}
+	/**根据id删除感恩人信息*/
 	@Override
 	public int deleteTipsOwes_content(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return tipsDao.deleteTipsOwes_content(map);
+	}
+	/**根据id删除工作总结*/
+	@Override
+	public int deleteWork(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return tipsDao.deleteById(map);
 	}
 
 	

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.asiainfo.abdinfo.po.Announcement;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.po.ReadCount;
 
@@ -34,10 +33,6 @@ public interface ReadClockDao {
 	 * @param map
 	 */
 	void updateBook(Map map);
-	
-	
-	List<Announcement> findAnnount();
-	
 	
 	/**
 	 * 查数据 该功能用来做日历模块

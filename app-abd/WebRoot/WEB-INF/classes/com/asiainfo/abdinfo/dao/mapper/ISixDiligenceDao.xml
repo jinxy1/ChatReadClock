@@ -141,9 +141,11 @@
 	<resultMap type="com.asiainfo.abdinfo.po.SixList" id="sixList">
 		<id property="staffCode" column="staffCode" />
 		<result property="date" column="date"/>
-		<collection property="custom_reflections" ofType="com.asiainfo.abdinfo.po.Custom_reflection" javaType="ArrayList">
-			<id property="department" column="type"></id>
-			<collection property="type" column="type" ofType="com.asiainfo.abdinfo.po.Type" javaType="ArrayList">
+		<collection property="custom_reflections" ofType="com.asiainfo.abdinfo.po.Custom_reflection" 
+			javaType="ArrayList">
+				<id property="department" column="type"></id>
+			<collection property="type" column="type" ofType="com.asiainfo.abdinfo.po.Type" 
+			javaType="ArrayList">
 				
 			</collection>
 		</collection>
@@ -151,16 +153,21 @@
 	<select id="find" resultMap="sixList">
 		select date,staffCode,type,Customtype,Customcontent from
 		(
-		SELECT SUBSTRING(now(),12,8) as date,'头像' as type,`姓名` as Customtype,头像 as Customcontent,人员编码 as staffCode from datacenter_personnel p left JOIN usertable u on u.`员工编码`=p.`人员编码` 
+		SELECT '23:59:59' as date,'头像' as type,`姓名` as Customtype,头像 as Customcontent,人员编码 
+		as staffCode from datacenter_personnel p left JOIN usertable u on u.`员工编码`=p.`人员编码` 
 		UNION ALL
-		select SUBSTRING(createDate,12,8) date,'总结' as type,actconcom ,staffCode,staffCode from work_plan where date=#{date}
+		select SUBSTRING(createDate,12,8) date,'总结' as type,actconcom ,staffCode,staffCode from 
+		work_plan where date=#{date}
 		UNION ALL
-		select SUBSTRING(createTime,12,8) date,'精进' as type,r.types,(CASE  when  r.content is null then '' else r.content end ) content,staffCode
+		select SUBSTRING(createTime,12,8) date,'精进' as type,r.types,(CASE  when  r.content is null 
+		then '' else r.content end ) content,staffCode
 		from Reading_reflection r where date=#{date}
 		UNION ALL
-		select SUBSTRING(createTime,12,8) date,'感恩' as type,owePerson,oweDetails,staffCode from owes_content where date=#{date}
+		select SUBSTRING(createTime,12,8) date,'感恩' as type,owePerson,oweDetails,staffCode from 
+		owes_content oc where oc.date=#{date}
 		UNION ALL
-		select SUBSTRING(createTime,12,8) date,'自主' as type,c.Customtype,(CASE  when  c.Customcontent is null then '' else c.Customcontent end ) Customcontent ,staffCode
+		select SUBSTRING(createTime,12,8) date,'自主' as type,c.Customtype,(CASE  when  c.Customcontent 
+		is null then '' else c.Customcontent end ) Customcontent ,staffCode
 		from custom_reflection c where date=#{date}
 		) a where staffCode in
 		<foreach collection="staffCodes" item="staffCode" separator="," open="(" close=")">

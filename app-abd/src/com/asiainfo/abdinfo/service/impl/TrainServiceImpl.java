@@ -16,13 +16,13 @@ public class TrainServiceImpl implements ITrianService{
 	
 	@Resource
 	private ITrainDao trainDao;
-	
+	/**查询培训内容*/
 	@Override
 	public List<Train> findTrain(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return trainDao.findTrain(map);
 	}
-
+	/**更新培训心得*/
 	@Override
 	public int updateTrain(Map<String, Object> map) {
 		

@@ -1,7 +1,6 @@
 package com.asiainfo.abdinfo.service.impl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import com.asiainfo.abdinfo.common.CurrentTime;
 import com.asiainfo.abdinfo.dao.ReadClockDao;
-import com.asiainfo.abdinfo.po.Announcement;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.po.ReadCount;
 import com.asiainfo.abdinfo.service.ReadClockService;
@@ -22,7 +20,9 @@ public class ReadClockImple implements ReadClockService {
 
 	@Resource
 	private ReadClockDao readClockDao;
-
+	/**
+	 * 在readclock页面和"我的"页面查询读书感悟
+	 */
 	@Override
 	public Map getReadIndex(String staffCode,String clockDate) {
 		if(clockDate.equals("undefined")||clockDate==null){
@@ -40,27 +40,26 @@ public class ReadClockImple implements ReadClockService {
 		m.put("r", r);
 		return m;
 	}
-
+	/**
+	 * 数据的插入即更新
+	 * 填写读书感悟
+	 */
 	@Override
 	public void updateBook(Map map) {
 		readClockDao.updateBook(map);
 	}
-
+	/**
+	 * 展示读书页面中已读和需读的内容
+	 */
 	@Override
 	public List<ReadClock> getReadIndex1(Map map) {
 		map.put("beginClockDate", CurrentTime.getBeforeTime());
 		map.put("endClockDate", CurrentTime.getAfterTime());	
 		return readClockDao.findReadIndex(map);
 	}
-
-	@Override
-	public List<Announcement> getAnnount() {
-		return readClockDao.findAnnount();
-	}
-
 	
 	/**
-	 * 该功能用来查询数据
+	 * 该功能用来根据日历查询数据
 	 */
 	@Override
 	public List<Map> getCalendar(Map map) {
@@ -69,7 +68,7 @@ public class ReadClockImple implements ReadClockService {
 	}
 
 	/**
-	 * 查询读书心得的数据
+	 * 查询读书心得的积分
 	 */
 	@Override
 	public String getIntegralRead(String staffCode, String clockDate) {

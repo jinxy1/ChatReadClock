@@ -14,10 +14,10 @@ public interface IUserUserDao {
 	 * @param map
 	 * @return
 	 */
-	public User findUserByIdAndName(Map<String, Object> map);
+	public User findUserByIdAndName(Map<String, Object> map);/**根据人员编码和密码查询个人信息，用于登录页面*/
 	
-	public List<String>findDepartment(Map<String, Object> map);
+	public List<String>findDepartment(Map<String, Object> map);/**根据人员编码查询所在部门*/
 	
-	public List<User> findDepartmentPeople(Map<String, Object> map);
+	public List<User> findDepartmentPeople(Map<String, Object> map);/**根据部门查询所有的人的信息*/
 
 }
