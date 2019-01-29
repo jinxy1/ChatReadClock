@@ -17,6 +17,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.asiainfo.abdinfo.po.BaseInformation;
 import com.asiainfo.abdinfo.service.impl.NewLoginImple;
+import com.asiainfo.abdinfo.service.impl.PlanDaoServiceImple;
 import com.asiainfo.abdinfo.service.impl.ReadClockImple;
 import com.asiainfo.abdinfo.service.impl.SixDiligenceServiceImpl;
 
@@ -40,11 +41,14 @@ public class TestDate {
 	
 	@Test
 	public void test4() {
-		ReadClockImple mlcvp;
+		PlanDaoServiceImple mlcvp;
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
-		mlcvp = ac.getBean("ReadClockService", ReadClockImple.class);
+		mlcvp = ac.getBean("PlanDaoService", PlanDaoServiceImple.class);
+	    String staffCode="18060405";
+	    String planTime="2019-01-28";
+	   // [{"type":"系统研发","projectName":"微信小程序开发","timeLong":0.3,"planContent":"fdf"},{"type":"系统研发","projectName":"微信小程序开发","timeLong":0.3,"planContent":"fd"}]
 	    
-		
+	//	mlcvp.insertPlanRecord(staffCode, planTime, list);
 		
 	
 	}
