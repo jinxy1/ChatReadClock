@@ -11,6 +11,9 @@ public class Works implements Serializable{
 	private static final long serialVersionUID = -5778657439139609236L;
 	private Integer id;
 	private String work;
+	private String projectType;
+	private String entry_name;
+	private String planTime;
 	private Date date;//时间
 	public Works() {
 		super();
@@ -32,6 +35,33 @@ public class Works implements Serializable{
 		return date;
 	}
 	public void setDate(Date date) {
+		this.date = date;
+	}
+	public String getProjectType() {
+		return projectType;
+	}
+	public void setProjectType(String projectType) {
+		this.projectType = projectType;
+	}
+	public String getEntry_name() {
+		return entry_name;
+	}
+	public void setEntry_name(String entry_name) {
+		this.entry_name = entry_name;
+	}
+	public String getPlanTime() {
+		return planTime;
+	}
+	public void setPlanTime(String planTime) {
+		this.planTime = planTime;
+	}
+	public Works(Integer id, String work, String projectType, String entry_name, String planTime, Date date) {
+		super();
+		this.id = id;
+		this.work = work;
+		this.projectType = projectType;
+		this.entry_name = entry_name;
+		this.planTime = planTime;
 		this.date = date;
 	}
 	

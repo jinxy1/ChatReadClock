@@ -109,11 +109,14 @@
 			ofType="com.asiainfo.abdinfo.po.Works" javaType="ArrayList">
 			<result property="work" column="actconcom" />
 			<result property="id" column="id" />
+			<result property="entry_name" column="entry_name" />
+			<result property="planTime" column="planTime" />
+			<result property="projectType" column="projectType" />
 		</collection>
 	</resultMap>
 	<!-- 查找全部工作内容 -->
 	<select id="findWork" parameterType="java.util.Map" resultMap="works">
-		select id, actconcom ,date from work_plan
+		select id,actconcom ,date,projectType,entry_name,planTime from work_plan
 		where staffCode=#{staffCode}
 		<if test="date!=null">
 			and date=#{date}
@@ -132,12 +135,8 @@
 		select actconcom ,date from work_plan
 		where staffCode=#{staffCode} and date=#{date}
 	</select>
-
 	
-	
-	
-	
-	
+	<!-- 封装日精进和日总结一起显示的信息 -->
 	<resultMap type="com.asiainfo.abdinfo.po.SixList" id="sixList">
 		<id property="staffCode" column="staffCode" />
 		<result property="date" column="date"/>
