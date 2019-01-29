@@ -86,7 +86,7 @@
 	<select id="selectCalendar" parameterType="java.util.Map" resultType="java.util.Map">
 	select clockDate,CASE IFNULL(ReadingFeeling,'') WHEN '' THEN 1 ELSE 0 END AS readFeel
 		from reading_plancontent  
-		where staffCode='18060405' AND clockDate like concat(#{yearMonth},'%')
+		where staffCode=#{staffCode} AND clockDate like concat(#{yearMonth},'%')
        ORDER BY clockDate
 	</select>
 	

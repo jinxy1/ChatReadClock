@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.po.PageBean;
+import com.asiainfo.abdinfo.po.SixDiligence;
 import com.asiainfo.abdinfo.service.ISixDiligenceService;
 import com.asiainfo.abdinfo.utils.mybatis.paginator.domain.PageBounds;
 
@@ -62,7 +63,7 @@ public class SixDiligenceController {
 		map.put("clockDate", clockDate);
 		map.put("page", page);
 		PageBounds pb = new PageBounds(page,limit);
-		PageBean list=sixDiligenceService.findReadingFeeling(map,pb);
+		PageBean<SixDiligence> list=sixDiligenceService.findReadingFeeling(map,pb);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
 	}
 	/**在我的查找工作总结，日感想，善行，感恩，反省的内容*/

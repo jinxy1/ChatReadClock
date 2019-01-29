@@ -62,10 +62,10 @@ public class SixDiligenceServiceImpl implements ISixDiligenceService{
 	
 	//我的页面查找读书感悟
 	@Override
-	public PageBean findReadingFeeling(Map<String, Object> map,PageBounds pb) {
+	public PageBean<SixDiligence> findReadingFeeling(Map<String, Object> map,PageBounds pb) {
 		PageHelper.startPage(pb.getPage(), pb.getLimit());
 		List<SixDiligence> readFeeling=sixDiligenceDao.findReadFeeling(map);  //读书感悟
-		PageBean  pageBean  = new PageBean(readFeeling);
+		PageBean<SixDiligence>  pageBean  = new PageBean<SixDiligence>(readFeeling);
 		return pageBean;
 	}
 	
