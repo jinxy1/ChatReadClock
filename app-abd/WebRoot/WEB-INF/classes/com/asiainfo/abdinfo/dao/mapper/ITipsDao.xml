@@ -51,11 +51,14 @@
 	<!-- 插入工作总结 -->
 	<insert id="addWorkPlan">
 		INSERT INTO work_plan
-           (department,staffCode,staffName,date,actconcom,createDate)
+           (department,staffCode,staffName,date,actconcom,createDate,entry_name,projectType,planTime)
      VALUES
-           (#{department},#{staffCode},'',#{date},#{work},now())
+           (#{department},#{staffCode},'',#{date},#{work.work},now(),#{work.entry_name},#{work.projectType},#{work.planTime})
 	</insert>
-	
+	<update id="updateWorkPlan">
+		update work_plan set actconcom=#{work.work},entry_name=#{work.entry_name},projectType=#{work.projectType},
+		planTime=#{work.planTime},update_date=now() where id=#{work.id}
+	</update>
 	<!-- 第二次插入之前删除上一次提交的数据 -->
 	<delete id="delwkl">
 		delete from work_plan where staffCode=#{staffCode} and date=#{date}

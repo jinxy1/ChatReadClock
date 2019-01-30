@@ -16,6 +16,7 @@ import com.asiainfo.abdinfo.dao.ITipsDao;
 import com.asiainfo.abdinfo.po.Menus;
 import com.asiainfo.abdinfo.po.SixDiligence;
 import com.asiainfo.abdinfo.po.User;
+import com.asiainfo.abdinfo.po.Works;
 import com.asiainfo.abdinfo.service.ITipsService;
 
 @Service("ITipsService")
@@ -34,10 +35,14 @@ public class TipsServiceImpl implements ITipsService{
 		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
 		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));//感恩内容
 		JSONArray workArray=JSONArray.parseArray((String)map.get("workList"));//总结内容
-		tipsDao.delwkl(map);;
 		for (Object object : workArray) {
-			map.put("work", object.toString());
-			tipsDao.addWorkPlan(map);
+			Works works=(Works)JSON.parseObject(object.toString(),Works.class);
+			map.put("work", works);
+			if (works.getId()!=null) {
+				tipsDao.updateWorkPlan(map);
+			}else{
+				tipsDao.addWorkPlan(map);
+			}
 		}
 		String customStr=(String)map.get("customcontent");
 		int num=0;

@@ -22,5 +22,6 @@ public interface ITipsDao {
 	public void delwkl(Map<String, Object> map);/**再次提交删除之前工作总结*/
 	public void addWorkPlan(Map<String, Object> map);/**添加工作总结*/
 	public int deleteById(Map<String, Object> map);/**删除单条工作总结*/
+	public int updateWorkPlan(Map<String, Object> map);/**根据id更新工作总结*/
 
 }

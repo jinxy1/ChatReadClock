@@ -152,27 +152,27 @@
 	<select id="find" resultMap="sixList">
 		select date,staffCode,type,Customtype,Customcontent from
 		(
-		SELECT '23:59:59' as date,'头像' as type,`姓名` as Customtype,头像 as Customcontent,人员编码 
+		SELECT 5 num,'23:59:59' as date,'头像' as type,`姓名` as Customtype,头像 as Customcontent,人员编码 
 		as staffCode from datacenter_personnel p left JOIN usertable u on u.`员工编码`=p.`人员编码` 
 		UNION ALL
-		select SUBSTRING(createDate,12,8) date,'总结' as type,actconcom ,staffCode,staffCode from 
+		select 4 num,SUBSTRING(createDate,12,8) date,'总结' as type,actconcom ,staffCode,staffCode from 
 		work_plan where date=#{date}
 		UNION ALL
-		select SUBSTRING(createTime,12,8) date,'精进' as type,r.types,(CASE  when  r.content is null 
+		select 3 num,SUBSTRING(createTime,12,8) date,'精进' as type,r.types,(CASE  when  r.content is null 
 		then '' else r.content end ) content,staffCode
 		from Reading_reflection r where date=#{date}
 		UNION ALL
-		select SUBSTRING(createTime,12,8) date,'感恩' as type,owePerson,oweDetails,staffCode from 
+		select 2 num,SUBSTRING(createTime,12,8) date,'感恩' as type,owePerson,oweDetails,staffCode from 
 		owes_content oc where oc.date=#{date}
 		UNION ALL
-		select SUBSTRING(createTime,12,8) date,'自主' as type,c.Customtype,(CASE  when  c.Customcontent 
+		select 1 num,SUBSTRING(createTime,12,8) date,'自主' as type,c.Customtype,(CASE  when  c.Customcontent 
 		is null then '' else c.Customcontent end ) Customcontent ,staffCode
 		from custom_reflection c where date=#{date}
 		) a where staffCode in
 		<foreach collection="staffCodes" item="staffCode" separator="," open="(" close=")">
 			#{staffCode}
 		</foreach>
-		order by date desc
+		order by num desc
 	</select>
 	<!-- 根据人员编码查找部门或者事业部的所有人的人员编码 -->
 	<select id="findStaffCode" resultType="java.lang.String">
