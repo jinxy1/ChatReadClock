@@ -1,12 +1,14 @@
 package com.asiainfo.abdinfo.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.asiainfo.abdinfo.dao.PlanDao;
 import com.asiainfo.abdinfo.po.DayPlan;
+import com.asiainfo.abdinfo.po.PlanData;
 import com.asiainfo.abdinfo.po.PlanRecord;
 import com.asiainfo.abdinfo.service.PlanDaoService;
 
@@ -31,4 +33,20 @@ public class PlanDaoServiceImple implements PlanDaoService{
 		planDao.insertPlanRecord(staffCode, planTime, list);
 	}
 
+	/**
+	 * 反查插入的计划
+	 */
+	@Override
+	public List<PlanData> selectPlan(String staffCode, String planTime) {
+		
+		return planDao.selectPlan(staffCode, planTime);
+	}
+
+	@Override
+	public void delectPlan(String id) {
+		planDao.delectPlan(id);		
+	}
+
 }
+
+

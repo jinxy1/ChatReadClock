@@ -83,9 +83,35 @@ public class LinkageController {
 			e.printStackTrace();
 			System.out.println("数据插入错误");
 		}
-		
-		
 	}
+	
+	
+	/**
+	 * 反查数据
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "selectPlan.do")
+	public void Plan(HttpServletRequest request, HttpServletResponse response){
+		String staffCode = request.getParameter("staffCode");	
+		String planTime = request.getParameter("planData");
+		ResponseUtils.renderJson(response, JsonUtils.toJson(planDaoService.selectPlan(staffCode, planTime)));
+	}
+	
+	
+	/**
+	 * 删除反查数据
+	 * @param request
+	 * @param response
+	 */
+	@RequestMapping(value = "delectPlan.do")
+	public void delectPlan(HttpServletRequest request, HttpServletResponse response){
+		String id = request.getParameter("id");	
+		planDaoService.delectPlan(id);
+	}
+	
+	
+	
 
 
 
