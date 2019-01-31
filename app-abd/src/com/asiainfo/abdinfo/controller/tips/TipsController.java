@@ -95,6 +95,17 @@ public class TipsController {
 		tipsService.deleteWork(map);
 		
 	}
+	
+	/**根据id更新工作总计*/
+	@RequestMapping(value="/updateWorkById.do")
+	@ResponseBody
+	public void updateWork(HttpServletRequest request,HttpServletResponse response){
+		String workList=request.getParameter("editWork");//总结内容
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("editWork",workList);
+		tipsService.updateWork(map);
+		
+	}
 }
 
 

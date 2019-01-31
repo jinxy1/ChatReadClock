@@ -7,8 +7,9 @@ import com.asiainfo.abdinfo.po.User;
 
 public interface ITipsService {
 	
-	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map);
-	public List<User> findTips(Map<String, Object> map);
-	public int deleteTipsOwes_content(Map<String, Object> map);
-	public int deleteWork(Map<String, Object> map);
+	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map);/**添加今日感想、反省、善行、工作总结等内容*/
+	public List<User> findTips(Map<String, Object> map);/**查询所有人的姓名信息*/
+	public int deleteTipsOwes_content(Map<String, Object> map);/**根据id删除感恩人信息*/
+	public int deleteWork(Map<String, Object> map);/**根据id删除工作总结*/
+	public int updateWork(Map<String, Object> map);/**根据id更新工作总结*/
 }

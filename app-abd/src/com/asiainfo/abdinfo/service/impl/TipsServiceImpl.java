@@ -113,6 +113,12 @@ public class TipsServiceImpl implements ITipsService{
 		// TODO Auto-generated method stub
 		return tipsDao.deleteById(map);
 	}
+	@Override
+	public int updateWork(Map<String, Object> map) {
+		Works works=(Works)JSON.parseObject(map.get("editWork").toString(),Works.class);
+		map.put("work", works);
+		return tipsDao.updateWorkPlan(map);
+	}
 
 	
 
