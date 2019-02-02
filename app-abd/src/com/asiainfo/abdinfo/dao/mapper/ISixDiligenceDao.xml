@@ -183,7 +183,26 @@
 		<if test="bumen=='11'">
 			事业部=(select 事业部 from datacenter_personnel where 人员编码=#{staffCode}) 
 		</if>
-		
+	</select>
+	
+	<resultMap type="com.asiainfo.abdinfo.po.Custom_reflection" id="findMy_day">
+		<id property="department" column="type" />
+		<collection property="type" ofType="com.asiainfo.abdinfo.po.Type" javaType="ArrayList">
+			
+		</collection>
+    </resultMap>
+	<select id="findMyDay" resultMap="findMy_day">
+		select '总结' type,date,actconcom Customtype,1 Customcontent,4 num from work_plan 
+		where  staffCode=#{staffCode} and date=#{date}
+		union all
+		select '精进' type,date,types Customtype,content Customcontent,3 num from Reading_reflection 
+		where staffCode=#{staffCode} and date=#{date}
+		union all
+		SELECT '感恩' type,date,owePerson Customtype,oweDetails Customcontent,2 num from owes_content 
+		where staffCode=#{staffCode} and date=#{date}
+		union all
+		SELECT '自主' type,date,Customtype Customtype,Customcontent Customcontent,1 num from custom_reflection 
+		WHERE staffCode=#{staffCode} and date=#{date}
 	</select>
 
 

@@ -45,7 +45,7 @@ public class WXRegController {
 		String userId=request.getParameter("userId");
 		String password=request.getParameter("pwd");
 		String openId=request.getParameter("openId");
-		Map map=new HashMap();
+		Map<String,Object> map=new HashMap<String,Object>();
 	    map.put("staffCode", userId);
 	    map.put("staffPwd", password);
 		User user = null;
@@ -79,7 +79,7 @@ public class WXRegController {
 			List<NewLogin>  nn=newLoginService.getNewUser(openId);
 			String clockDate=request.getParameter("clockDate");
 			if(nn.size()!=0){
-				Map re=readClockService.getReadIndex(nn.get(0).getStaffCode(),clockDate);
+				Map<String,Object> re=readClockService.getReadIndex(nn.get(0).getStaffCode(),clockDate);
 				ResponseUtils.renderJson(response, JsonUtils.toJson(re));									
 			}else{
 				ResponseUtils.renderJson(response, JsonUtils.toJson(0));	

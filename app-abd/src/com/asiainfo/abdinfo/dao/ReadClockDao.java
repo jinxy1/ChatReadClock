@@ -15,31 +15,31 @@ public interface ReadClockDao {
 	 * @param map
 	 * @return
 	 */
-	List<ReadClock> findReadIndex(Map map);
+	List<ReadClock> findReadIndex(Map<String,Object> map);
 	
 	/**
 	 * 各种统计
 	 * @return
 	 */
-	ReadCount findCount(Map map);
+	ReadCount findCount(Map<String,Object> map);
 	
 	/*
 	 * 判断有多少人上线 
 	 */
-	String findCountPeople(Map map);
+	String findCountPeople(Map<String,Object> map);
 	
 	/**
 	 * 插入数据即更新
 	 * @param map
 	 */
-	void updateBook(Map map);
+	void updateBook(Map<String,Object> map);
 	
 	/**
 	 * 查数据 该功能用来做日历模块
 	 * @param map
 	 * @return
 	 */
-	List<Map> selectCalendar(Map map);
+	List<Map<String,Object>> selectCalendar(Map<String,Object> map);
 	
 	
 	/**

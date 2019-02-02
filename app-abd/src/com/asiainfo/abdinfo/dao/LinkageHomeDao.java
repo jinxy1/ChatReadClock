@@ -7,6 +7,6 @@ import com.asiainfo.abdinfo.po.ReadClock;
 /** 首页点击封面获取书单 */
 public interface LinkageHomeDao {
 	
-	public List<ReadClock> findLinkage(Map map);
+	public List<ReadClock> findLinkage(Map<String,Object> map);
 
 }

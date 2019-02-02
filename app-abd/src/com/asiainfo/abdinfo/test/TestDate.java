@@ -3,7 +3,6 @@ package com.asiainfo.abdinfo.test;
 
 
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -23,6 +22,7 @@ public class TestDate {
 	    String planTime="2019-01-29";
 	    List<PlanData>map=mlcvp.selectPlan(staffCode, planTime);
 	    System.out.println(map);
+	    System.out.println(ac);
 		
 	
 	}

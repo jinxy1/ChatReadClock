@@ -17,7 +17,7 @@ public class LinkageHomeImple implements linkageHomeService{
 	private LinkageHomeDao linkageHomeDao;
 
 	@Override
-	public List<ReadClock> getLinkage(Map map) {
+	public List<ReadClock> getLinkage(Map<String,Object> map) {
 		return linkageHomeDao.findLinkage(map);	
 	}
 

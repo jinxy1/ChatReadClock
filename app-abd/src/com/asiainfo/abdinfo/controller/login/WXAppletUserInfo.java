@@ -1,7 +1,5 @@
 package com.asiainfo.abdinfo.controller.login;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.security.AlgorithmParameters;
 import java.security.InvalidAlgorithmParameterException;
@@ -13,7 +11,7 @@ import java.security.spec.InvalidParameterSpecException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.ResourceBundle;
+
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
@@ -24,6 +22,8 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.log4j.Logger;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.linkage.bi.connect.phprpc.util.Base64;
 
 /**
