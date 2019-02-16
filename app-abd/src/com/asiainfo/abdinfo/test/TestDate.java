@@ -9,7 +9,6 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.asiainfo.abdinfo.po.Calendar;
 import com.asiainfo.abdinfo.service.impl.LinkageHomeImple;
-import com.asiainfo.abdinfo.service.impl.ReadClockImple;
 
 public class TestDate {
 
@@ -21,6 +20,9 @@ public class TestDate {
 		long startTime=System.currentTimeMillis();
 		List<Calendar> a=mlcvp.selectCalendarContent("18060405","2019-02-14");
 		long endTime=System.currentTimeMillis();
+		System.out.println(startTime+endTime);
+		System.out.println(ac);
+		System.out.println(a);
 
 	}
 
@@ -40,6 +42,7 @@ public class TestDate {
 	public void test3(){
 	String a="24:05:30"	;
 	String b="11:05:06";
+	System.out.println(a+b);
 	//dateConversion(a);
 	int c=0;
 	intConversion(c);
@@ -59,23 +62,23 @@ public class TestDate {
 	
 	
 	
-	private int dateConversion(String str){
+/*	private int dateConversion(String str){
 		int a=Integer.parseInt(str.substring(0,2))*60*60;
 		int b =Integer.parseInt(str.substring(3,5))*60;
 		int c=Integer.parseInt(str.substring(6,8));
 		int tatal=a+b+c;
 		System.out.println(tatal);
 		return tatal;
-	}
+	}*/
 	
 	
-	@Test
+	/*@Test
 	public void test2(){
 		ReadClockImple mlcvp;
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
 		mlcvp = ac.getBean("ReadClockService", ReadClockImple.class);
 		
-	}
+	}*/
 	
 	
 
