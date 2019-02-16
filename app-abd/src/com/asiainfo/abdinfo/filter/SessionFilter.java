@@ -34,7 +34,7 @@ public class SessionFilter implements Filter {
  
         String excepUrlRegex = cfg.getInitParameter("excepUrlRegex");
         if (!StringUtils.isBlank(excepUrlRegex)) {
-            excepUrlPattern = Pattern.compile(excepUrlRegex);
+            setExcepUrlPattern(Pattern.compile(excepUrlRegex));
         }
         forwardUrl = cfg.getInitParameter("redirectUrl");
         System.out.println(forwardUrl);
@@ -74,4 +74,12 @@ public class SessionFilter implements Filter {
     public void destroy() {
     	
     }
+
+	public Pattern getExcepUrlPattern() {
+		return excepUrlPattern;
+	}
+
+	public void setExcepUrlPattern(Pattern excepUrlPattern) {
+		this.excepUrlPattern = excepUrlPattern;
+	}
 }

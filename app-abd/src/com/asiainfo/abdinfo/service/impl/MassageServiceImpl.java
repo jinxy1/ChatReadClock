@@ -20,10 +20,10 @@ public class MassageServiceImpl implements IMassageService{
 	private IMassageDao iMassageDao;
 	/**查询信息流内容*/
 	@Override
-	public PageBean findMassage(Map<String, Object> map,PageBounds pb) {
+	public PageBean<Massage> findMassage(Map<String, Object> map,PageBounds pb) {
 		PageHelper.startPage(pb.getPage(), pb.getLimit());
 		List<Massage> massages=iMassageDao.findMassage(map);
-		PageBean  pageBean  = new PageBean(massages);
+		PageBean<Massage>  pageBean  = new PageBean<Massage>(massages);
 		return pageBean;
 	}
 	/**查询未读信息流数量*/

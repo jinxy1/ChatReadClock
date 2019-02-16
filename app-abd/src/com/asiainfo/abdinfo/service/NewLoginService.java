@@ -11,10 +11,10 @@ import com.asiainfo.abdinfo.utils.mybatis.paginator.domain.PageBounds;
 public interface NewLoginService {
 	
 	/*插入用户信息*/
-	void insertUser(Map map);
-	void deleteUser(Map map);
+	void insertUser(Map<String,Object> map);
+	void deleteUser(Map<String,Object> map);
 	
-	public List<NewLogin> getUser(Map map);
+	public List<NewLogin> getUser(Map<String,Object> map);
 	
 	void regUser(String userId,String password,String openId);
 	
@@ -23,9 +23,9 @@ public interface NewLoginService {
 	/**
 	 * 用于展示用户的感想
 	 */
-	PageBean  getAllFeeling(Map map,PageBounds pb);
+	PageBean<ListAllFeeling>  getAllFeeling(Map<String,Object> map,PageBounds pb);
 	
-	List<NewLogin> selectUser(Map map);
+	List<NewLogin> selectUser(Map<String,Object> map);
 	/**
 	 * 用于头像的显示
 	 * */
@@ -35,7 +35,7 @@ public interface NewLoginService {
 	 * 若用户信息已存在更新
 	 * @param map
 	 */
-	void updateUser(Map map);
+	void updateUser(Map<String,Object> map);
 	
 	
 

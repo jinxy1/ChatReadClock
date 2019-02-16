@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
+import com.asiainfo.abdinfo.po.Massage;
 import com.asiainfo.abdinfo.po.PageBean;
 import com.asiainfo.abdinfo.service.IMassageService;
 import com.asiainfo.abdinfo.service.IStutasService;
@@ -40,7 +41,7 @@ public class MassageController{
 		map.put("staffCode", staffCode);
 		Integer count=iMassageService.findCount(map);
 		PageBounds pb = new PageBounds(page,limit);
-		PageBean massage=iMassageService.findMassage(map, pb);
+		PageBean<Massage> massage=iMassageService.findMassage(map, pb);
 		Map<String, Object> date = new HashMap<String,Object>();
 		date.put("count", count);
 		date.put("massage", massage);

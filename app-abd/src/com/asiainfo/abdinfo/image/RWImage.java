@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
- 
+
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
@@ -55,7 +55,7 @@ public class RWImage {
 		try {
 			/**********************读取图片*********************************/
 			File f = new File("F:\\Eclipse\\Git\\app-abd\\WebRoot\\images\\icons\\strategy.jpg");
-			Iterator readers = ImageIO.getImageReadersByFormatName("jpg");
+			Iterator<?> readers = ImageIO.getImageReadersByFormatName("jpg");
 			ImageReader reader = (ImageReader)readers.next();
 			/*
 			 * 获得了一个ImageReader对象，必须给它是指一个输入源。
@@ -83,7 +83,7 @@ public class RWImage {
 			BufferedImage bi=reader.read(0, param);
 			
 			/**********************写图片*********************************/
-			Iterator writes=ImageIO.getImageWritersByFormatName("png");
+			Iterator<?> writes=ImageIO.getImageWritersByFormatName("png");
 			ImageWriter imageWriter=(ImageWriter)writes.next();
 			f=new File("F:\\Eclipse\\Git\\app-abd\\WebRoot\\images\\icons\\strategy.jpg");
 			ImageOutputStream iops=ImageIO.createImageOutputStream(f);

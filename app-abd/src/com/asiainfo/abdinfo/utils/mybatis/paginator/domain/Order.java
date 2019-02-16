@@ -77,10 +77,10 @@ public class Order implements Serializable {
      */
     public static List<Order> formString(String orderSegment,String orderExpr){
         if(orderSegment == null || orderSegment.trim().equals("")) {
-            return new ArrayList(0);
+            return new ArrayList<Order>(0);
         }
 
-        List<Order> results = new ArrayList();
+        List<Order> results = new ArrayList<Order>();
         String[] orderSegments = orderSegment.trim().split(",");
         for(int i = 0; i < orderSegments.length; i++) {
             String sortSegment = orderSegments[i];

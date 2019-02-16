@@ -34,16 +34,6 @@ public class TipsServiceImpl implements ITipsService{
 		List<SixDiligence> sixDiligences=sixDiligenceDao.findSixDiligence(map);
 		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
 		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));//感恩内容
-		JSONArray workArray=JSONArray.parseArray((String)map.get("workList"));//总结内容
-		for (Object object : workArray) {
-			Works works=(Works)JSON.parseObject(object.toString(),Works.class);
-			map.put("work", works);
-			if (works.getId()!=null) {
-				tipsDao.updateWorkPlan(map);
-			}else{
-				tipsDao.addWorkPlan(map);
-			}
-		}
 		String customStr=(String)map.get("customcontent");
 		int num=0;
 		int num1=0;
@@ -87,7 +77,9 @@ public class TipsServiceImpl implements ITipsService{
 			map.put("detail", detail);
 			map.put("id", id);
 			map.put("staffCodeOther", staffCodeOther);
-			num1=tipsDao.addTipsOwes_content(map);
+			if(per.length()!=0){
+				num1=tipsDao.addTipsOwes_content(map);
+			}
 		};
 		
 		Map<String, Integer> numMap=new HashMap<String, Integer>();
@@ -113,6 +105,29 @@ public class TipsServiceImpl implements ITipsService{
 		// TODO Auto-generated method stub
 		return tipsDao.deleteById(map);
 	}
+	@Override
+	public int updateWork(Map<String, Object> map) {
+		Works works=(Works)JSON.parseObject(map.get("editWork").toString(),Works.class);
+		map.put("work", works);
+		return tipsDao.updateWorkSummary(map);
+	}
+	@Override
+	public int addWorkSummary(Map<String, Object> map) {
+			Works works=(Works)JSON.parseObject(map.get("workList").toString(),Works.class);
+			map.put("work", works);
+			System.out.println(map.get("codeStr").toString());
+			if (map.get("codeStr").toString().equals("1")) {
+				tipsDao.addWorkPlan(map);
+			}else{
+				if (works.getId()!=null) {
+					tipsDao.updateWorkSummary(map);
+				}else {
+					tipsDao.addWorkSummary(map);
+				}
+			}
+		return 0;
+	}
+	
 
 	
 

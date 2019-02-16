@@ -33,9 +33,6 @@ public class TipsController {
 		String time=request.getParameter("date");
 		String customcontent=request.getParameter("customcontent");//自主填写内容
 		String workList=request.getParameter("workList");//总结内容
-		/*SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-		String time=df.format(new Date());
-		Date date=df.parse(time);*/
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("time",time);
 		map.put("date",time);
@@ -57,6 +54,24 @@ public class TipsController {
 		return numMap;
 	}
 	
+	/**添加工作总结*/
+	@RequestMapping(value="/addWork.do")
+	@ResponseBody
+	public int addWork( HttpServletRequest request,HttpServletResponse response){
+		String department=request.getParameter("department");//部门
+		String staffCode=request.getParameter("staffCode");//人员编码
+		String time=request.getParameter("date");//日期
+		String codeStr=request.getParameter("plan");//判断是否添加计划
+		String workList=request.getParameter("workList");//总结内容
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("date",time);
+		map.put("department", department);
+		map.put("staffCode", staffCode);
+		map.put("workList", workList);
+		map.put("codeStr", codeStr==null?"":codeStr);
+		int code=tipsService.addWorkSummary(map);
+		return code;
+	}
 	/**查询所有人的姓名信息用于模糊查询*/
 	@RequestMapping(value="/show.do")
 	@ResponseBody
@@ -65,10 +80,6 @@ public class TipsController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("staffCode", staffCode);
 		List<User> b=tipsService.findTips(map);
-		/*List<String> namelist=new ArrayList<String>();
-		for (User u : b) {
-			namelist.add(u.getStaffName());
-		}*/
 		ResponseUtils.renderJson(response, JsonUtils.toJson(b));
 		
 	}
@@ -93,6 +104,16 @@ public class TipsController {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id",id);
 		tipsService.deleteWork(map);
+	}
+	
+	/**根据id更新工作总计*/
+	@RequestMapping(value="/updateWorkById.do")
+	@ResponseBody
+	public void updateWork(HttpServletRequest request,HttpServletResponse response){
+		String workList=request.getParameter("editWork");//总结内容
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("editWork",workList);
+		tipsService.updateWork(map);
 		
 	}
 }

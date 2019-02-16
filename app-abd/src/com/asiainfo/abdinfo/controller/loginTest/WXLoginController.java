@@ -30,10 +30,10 @@ public class WXLoginController {
 	
     @RequestMapping(value = "/decodeUserInfo.do", method=RequestMethod.POST)  
     @ResponseBody  
-    public Map decodeUserInfo(@RequestParam(value="encryptedData") String encryptedData, @RequestParam(value="iv")String iv,@RequestParam(value="code") String code) {  
+    public Map<String,Object> decodeUserInfo(@RequestParam(value="encryptedData") String encryptedData, @RequestParam(value="iv")String iv,@RequestParam(value="code") String code) {  
     System.out.println(encryptedData+iv+code);
     	
-    Map map = new HashMap();  
+    Map<String,Object> map = new HashMap<String,Object>();  
  
     // 登录凭证不能为空  
     if (code == null || code.length() == 0) {  
@@ -78,6 +78,7 @@ public class WXLoginController {
     // 用户的唯一标识（openid）  
     try {
 		String openid = (String) json.get("openid");
+		System.out.println(openid);
 	} catch (JSONException e1) {
 		// TODO Auto-generated catch block
 		e1.printStackTrace();
@@ -91,7 +92,7 @@ public class WXLoginController {
             map.put("msg", "解密成功");  
  
             JSONObject userInfoJSON = new JSONObject(result);  
-            Map userInfo = new HashMap();  
+            Map<String,Object> userInfo = new HashMap<String,Object>();  
             userInfo.put("openId", userInfoJSON.get("openId"));  
             userInfo.put("nickName", "");  
             userInfo.put("gender", userInfoJSON.get("gender"));  

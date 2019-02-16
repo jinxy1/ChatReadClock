@@ -48,16 +48,24 @@
 			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel where 人员编码=#{staffCode}
 		</if>
 	</select>
-	<!-- 插入工作总结 -->
+	<!-- 插入工作计划 -->
 	<insert id="addWorkPlan">
-		INSERT INTO work_plan
-           (department,staffCode,staffName,date,actconcom,createDate,entry_name,projectType,planTime)
+		INSERT INTO plan_record
+           (department,staffCode,staffName,planTime,planContent,currentTime,projectName,type,timeLong)
      VALUES
            (#{department},#{staffCode},'',#{date},#{work.work},now(),#{work.entry_name},#{work.projectType},#{work.planTime})
 	</insert>
-	<update id="updateWorkPlan">
+	<!-- 插入工作总结 -->
+	<insert id="addWorkSummary">
+		INSERT INTO work_plan
+           (department,staffCode,staffName,date,actconcom,createDate,entry_name,projectType,actualnum)
+     VALUES
+           (#{department},#{staffCode},'',#{date},#{work.work},now(),#{work.entry_name},#{work.projectType},#{work.planTime})
+	</insert>
+	<!-- 更新工作总结 -->
+	<update id="updateWorkSummary">
 		update work_plan set actconcom=#{work.work},entry_name=#{work.entry_name},projectType=#{work.projectType},
-		planTime=#{work.planTime},update_date=now() where id=#{work.id}
+		actualnum=#{work.planTime},update_date=now() where id=#{work.id}
 	</update>
 	<!-- 第二次插入之前删除上一次提交的数据 -->
 	<delete id="delwkl">

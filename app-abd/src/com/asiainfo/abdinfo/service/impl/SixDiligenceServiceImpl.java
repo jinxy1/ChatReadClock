@@ -33,16 +33,6 @@ public class SixDiligenceServiceImpl implements ISixDiligenceService{
 		List<SixDiligence> tips=sixDiligenceDao.findTips(map);        //感恩的人n
 		List<SixDiligence> readFeeling=sixDiligenceDao.findReadFeeling(map);  //读书感悟1
 		List<SixDiligence> works=sixDiligenceDao.findWork(map);   //工作z
-		/*List<Works> worksSix=new ArrayList<Works>();
-		if (works.size()!=0) {
-			worksSix=works.get(0).getWorks();//获取工作总结
-		}
-		List<String> workStr=new ArrayList<String>();
-		List<Integer> workID=new ArrayList<Integer>();
-		for (Works works2 : worksSix) {
-			workStr.add(works2.getWork());*//**将工作总结的内容转换成字符串数组*//*
-			workID.add(works2.getId());*//**将每个工作总结的唯一id存到数组中，用于删除单个工作总结*//*
-		}*/
 		Map<String,Object> data=new HashMap<String,Object>();
 		data.put("sixDiligence",sixDiligence);
 		data.put("tips",tips);
@@ -68,33 +58,26 @@ public class SixDiligenceServiceImpl implements ISixDiligenceService{
 	
 	/**在我的查找工作总结，日感想，善行，感恩，反省的内容*/
 	@Override
-	public PageBean findTips(Map<String, Object> map, PageBounds pb) {
+	public PageBean<SixDiligence> findTips(Map<String, Object> map, PageBounds pb) {
 		PageHelper.startPage(pb.getPage(), pb.getLimit());
 		List<SixDiligence> readFeeling=sixDiligenceDao.findReadFeeling(map);/**读书感悟*/
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
 		String date=null;
-		System.out.println(readFeeling.get(0).getCeshi());
 		for(int i=0;i<readFeeling.size();i++){
 			Date day=readFeeling.get(i).getDate();
 			date=df.format(day);
 			map.put("date", date);
-			List<SixDiligence> findSixDiligence=sixDiligenceDao.findSixDiligence(map);
-			readFeeling.get(i).setMenus(sixDiligenceDao.findMenus(map));
-			readFeeling.get(i).setWorks(sixDiligenceDao.findworks(map));
-			readFeeling.get(i).setCustomContent(sixDiligenceDao.findCustomcontent(map));
-			if (findSixDiligence.size()!=0) {
-				readFeeling.get(i).setTypes(findSixDiligence.get(0).getTypes());
-			}
+			/**查询我的页面的日精进和日总结内容*/
+			readFeeling.get(i).setCustom_reflection(sixDiligenceDao.findMyDay(map));
 		}
-		
-		PageBean  pageBean  = new PageBean(readFeeling);
+		PageBean<SixDiligence>  pageBean  = new PageBean<SixDiligence>(readFeeling);
 		return pageBean;
 	}
 	/**查询部门或者事业部的日总结、感想等内容*/
 	@Override
 	public Map<String, Object> findbydaydiligence(String staffcode, String date, String bumen) {
 		Map<String, Object> map=new HashMap<String,Object>();
-		map.put("staffCode", staffcode);
+		map.put("staffCodeMy", staffcode);
 		map.put("date", date);
 		map.put("bumen", bumen);
 		List<String> staffCodes=sixDiligenceDao.findStaffCode(map);

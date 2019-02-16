@@ -82,7 +82,7 @@ public class SixDiligenceController {
 		map.put("clockDate", clockDate);
 		map.put("page", page);
 		PageBounds pb = new PageBounds(page,limit);
-		PageBean list=sixDiligenceService.findTips(map, pb);
+		PageBean<SixDiligence> list=sixDiligenceService.findTips(map, pb);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
 	}
 	/**查询部门或者事业部的日总结、感想等内容*/

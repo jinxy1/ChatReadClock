@@ -15,6 +15,7 @@ import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.po.PageBean;
 import com.asiainfo.abdinfo.po.ReadClock;
+import com.asiainfo.abdinfo.po.NewLoginBean.ListAllFeeling;
 import com.asiainfo.abdinfo.po.NewLoginBean.NewLogin;
 import com.asiainfo.abdinfo.service.NewLoginService;
 import com.asiainfo.abdinfo.service.ReadClockService;
@@ -43,7 +44,7 @@ public class ReadClockController {
 		String staffCode=request.getParameter("staffCode");
 		String clockDate=request.getParameter("clockDate");
 		System.out.println(clockDate);
-		Map re=readClockService.getReadIndex(staffCode,clockDate);
+		Map<String,Object> re=readClockService.getReadIndex(staffCode,clockDate);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(re));
 	}
 	
@@ -63,7 +64,7 @@ public class ReadClockController {
 		if(clockDate.equals("undefined")||clockDate==null){
 			clockDate=CurrentTime.getCurrentTime();
 		}
-		Map<String,String> map=new HashMap<String,String>();
+		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("staffCode", staffCode);
 		map.put("timeLength", timeLength);
 		map.put("feeling", feeling);
@@ -85,7 +86,7 @@ public class ReadClockController {
 		String openId=request.getParameter("openId");//员工编码    
 		//根据openIdc查询用户名
 		List<NewLogin> login=newLoginService.getNewUser(openId);
-		Map map=new HashMap();
+		Map<String,Object> map=new HashMap<String,Object>();
 		map.put("staffCode", login.get(0).getStaffCode());
 		List<ReadClock> list=readClockService.getReadIndex1(map);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
@@ -104,11 +105,11 @@ public class ReadClockController {
 		String dep= request.getParameter("dep");
 		int page=Integer.valueOf(request.getParameter("page"));
 		int limit=Integer.valueOf(request.getParameter("limit"));
-		Map<String,String> map =new HashMap<String,String>();
+		Map<String,Object> map =new HashMap<String,Object>();
 		map.put("staffCode", staffCode);
 		map.put("dep", dep);
 		PageBounds pb = new PageBounds(page,limit);
-		 PageBean list=newLoginService.getAllFeeling(map,pb);	
+		 PageBean<ListAllFeeling> list=newLoginService.getAllFeeling(map,pb);	
 		 System.out.println(list);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));	
 	}
@@ -132,6 +133,7 @@ public class ReadClockController {
 	public void findCalendar(HttpServletRequest request,HttpServletResponse response){
 		String staffCode=request.getParameter("staffCode");
 		String yearMonth=request.getParameter("yearMonth");
+
 		ResponseUtils.renderJson(response, JsonUtils.toJson(readClockService.getCalendar(staffCode,yearMonth)));
 	}
 	

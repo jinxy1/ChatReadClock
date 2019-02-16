@@ -11,25 +11,25 @@ import com.asiainfo.abdinfo.po.NewLoginBean.NewLogin;
 public interface NewLoginPage {
 	
 	/*插入用户信息*/
-	void insertUser(Map map);
+	void insertUser(Map<String,Object> map);
 	
 	
-	void deleteUser(Map map);
+	void deleteUser(Map<String,Object> map);
 	
 	/**
 	 * 查询用户
 	 * @param map
 	 * @return
 	 */
-	public List<NewLogin> findUser(Map map);
+	public List<NewLogin> findUser(Map<String,Object> map);
 	
 	/**
 	 * 注册 即更新
 	 * @param map
 	 */
-	void updateUser(Map map);
+	void updateUser(Map<String,Object> map);
 	
-	void updateUserNewe(Map map);
+	void updateUserNewe(Map<String,Object> map);
 	
 	/*
 	 * 查询用户新
@@ -39,23 +39,23 @@ public interface NewLoginPage {
 	/**
 	 * 用于展示用户的感想
 	 */
-	List<ListAllFeeling> findAllFeeling(Map map);
+	List<ListAllFeeling> findAllFeeling(Map<String,Object> map);
 	
 	/**
 	 * 查询员工编码
 	 * @param map
 	 * @return
 	 */
-	List<NewLogin> selectUser(Map map);
+	List<NewLogin> selectUser(Map<String,Object> map);
 	
 	/**
 	 * 根据openId删除不同于现在openId的用户，主要用于openId变化时
 	 * */
-	void deleteUserByOpenId(Map map);
+	void deleteUserByOpenId(Map<String,Object> map);
 	/**
 	 * 用于头像的显示
 	 * */
-	ListAllFeeling findbaseByCode(Map map);
+	ListAllFeeling findbaseByCode(Map<String,Object> map);
 }
 
 

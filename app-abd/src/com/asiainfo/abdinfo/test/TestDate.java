@@ -21,8 +21,7 @@ public class TestDate {
 		long startTime=System.currentTimeMillis();
 		List<Calendar> a=mlcvp.selectCalendarContent("18060405","2019-02-14");
 		long endTime=System.currentTimeMillis();
-		
-		System.out.println(endTime-startTime);
+
 	}
 
 	

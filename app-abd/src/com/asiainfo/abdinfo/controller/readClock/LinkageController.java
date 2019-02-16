@@ -17,8 +17,6 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
-import com.asiainfo.abdinfo.common.ReturnResult;
-import com.asiainfo.abdinfo.po.Menus;
 import com.asiainfo.abdinfo.po.PlanRecord;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.service.PlanDaoService;
@@ -38,7 +36,7 @@ public class LinkageController {
 	@RequestMapping(value = "Linkage.do")
 	public void Linkage(HttpServletRequest request, HttpServletResponse response) {
 		String staffCode = request.getParameter("staffCode");
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("staffCode", staffCode);
 		List<ReadClock> re = inkageHomeService.getLinkage(map);
 		System.out.println(re);

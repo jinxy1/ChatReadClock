@@ -12,7 +12,7 @@ public interface ReadClockService {
 	/**
 	 * 在readclock页面和"我的"页面查询读书感悟
 	 */
-	Map getReadIndex(String staffCode,String clockDate);
+	Map<String,Object> getReadIndex(String staffCode,String clockDate);
 	
 	/**
 	 * 数据的插入即更新
@@ -20,14 +20,25 @@ public interface ReadClockService {
 	 * @param request
 	 * @param response
 	 */
-	void updateBook(Map map);
+	void updateBook(Map<String,Object> map);
 	
 	
 	/**
 	 * 展示读书页面中已读和需读的内容
 	 */
-	List<ReadClock> getReadIndex1(Map map);
+	List<ReadClock> getReadIndex1(Map<String,Object> map);
 	
+
+	/**
+	 * 查数据 该功能用来做日历模块
+	 * @param map
+	 * @return
+	 */
+	List<Map<String,Object>> getCalendar(Map<String,Object> map);
+	
+	
+	
+
 	/**
 	 * 查询读书心得的数据
 	 * @param staffCode

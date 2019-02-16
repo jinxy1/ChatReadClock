@@ -32,7 +32,7 @@ public class LinkageHomeImple implements linkageHomeService{
 	private ReadClockService readClockService;
 
 	@Override
-	public List<ReadClock> getLinkage(Map map) {
+	public List<ReadClock> getLinkage(Map<String,Object> map) {
 		return linkageHomeDao.findLinkage(map);	
 	}
    

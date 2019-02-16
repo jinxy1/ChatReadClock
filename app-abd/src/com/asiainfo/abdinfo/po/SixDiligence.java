@@ -21,18 +21,15 @@ public class SixDiligence implements Serializable{
 	private String chapters;//章节名称
 	private String ceshi;//读书感悟
 	private List<Works> works;//工作内容
+	private List<Custom_reflection> custom_reflection;
 	public SixDiligence() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public List<Menus> getMenus() {
-		return menus;
-	}
-	
 	
 	public SixDiligence(Integer id, List<Menus> menus, List<Types> types, List<Menus> customContent, Date date,
 			String department, String staffName, String clockIn, String bookNames, String chapters, String ceshi,
-			List<Works> works) {
+			List<Works> works, List<Custom_reflection> custom_reflection) {
 		super();
 		this.id = id;
 		this.menus = menus;
@@ -46,6 +43,11 @@ public class SixDiligence implements Serializable{
 		this.chapters = chapters;
 		this.ceshi = ceshi;
 		this.works = works;
+		this.custom_reflection = custom_reflection;
+	}
+
+	public List<Menus> getMenus() {
+		return menus;
 	}
 	public List<Types> getTypes() {
 		return types;
@@ -119,9 +121,13 @@ public class SixDiligence implements Serializable{
 	public void setCustomContent(List<Menus> customContent) {
 		this.customContent = customContent;
 	}
-	
-	
-	
-	
 
+	public List<Custom_reflection> getCustom_reflection() {
+		return custom_reflection;
+	}
+
+	public void setCustom_reflection(List<Custom_reflection> custom_reflection) {
+		this.custom_reflection = custom_reflection;
+	}
+	
 }

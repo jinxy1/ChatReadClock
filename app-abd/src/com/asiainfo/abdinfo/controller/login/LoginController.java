@@ -1,19 +1,14 @@
 package com.asiainfo.abdinfo.controller.login;
 
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang3.StringUtils;
-import org.jfree.util.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,8 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.abdinfo.common.ErrorCode;
-import com.asiainfo.abdinfo.common.JsonUtils;
-import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.common.ReturnResult;
 import com.asiainfo.abdinfo.po.User;
 import com.asiainfo.abdinfo.service.UserService;
@@ -47,7 +40,7 @@ public class LoginController {
 		String userId=request.getParameter("userId");
 		String pwd=request.getParameter("pwd");
 		System.out.println(userId+pwd);
-		Map map=new HashMap();
+		Map<String,Object> map=new HashMap<String,Object>();
 	    map.put("staffCode", userId);
 	    map.put("staffPwd", pwd);
 		User user = null;
