@@ -77,7 +77,7 @@ public class SixDiligenceServiceImpl implements ISixDiligenceService{
 	@Override
 	public Map<String, Object> findbydaydiligence(String staffcode, String date, String bumen) {
 		Map<String, Object> map=new HashMap<String,Object>();
-		map.put("staffCode", staffcode);
+		map.put("staffCodeMy", staffcode);
 		map.put("date", date);
 		map.put("bumen", bumen);
 		List<String> staffCodes=sixDiligenceDao.findStaffCode(map);

@@ -20,8 +20,10 @@ public interface ITipsDao {
 	public int updateCustomContent(Map<String, Object> map);/**更新自主内容*/
 	public int deleteOwes_content(Map<String, Object> map);/**再次提交删除之前的感恩信息，添加当前的感恩信息*/
 	public void delwkl(Map<String, Object> map);/**再次提交删除之前工作总结*/
-	public void addWorkPlan(Map<String, Object> map);/**添加工作总结*/
+	public int addWorkSummary(Map<String, Object> map);/**添加工作总结*/
 	public int deleteById(Map<String, Object> map);/**删除单条工作总结*/
-	public int updateWorkPlan(Map<String, Object> map);/**根据id更新工作总结*/
+	public int updateWorkSummary(Map<String, Object> map);/**根据id更新工作总结*/
+	public int addWorkPlan(Map<String, Object> map);/**添加工作计划*/
+	
 
 }

@@ -110,13 +110,13 @@
 			<result property="work" column="actconcom" />
 			<result property="id" column="id" />
 			<result property="entry_name" column="entry_name" />
-			<result property="planTime" column="planTime" />
+			<result property="planTime" column="actualnum" />
 			<result property="projectType" column="projectType" />
 		</collection>
 	</resultMap>
 	<!-- 查找全部工作内容 -->
 	<select id="findWork" parameterType="java.util.Map" resultMap="works">
-		select id,actconcom ,date,projectType,entry_name,planTime from work_plan
+		select id,actconcom ,date,projectType,entry_name,actualnum from work_plan
 		where staffCode=#{staffCode}
 		<if test="date!=null">
 			and date=#{date}
@@ -172,16 +172,17 @@
 		<foreach collection="staffCodes" item="staffCode" separator="," open="(" close=")">
 			#{staffCode}
 		</foreach>
+		and staffCode!=#{staffCodeMy}
 		order by num desc
 	</select>
 	<!-- 根据人员编码查找部门或者事业部的所有人的人员编码 -->
 	<select id="findStaffCode" resultType="java.lang.String">
 		select 人员编码 from datacenter_personnel where 
 		<if test="bumen=='12'">
-			部门=(select 部门 from datacenter_personnel where 人员编码=#{staffCode}) 
+			部门=(select 部门 from datacenter_personnel where 人员编码=#{staffCodeMy}) 
 		</if>
 		<if test="bumen=='11'">
-			事业部=(select 事业部 from datacenter_personnel where 人员编码=#{staffCode}) 
+			事业部=(select 事业部 from datacenter_personnel where 人员编码=#{staffCodeMy}) 
 		</if>
 	</select>
 	
