@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.po.ReadCount;
 
@@ -34,12 +35,7 @@ public interface ReadClockDao {
 	 */
 	void updateBook(Map map);
 	
-	/**
-	 * 查数据 该功能用来做日历模块
-	 * @param map
-	 * @return
-	 */
-	List<Map> selectCalendar(Map map);
+
 	
 	
 	/**
@@ -55,6 +51,32 @@ public interface ReadClockDao {
 	 * @return
 	 */
 	String selectIconLevel(@Param(value="staffCode") String staffCode);
+	
+	
+	
+	
+	/**
+	 * 根据假期判断
+	 * @param yearMonth 传入年月
+	 * @param month   传入月份
+	 * @return
+	 */
+	List<DayRest> selectDayRest(@Param(value="staffCode") String yearMonth,@Param(value="yearMonth") String month,@Param(value="yearDay") String yearDay,@Param(value="status") String status);
+	
+	/**
+	 * 判断有没有数据
+	 * @param yearMonth
+	 * @param month
+	 * @return
+	 */
+	String selectJibenxinxi(@Param(value="staffCode") String yearMonth,@Param(value="yearMonth") String month);
+	
+	/**
+	 * 查数据 该功能用来做日历模块
+	 * @param map
+	 * @return
+	 */
+	List<DayRest> selectCalendar(@Param(value="staffCode") String yearMonth,@Param(value="yearMonth") String month);
 	
 
 	

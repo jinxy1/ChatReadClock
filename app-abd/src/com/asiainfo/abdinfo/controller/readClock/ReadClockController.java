@@ -3,15 +3,12 @@ package com.asiainfo.abdinfo.controller.readClock;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.asiainfo.abdinfo.common.CurrentTime;
 import com.asiainfo.abdinfo.common.EmojiUtil;
 import com.asiainfo.abdinfo.common.JsonUtils;
@@ -135,10 +132,20 @@ public class ReadClockController {
 	public void findCalendar(HttpServletRequest request,HttpServletResponse response){
 		String staffCode=request.getParameter("staffCode");
 		String yearMonth=request.getParameter("yearMonth");
-		Map<String,String> map=new HashMap<String,String>();
-		map.put("staffCode", staffCode);
-		map.put("yearMonth", yearMonth);
-		ResponseUtils.renderJson(response, JsonUtils.toJson(readClockService.getCalendar(map)));
+		ResponseUtils.renderJson(response, JsonUtils.toJson(readClockService.getCalendar(staffCode,yearMonth)));
+	}
+	
+	/**
+	 * 日历假期
+	 * @param request
+	 * @param response
+	 */
+	@ResponseBody
+	@RequestMapping(value="/dayRest.do")
+	public void DayRest(HttpServletRequest request,HttpServletResponse response){
+		String staffCode=request.getParameter("staffCode");
+		String yearMonth=request.getParameter("yearMonth");
+		ResponseUtils.renderJson(response, JsonUtils.toJson(readClockService.selectDayRest(staffCode, yearMonth,yearMonth,"dateLike")));
 	}
 	
 	

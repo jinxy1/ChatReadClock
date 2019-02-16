@@ -3,6 +3,9 @@ package com.asiainfo.abdinfo.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
 
 public interface ReadClockService {
@@ -25,16 +28,6 @@ public interface ReadClockService {
 	 */
 	List<ReadClock> getReadIndex1(Map map);
 	
-	
-	/**
-	 * 查数据 该功能用来做日历模块
-	 * @param map
-	 * @return
-	 */
-	List<Map> getCalendar(Map map);
-	
-	
-	
 	/**
 	 * 查询读书心得的数据
 	 * @param staffCode
@@ -48,6 +41,30 @@ public interface ReadClockService {
 	 * @return
 	 */
 	List<String> getIconLevel(String staffCode);
+	
+	
+	
+	/**
+	 * 查数据 该功能用来做日历模块
+	 * @param map
+	 * @return
+	 */
+	 List <DayRest> getCalendar(String staffCode,String yearMonth );
+	
+	
+	/**
+	 * 根据假期判断
+	 * @param yearMonth
+	 * @param month
+	 * @return
+	 */
+	List<DayRest>   selectDayRest( String staffCode,String yearMonth,String yearDay,String status);
+
+	
+	
+	
+	
+	
 	
 
 

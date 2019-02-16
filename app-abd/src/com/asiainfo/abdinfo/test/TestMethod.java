@@ -17,14 +17,12 @@ public class TestMethod {
 	
 	@Test
 	public void Test1(){
-		String str = "";
-        System.out.println("原始字符为：\n" + str);
-
-        System.out.println("to aliases 之后：");
-        System.out.println(EmojiParser.parseToAliases(str));
-        System.out.println(EmojiParser.parseToAliases(str, EmojiParser.FitzpatrickAction.PARSE));
-        System.out.println(EmojiParser.parseToAliases(str, EmojiParser.FitzpatrickAction.REMOVE));
-        System.out.println(EmojiParser.parseToAliases(str, EmojiParser.FitzpatrickAction.IGNORE));
+		String str = "2019-02-08";
+		String str1=str.trim().substring(8,10);
+		
+		System.out.println(Integer.parseInt(str1));
+		
+        
 
 	}
 
