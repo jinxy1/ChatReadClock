@@ -89,7 +89,8 @@ public class TipsController {
 	@ResponseBody
 	public void delete(HttpServletRequest request,HttpServletResponse response){
 		String idstr=request.getParameter("id");
-		Integer id= Integer.parseInt(idstr);
+		
+		Integer id= Integer.parseInt(idstr.equals("undefined")?"-1":idstr);
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id",id);
 		tipsService.deleteTipsOwes_content(map);
