@@ -35,7 +35,7 @@
 	   <!--  SELECT '【精进】' as project,CONCAT("【",types,"】",content) AS  content,'practice' as icon FROM Reading_reflection WHERE staffCode='18060405' AND date='2019-02-14' AND  content!='' --> 
 		SELECT '【精进】' as project,CONCAT("【",types,"】",char(10),content) AS  content,'practice' as icon FROM Reading_reflection WHERE <include refid="numberDateNew"/> AND  content!=''
 		union ALL
-		SELECT '【今日感恩】' as project ,oweDetails as content , 'gratitude' as icon FROM owes_content WHERE <include refid="numberDateNew"/>
+		SELECT '【今日感恩】' as project ,oweDetails as content , 'gratitude' as icon FROM owes_content WHERE <include refid="numberDateNew"/> AND oweDetails!=''
 		UNION ALL
 		SELECT Customtype as project,Customcontent as content ,'career' as icon from custom_reflection WHERE <include refid="numberDateNew"/>
 		

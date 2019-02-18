@@ -11,7 +11,6 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import com.asiainfo.abdinfo.common.CurrentTime;
-import com.asiainfo.abdinfo.common.StatusCode;
 import com.asiainfo.abdinfo.dao.ReadClockDao;
 import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
@@ -21,7 +20,8 @@ import com.asiainfo.abdinfo.service.ReadClockService;
 @Service("ReadClockService")
 public class ReadClockImple implements ReadClockService {
 	
-	Logger  log = Logger.getLogger(ReadClockImple.class);
+	
+	private static final Logger LOG = Logger.getLogger(ReadClockImple.class);
 
 	@Resource
 	private ReadClockDao readClockDao;
@@ -117,7 +117,9 @@ public class ReadClockImple implements ReadClockService {
 		String baseInfo = readClockDao.selectJibenxinxi(staffCode, yearDay);
 		System.out.println(baseInfo==null||baseInfo.isEmpty());
 		boolean flage=baseInfo==null||baseInfo.isEmpty();
+		int i=1;
 		while (flage) {
+			i++;
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar c = Calendar.getInstance();
 			c.setTime(new Date());
@@ -127,10 +129,14 @@ public class ReadClockImple implements ReadClockService {
 			yearDay=mon;
 			baseInfo=readClockDao.selectJibenxinxi(staffCode, yearDay);
 			flage=baseInfo==null||baseInfo.isEmpty();
+			if(i>10){
+				LOG.info("进入死循环被自动跳出");
+				break;
+			}
 		}
 		Long endCurrent=System.currentTimeMillis();
 		List<DayRest>  dayRest=readClockDao.selectDayRest(staffCode, yearMonth,yearDay,status);
-		System.out.println("----------selectDayRest---------用时"+(endCurrent-beginCurrent));
+		LOG.info("----------selectDayRest---------用时"+(endCurrent-beginCurrent));
 		 return dayRest;
 	}
 	

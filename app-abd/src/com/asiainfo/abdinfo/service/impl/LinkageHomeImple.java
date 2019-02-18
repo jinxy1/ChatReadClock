@@ -41,13 +41,13 @@ public class LinkageHomeImple implements linkageHomeService{
 	 */
 	@Override
 	public List<Calendar> selectCalendarContent(String staffCode, String date) {
-		List<Calendar> cal=calendarDao.selectCalendarContent( staffCode,  date);
-		System.out.println(cal);
+//		List<Calendar> cal=calendarDao.selectCalendarContent( staffCode,  date);
+//		System.out.println(cal);
 		List<Calendar> attend=getAttendance( staffCode,  date);
-		for(Calendar c:cal){
-			attend.add(c);
-		}
-		System.out.println(attend);
+//		for(Calendar c:cal){
+//			attend.add(c);
+//		}
+//		System.out.println(attend);
 		return attend;
 		
 	}
@@ -117,14 +117,17 @@ public class LinkageHomeImple implements linkageHomeService{
 		
 		goWork.setContents(goWorkList);
 		downWork.setContents(downWorkList);
-		
-		calendar.add(goWork);
-		calendar.add(downWork);
+		System.out.println(calendar);
+		List<Calendar> cal=calendarDao.selectCalendarContent( staffCode,  date);
+		cal.add(0,goWork);
+		cal.add(downWork);
+//		calendar.add(goWork);
+//		calendar.add(downWork);
 
 	  
 	    long begtinTime=System.currentTimeMillis();
 	    System.out.println("--------------考勤所用时间-------------------"+(begtinTime-startTime));
-	    return calendar;
+	    return cal;
 	}
 
 	

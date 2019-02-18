@@ -30,9 +30,13 @@ public class TestDate {
 	public void test1(){
 		
 		boolean flag=true;
+		int i=1;
 		while(flag){
 			System.out.println("fdkjfhjkd");
-			flag=false;
+			i++;
+			if(i>10){
+				break;
+			}
 		}
 	}
 	
