@@ -15,6 +15,7 @@ public class Works implements Serializable{
 	private String entry_name;
 	private String planTime;
 	private Date date;//时间
+	private String stutas;
 	public Works() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -55,7 +56,14 @@ public class Works implements Serializable{
 	public void setPlanTime(String planTime) {
 		this.planTime = planTime;
 	}
-	public Works(Integer id, String work, String projectType, String entry_name, String planTime, Date date) {
+	public String getStutas() {
+		return stutas;
+	}
+	public void setStutas(String stutas) {
+		this.stutas = stutas;
+	}
+	public Works(Integer id, String work, String projectType, String entry_name, String planTime, Date date,
+			String stutas) {
 		super();
 		this.id = id;
 		this.work = work;
@@ -63,7 +71,9 @@ public class Works implements Serializable{
 		this.entry_name = entry_name;
 		this.planTime = planTime;
 		this.date = date;
+		this.stutas = stutas;
 	}
+	
 	
 
 }

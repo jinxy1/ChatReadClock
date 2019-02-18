@@ -4,7 +4,6 @@ package com.asiainfo.abdinfo.test;
 import org.junit.Test;
 
 import com.asiainfo.abdinfo.common.EmojiUtil;
-import com.vdurmont.emoji.EmojiParser;
 
 public class TestMethod {
 	

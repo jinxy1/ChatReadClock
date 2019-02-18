@@ -1,9 +1,6 @@
 package com.asiainfo.abdinfo.service.impl;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +10,7 @@ import org.springframework.stereotype.Service;
 import com.asiainfo.abdinfo.dao.CalendarDao;
 import com.asiainfo.abdinfo.dao.LinkageHomeDao;
 import com.asiainfo.abdinfo.po.Calendar;
-import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
-import com.asiainfo.abdinfo.service.ReadClockService;
 import com.asiainfo.abdinfo.service.linkageHomeService;
 
 @Service("linkageHomeService")
@@ -28,8 +23,6 @@ public class LinkageHomeImple implements linkageHomeService{
 	@Autowired
 	private CalendarDao calendarDao;
 	
-	@Autowired
-	private ReadClockService readClockService;
 
 	@Override
 	public List<ReadClock> getLinkage(Map<String,Object> map) {
@@ -58,7 +51,7 @@ public class LinkageHomeImple implements linkageHomeService{
 	@Override
 	public List<Calendar> getAttendance(String staffCode, String date) {
 		long startTime=System.currentTimeMillis();
-		//List<DayRest>  holiday=readClockService.selectDayRest(staffCode, date, date, "dateEqul");   //假期      若空不放假     若不为空放假
+		
 		List<String>  calendarTime=calendarDao.selectAttendance(staffCode, date);                        //打卡(按指纹)记录        若空未打卡    若不为空打卡
 		System.out.println(calendarTime.size());
 		List<Calendar>  calendar=new ArrayList<Calendar>();    //存放上下班的集合

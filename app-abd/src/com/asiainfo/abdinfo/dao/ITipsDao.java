@@ -24,6 +24,7 @@ public interface ITipsDao {
 	public int deleteById(Map<String, Object> map);/**删除单条工作总结*/
 	public int updateWorkSummary(Map<String, Object> map);/**根据id更新工作总结*/
 	public int addWorkPlan(Map<String, Object> map);/**添加工作计划*/
+	public int updateWorkStutas(Map<String, Object> map);/**修改工作状态*/
 	
 
 }
