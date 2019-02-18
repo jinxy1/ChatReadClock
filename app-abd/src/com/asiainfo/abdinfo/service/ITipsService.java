@@ -13,4 +13,5 @@ public interface ITipsService {
 	public int deleteWork(Map<String, Object> map);/**根据id删除工作总结*/
 	public int updateWork(Map<String, Object> map);/**根据id更新工作总结*/
 	public int addWorkSummary(Map<String, Object> map);/**添加工作总结*/
+	public int updateWorkStutas(Map<String, Object> map);/**修改工作状态*/
 }

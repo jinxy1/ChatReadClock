@@ -117,6 +117,24 @@ public class TipsController {
 		tipsService.updateWork(map);
 		
 	}
+	
+	/**根据id更新工作总计*/
+	@RequestMapping(value="/updateWorkStutas.do")
+	@ResponseBody
+	public void updateWorkStutas(HttpServletRequest request,HttpServletResponse response){
+		String idstr=request.getParameter("id");
+		String staffCode=request.getParameter("staffCode");
+		String date=request.getParameter("date");
+		String codestr=request.getParameter("code");
+		Integer code= Integer.parseInt(codestr);
+		Integer id= Integer.parseInt(idstr);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("id",id);
+		map.put("staffCode",staffCode);
+		map.put("date",date);
+		map.put("code",code);
+		tipsService.updateWorkStutas(map);
+	}
 }
 
 

@@ -127,6 +127,11 @@ public class TipsServiceImpl implements ITipsService{
 			}
 		return 0;
 	}
+	@Override
+	public int updateWorkStutas(Map<String, Object> map) {
+		
+		return tipsDao.updateWorkStutas(map);
+	}
 	
 
 	
