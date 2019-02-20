@@ -60,6 +60,7 @@ public class SixDiligenceServiceImpl implements ISixDiligenceService{
 	@Override
 	public PageBean<SixDiligence> findTips(Map<String, Object> map, PageBounds pb) {
 		PageHelper.startPage(pb.getPage(), pb.getLimit());
+		map.put("code", 1);
 		List<SixDiligence> readFeeling=sixDiligenceDao.findReadFeeling(map);/**读书感悟*/
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd"); 
 		String date=null;
