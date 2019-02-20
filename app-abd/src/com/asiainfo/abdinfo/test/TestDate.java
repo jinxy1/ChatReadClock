@@ -16,12 +16,14 @@ public class TestDate {
 
 	@Test
 	public void test() {
-		ReadClockImple mlcvp;
+		LinkageHomeImple mlcvp;
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
-		mlcvp = ac.getBean("ReadClockService", ReadClockImple.class);
+		mlcvp = ac.getBean("linkageHomeService", LinkageHomeImple.class);
 
-		JSONObject a=mlcvp.getIconLevel("18060405");
+		List<Calendar> a=mlcvp.getAttendance("18060405", "2019-02-20");
 		System.out.println(a);
+		
+
 
 	}
 

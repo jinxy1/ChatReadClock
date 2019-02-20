@@ -58,6 +58,7 @@ public class LinkageHomeImple implements linkageHomeService{
 		Calendar goWork=new Calendar();          //存放上班的对象
 		Calendar downWork=new Calendar();          //存放下班的对象
 		
+		
 		goWork.setProject("上班时间");
 		downWork.setProject("下班时间");
 		goWork.setIcon("sumRound");
@@ -67,8 +68,8 @@ public class LinkageHomeImple implements linkageHomeService{
 		
 		if(calendarTime.size()!=0){  //打卡
 			//当多条记录时
-			int maxDate=dateConversion(calendarTime.get(0));      //最大值 
-			int minDate=dateConversion(calendarTime.get(0));      //最小值
+			String maxDate=calendarTime.get(0);      //最大值 
+			String minDate=calendarTime.get(0);      //最小值
 			for(int i=0;i<calendarTime.size();i++){
 				//如果只有一条打卡记录
 				if(calendarTime.size()==1){  
@@ -76,32 +77,45 @@ public class LinkageHomeImple implements linkageHomeService{
 					if(calendarInt<12){
 						//上班
 
-						minDate=dateConversion(calendarTime.get(i));
-						maxDate=0;
-//						goWork.setStutas("已打卡");
-//						downWork.setStutas("未打卡");
+						minDate=calendarTime.get(i);
+						maxDate="";
+					
 					}else{
 					   //下班	
-						minDate=0;
-						maxDate=dateConversion(calendarTime.get(i));
-//						goWork.setStutas("未打卡");
-//						downWork.setStutas("已打卡");
+						minDate="";
+						maxDate=calendarTime.get(i);
+					
 					}
 				}else{
+					
+					System.out.println(calendarTime.get(i).compareTo("12:00:00"));
+					
 					//若有多条打卡记录
-					if(dateConversion(calendarTime.get(i))<minDate){
-						minDate=dateConversion(calendarTime.get(i));
+					if(calendarTime.get(i).compareTo("12:00:00")<0){   //上午
+						System.out.println(calendarTime.get(i));
+						if(calendarTime.get(i).compareTo(minDate)<=0){
+							 minDate=calendarTime.get(i);  //最小 minDate
+							 if(maxDate.compareTo("12:00:00")<0){
+								 maxDate="";
+							 }
+						}
+					}else{
+						if(calendarTime.get(i).compareTo(maxDate)>=0){  //下午
+							 maxDate =calendarTime.get(i);  //最大 maxDate
+							 if(minDate.compareTo("12:00:00")>0){
+								 minDate="";
+							 }
+							
+						}
 					}
 					
-					if(dateConversion(calendarTime.get(i))>maxDate){
-						maxDate=dateConversion(calendarTime.get(i));
-					}
+					
+					
 				}
-//				goWork.setStutas("已打卡");
-//				downWork.setStutas("已打卡");
+
 			}
-			goWorkList.add(intConversion(minDate));
-			downWorkList.add(intConversion(maxDate));
+			goWorkList.add(minDate);
+			downWorkList.add(maxDate);
 		}else{           //未打卡
 //			if(holiday.size()!=0){  //放假
 //				
