@@ -7,21 +7,20 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.abdinfo.po.Calendar;
 import com.asiainfo.abdinfo.service.impl.LinkageHomeImple;
+import com.asiainfo.abdinfo.service.impl.ReadClockImple;
 
 public class TestDate {
 
 	@Test
 	public void test() {
-		LinkageHomeImple mlcvp;
+		ReadClockImple mlcvp;
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
-		mlcvp = ac.getBean("linkageHomeService", LinkageHomeImple.class);
-		long startTime=System.currentTimeMillis();
-		List<Calendar> a=mlcvp.selectCalendarContent("18060405","2019-02-14");
-		long endTime=System.currentTimeMillis();
-		System.out.println(startTime+endTime);
-		System.out.println(ac);
+		mlcvp = ac.getBean("ReadClockService", ReadClockImple.class);
+
+		JSONObject a=mlcvp.getIconLevel("18060405");
 		System.out.println(a);
 
 	}
@@ -66,23 +65,12 @@ public class TestDate {
 	
 	
 	
-/*	private int dateConversion(String str){
-		int a=Integer.parseInt(str.substring(0,2))*60*60;
-		int b =Integer.parseInt(str.substring(3,5))*60;
-		int c=Integer.parseInt(str.substring(6,8));
-		int tatal=a+b+c;
-		System.out.println(tatal);
-		return tatal;
-	}*/
-	
-	
-	/*@Test
-	public void test2(){
-		ReadClockImple mlcvp;
-		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
-		mlcvp = ac.getBean("ReadClockService", ReadClockImple.class);
-		
-	}*/
+	@Test
+    public void test4(){
+    	String a="start,start,startHref";
+    	a.split(",");
+    	System.out.println(a.split(","));
+    }
 	
 	
 

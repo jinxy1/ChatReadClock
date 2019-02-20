@@ -13,11 +13,13 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.abdinfo.common.CurrentTime;
 import com.asiainfo.abdinfo.dao.ReadClockDao;
 import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.po.ReadCount;
+import com.asiainfo.abdinfo.po.NewLoginBean.Integral;
 import com.asiainfo.abdinfo.service.ReadClockService;
 
 @Service("ReadClockService")
@@ -90,16 +92,14 @@ public class ReadClockImple implements ReadClockService {
 	 * 绘制积分图案
 	 */
 	@Override
-	public List<String> getIconLevel(String staffCode) {
-		String tconLevel = readClockDao.selectIconLevel(staffCode);
-		List<String> list = new ArrayList<String>();
-
-		String[] icon = tconLevel.split(",");
-		for (String a : icon) {
-			list.add(a.trim());
-		}
-
-		return list;
+	public JSONObject getIconLevel(String staffCode) {
+		Integral tconLevel = readClockDao.selectIconLevel(staffCode);
+		JSONObject object=new JSONObject();
+		String icon=tconLevel.getIcon();  //图标
+		String[] icon1 = icon.split(",");
+		object.put("icon1", icon1);
+		object.put("integral", tconLevel);
+		return object;
 	}
 
 	/**

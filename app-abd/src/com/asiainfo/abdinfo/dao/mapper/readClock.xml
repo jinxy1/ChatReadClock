@@ -90,25 +90,13 @@
 	</select>
 	
 	
-	<!-- 获取总积分 -->
-	<sql id="baseIcon">
-		select sum(a) FROM (
-		select count(praise) as a  from praise  where Be_praised_code=#{staffCode}   <!-- 点赞 -->
-		union all
-		select count(fabulous)*2 as a from fabulous  where Be_fabuloused_code=#{staffCode}  <!-- 超赞 -->
-		union all
-		select SUM(integral) from reading_plancontent WHERE staffCode=#{staffCode} AND integral is not null  <!--  读书打卡 -->
-		union ALL
-		select count(actconcom) from work_plan WHERE staffCode=#{staffCode}         <!--  日计划 -->
-		) bb
-	</sql>
+	
 	
 	
 	
 	<!-- 绘制积分图案 -->
-	<select id="selectIconLevel" resultType="String">
-	select icon_level from startIntegral 
-	where  (<include refid="baseIcon"/>) &gt;=min_start  and  (<include refid="baseIcon"/>)&lt;max_start
+	<select id="selectIconLevel" parameterType="String" resultType="com.asiainfo.abdinfo.po.NewLoginBean.Integral" statementType="CALLABLE">
+	   CALL integralLevel (#{staffCode})
 	</select>
 	
 	

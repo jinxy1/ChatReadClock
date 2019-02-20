@@ -5,6 +5,7 @@
     <resultMap type="com.asiainfo.abdinfo.po.Calendar" id="calendar">
        <id column="project" property="project"/>
        <result column="icon" property="icon"/>
+       <result column="stutas" property="stutas"/>
       <collection property="contents" ofType="string"  javaType="ArrayList" column="project">
           <result column="content" />  
      </collection>
@@ -20,24 +21,17 @@
 	
 	<!-- 日历模块 -->
 	<select id="selectCalendarContent" resultMap="calendar">
-	<!-- 	SELECT  '上班时间' AS project,concat('打卡时间：',substring(MIN(时间),1,5))  AS content,'sumRound' AS icon  
-		from dakajilu WHERE <include refid="numberDate"/>
-		union all
-		SELECT  '下班时间' AS project,concat('打卡时间：',substring(MAX(时间),1,5))  AS content,'moonRound' AS icon  
-		from dakajilu WHERE <include refid="numberDate"/>
-		UNION ALL -->
-		SELECT pROJECT,CONTENT,ICON FROM CALENDAR_PROJECT WHERE STAFF_CODE=#{staffCode} AND DATE=#{date}
+		 SELECT pROJECT,CONTENT,ICON,stutas FROM CALENDAR_PROJECT WHERE STAFF_CODE=#{staffCode} AND DATE=#{date}
 		UNION ALL
-		SELECT '【读书感悟】' as project,ReadingFeeling as content, 'book' as icon from reading_plancontent WHERE staffCode=#{staffCode} and ClockDate=#{date} AND ReadingFeeling!=''
+		SELECT '【读书感悟】' as project,ReadingFeeling as content, 'book' as icon ,CASE WHEN ReadingFeeling is NULL  OR ReadingFeeling=''  THEN '' else '已读' END from reading_plancontent WHERE staffCode=#{staffCode} and ClockDate=#{date} 
 		UNION ALL
-		SELECT '【行之实践】' as project ,actconcom as content ,'conclusion' as icon FROM work_plan WHERE <include refid="numberDateNew"/>
+		SELECT '【行之实践】' as project ,actconcom as content ,'conclusion' as icon,stutas FROM work_plan WHERE <include refid="numberDateNew"/> 
 		UNION ALL
-	   <!--  SELECT '【精进】' as project,CONCAT("【",types,"】",content) AS  content,'practice' as icon FROM Reading_reflection WHERE staffCode='18060405' AND date='2019-02-14' AND  content!='' --> 
-		SELECT '【精进】' as project,CONCAT("【",types,"】",char(10),content) AS  content,'practice' as icon FROM Reading_reflection WHERE <include refid="numberDateNew"/> AND  content!=''
+		SELECT '【精进】' as project,CONCAT("【",types,"】",char(10),content) AS  content,'practice' as icon,'' FROM Reading_reflection WHERE  <include refid="numberDateNew"/>  AND  content!=''
 		union ALL
-		SELECT '【今日感恩】' as project ,oweDetails as content , 'gratitude' as icon FROM owes_content WHERE <include refid="numberDateNew"/> AND oweDetails!=''
+		SELECT '【今日感恩】' as project ,oweDetails as content , 'gratitude' as icon,'' FROM owes_content WHERE <include refid="numberDateNew"/>  AND oweDetails!=''
 		UNION ALL
-		SELECT Customtype as project,Customcontent as content ,'career' as icon from custom_reflection WHERE <include refid="numberDateNew"/>
+		SELECT Customtype as project,Customcontent as content ,'career' as icon,'' from custom_reflection WHERE <include refid="numberDateNew"/> 
 		
 	</select>
 	
@@ -50,8 +44,13 @@
 	
 	<!-- 判断指定日期是否有读书内容 -->
 	<select id="judgeRead" resultType="String">
-   	SELECT ReadingFeeling
-    from reading_plancontent WHERE staffCode=#{staffCode} and ClockDate=#{date} 
+   <!-- 	SELECT ReadingFeeling
+    from reading_plancontent WHERE staffCode=#{staffCode} and ClockDate=#{date}  -->
+   <!--  AND    ReadingFeeling is not  null AND ReadingFeeling!='' -->
+   
+   SELECT IFNULL(ReadingFeeling,'')
+    from reading_plancontent 
+WHERE staffCode=#{staffCode} and ClockDate=#{date} 
 	</select>
 	
 	

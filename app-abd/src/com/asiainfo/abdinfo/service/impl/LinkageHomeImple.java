@@ -78,11 +78,14 @@ public class LinkageHomeImple implements linkageHomeService{
 
 						minDate=dateConversion(calendarTime.get(i));
 						maxDate=0;
-					
+//						goWork.setStutas("已打卡");
+//						downWork.setStutas("未打卡");
 					}else{
 					   //下班	
 						minDate=0;
 						maxDate=dateConversion(calendarTime.get(i));
+//						goWork.setStutas("未打卡");
+//						downWork.setStutas("已打卡");
 					}
 				}else{
 					//若有多条打卡记录
@@ -94,6 +97,8 @@ public class LinkageHomeImple implements linkageHomeService{
 						maxDate=dateConversion(calendarTime.get(i));
 					}
 				}
+//				goWork.setStutas("已打卡");
+//				downWork.setStutas("已打卡");
 			}
 			goWorkList.add(intConversion(minDate));
 			downWorkList.add(intConversion(maxDate));
@@ -106,6 +111,8 @@ public class LinkageHomeImple implements linkageHomeService{
 			int maxDate=0;
 			goWorkList.add(intConversion(minDate));
 			downWorkList.add(intConversion(maxDate));
+//			goWork.setStutas("未打卡");
+//			downWork.setStutas("未打卡");
 		}
 		
 		goWork.setContents(goWorkList);

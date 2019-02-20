@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
 import com.asiainfo.abdinfo.po.ReadCount;
+import com.asiainfo.abdinfo.po.NewLoginBean.Integral;
 
 public interface ReadClockDao {
 	
@@ -57,7 +58,7 @@ public interface ReadClockDao {
 	 * 绘制积分图案
 	 * @return
 	 */
-	String selectIconLevel(@Param(value="staffCode") String staffCode);
+	Integral selectIconLevel(@Param(value="staffCode") String staffCode);
 	
 	
 	

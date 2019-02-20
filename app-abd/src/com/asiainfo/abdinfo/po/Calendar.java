@@ -13,7 +13,17 @@ public class Calendar implements Serializable{
 	
 	private String icon;
 	
+	private String stutas;
 	
+	
+
+	public String getStutas() {
+		return stutas;
+	}
+
+	public void setStutas(String stutas) {
+		this.stutas = stutas;
+	}
 
 	public Calendar() {
 		super();
@@ -52,8 +62,11 @@ public class Calendar implements Serializable{
 
 	@Override
 	public String toString() {
-		return "Calendar [project=" + project + ", contents=" + contents + ", icon=" + icon + "]";
+		return "Calendar [project=" + project + ", contents=" + contents + ", icon=" + icon + ", stutas=" + stutas
+				+ "]";
 	}
+
+	
 
 
    

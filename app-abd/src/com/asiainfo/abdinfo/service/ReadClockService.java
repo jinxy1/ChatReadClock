@@ -3,6 +3,7 @@ package com.asiainfo.abdinfo.service;
 import java.util.List;
 import java.util.Map;
 
+import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.abdinfo.po.DayRest;
 import com.asiainfo.abdinfo.po.ReadClock;
 
@@ -49,7 +50,7 @@ public interface ReadClockService {
 	 * 绘制积分图案
 	 * @return
 	 */
-	List<String> getIconLevel(String staffCode);
+	JSONObject getIconLevel(String staffCode);
 	
 	
 	
