@@ -12,15 +12,17 @@ public class Type implements Serializable{
 	private String Customtype;
 	private String Customcontent;
 	private String date;
+	private String stutas;
 	public Type() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Type(String customtype, String customcontent, String date) {
+	public Type(String customtype, String customcontent, String date, String stutas) {
 		super();
 		Customtype = customtype;
 		Customcontent = customcontent;
 		this.date = date;
+		this.stutas = stutas;
 	}
 	public String getCustomtype() {
 		return Customtype;
@@ -39,6 +41,12 @@ public class Type implements Serializable{
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public String getStutas() {
+		return stutas;
+	}
+	public void setStutas(String stutas) {
+		this.stutas = stutas;
 	}
 	
 }
