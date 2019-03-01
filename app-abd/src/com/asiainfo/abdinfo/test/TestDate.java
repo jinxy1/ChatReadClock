@@ -7,10 +7,8 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.abdinfo.po.Calendar;
 import com.asiainfo.abdinfo.service.impl.LinkageHomeImple;
-import com.asiainfo.abdinfo.service.impl.ReadClockImple;
 
 public class TestDate {
 
@@ -19,7 +17,7 @@ public class TestDate {
 		LinkageHomeImple mlcvp;
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
 		mlcvp = ac.getBean("linkageHomeService", LinkageHomeImple.class);
-
+		System.out.println(ac);
 		List<Calendar> a=mlcvp.getAttendance("18060405", "2019-02-20");
 		System.out.println(a);
 		
