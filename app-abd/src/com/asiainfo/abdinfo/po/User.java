@@ -21,7 +21,7 @@ public class User implements Serializable{
 	//部门
 	private String department;
 	
-	
+	private String BU;
 
 	public String getDepartment() {
 		return department;
@@ -63,11 +63,35 @@ public class User implements Serializable{
 		this.staffPwd = staffPwd;
 	}
 
+	public User() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public User(String staffCode, String staffName, String staffPwd, String dataLevel, String department, String bU) {
+		super();
+		this.staffCode = staffCode;
+		this.staffName = staffName;
+		this.staffPwd = staffPwd;
+		DataLevel = dataLevel;
+		this.department = department;
+		BU = bU;
+	}
+
 	@Override
 	public String toString() {
 		return "User [staffCode=" + staffCode + ", staffName=" + staffName + ", staffPwd=" + staffPwd + ", DataLevel="
-				+ DataLevel + ", department=" + department + "]";
+				+ DataLevel + ", department=" + department + ", BU=" + BU + "]";
 	}
+
+	public String getBU() {
+		return BU;
+	}
+
+	public void setBU(String bU) {
+		BU = bU;
+	}
+	
 
 	
 

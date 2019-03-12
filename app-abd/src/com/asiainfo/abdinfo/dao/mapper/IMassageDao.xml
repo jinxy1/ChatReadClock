@@ -26,6 +26,8 @@
   <update id="updateMassage" parameterType="java.util.Map">
   	update massage set stutas='1' where addresseeCode=#{staffCode} and stutas='0'
   </update>
+  
+  
 </mapper>
 
 

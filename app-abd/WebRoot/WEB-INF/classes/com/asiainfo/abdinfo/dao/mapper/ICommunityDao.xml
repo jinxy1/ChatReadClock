@@ -1,0 +1,39 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.asiainfo.abdinfo.dao.ICommunityDao">
+
+	<select id="getCommunityMsgType" resultType="CommunityInfoType">
+		select * from flow_type
+	</select>
+	
+	<resultMap type="com.asiainfo.abdinfo.po.community.CommunityInfo" id="communityMsg">
+		<id property="id" column="id"/>
+		<result property="infoTitle" column="infoTitle"/>
+		<result property="infoContent" column="infoContent"/>
+		<result property="infoCurrentTime" column="infoCurrentTime"/>
+		<association property="personnel" javaType="com.asiainfo.abdinfo.po.Personnel">
+			<result property="username" column="姓名"/>
+			<result property="department" column="部门"/>
+			<result property="division" column="事业部"/>
+		</association>
+		<collection property="communityImgInfo" ofType="string" column="id"
+		 select="com.asiainfo.abdinfo.dao.ICommunityDao.getImg">
+		</collection>
+	</resultMap>
+	<select id="getCommunityMsg"  resultMap="communityMsg">
+		SELECT fi.id,fi.infoTitle,fi.infoContent,fi.infoCurrentTime,fi.infoSendStaffCode,
+		dp.姓名,dp.部门,dp.事业部
+		from flow_info fi 
+		INNER JOIN flow_info_accept fia ON fi.id=fia.infoId
+		INNER JOIN flow_type ft ON fi.infoTypeId=ft.id
+		INNER JOIN datacenter_personnel dp on fi.infoSendStaffCode=dp.人员编码
+		where (infoAcceptName=#{user.staffCode} or infoAcceptName=#{user.department} 
+		or infoAcceptName=#{user.BU} or infoAcceptName='公司') 
+		<if test="typeName!='全部'">
+		AND typeName=#{typeName}
+		</if>
+	</select>
+	<select id="getImg" resultType="String">
+		select CONCAT('https://www.datacenterlab.cn/image/',infoImg,'.png') infoImg from flow_info_img where infoId=#{id}
+	</select>
+</mapper>

@@ -7,12 +7,16 @@
        <result property="staffName" column="姓名" />
        <result property="department" column="部门"/>
        <result property="DataLevel" column="数据级别"/>
+       <result property="BU" column="事业部"/>
     </resultMap>
 	
 	<!-- 插入日感想 -->
 	<insert id="addTipsDailyfeeling" parameterType="java.util.Map">
 		insert into Reading_reflection(department,types,content,staffCode,date,createTime) 
-		values (#{department},#{type},#{content},#{staffCode},#{time},now())
+		values 
+		<foreach collection="listAddM" item="menu" separator=",">
+			(#{department},#{menu.type},#{menu.content},#{staffCode},#{time},now())
+		</foreach>
 	</insert>
 	<!-- 感恩的具体人 -->
 	<insert id="addTipsOwes_content" parameterType="java.util.Map">
@@ -42,10 +46,10 @@
 	<!-- 查询个人信息 -->
 	<select id="findTips" parameterType="java.util.Map"  resultMap="user">
 		<if test="staffCode==null" >
-			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel
+			select 人员编码,姓名,部门 ,数据级别 ,事业部 from datacenter_personnel
 		</if>
 		<if test="staffCode!=null">
-			select 人员编码,姓名,部门 ,数据级别 from datacenter_personnel where 人员编码=#{staffCode}
+			select 人员编码,姓名,部门 ,数据级别 ,事业部  from datacenter_personnel where 人员编码=#{staffCode}
 		</if>
 	</select>
 	<!-- 插入工作计划 -->
