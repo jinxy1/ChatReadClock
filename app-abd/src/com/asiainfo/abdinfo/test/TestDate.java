@@ -1,25 +1,18 @@
 package com.asiainfo.abdinfo.test;
 
 
-import java.util.List;
-
 import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import com.asiainfo.abdinfo.po.Calendar;
-import com.asiainfo.abdinfo.service.impl.LinkageHomeImple;
 
 public class TestDate {
 
 	@Test
 	public void test() {
-		LinkageHomeImple mlcvp;
-		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
-		mlcvp = ac.getBean("linkageHomeService", LinkageHomeImple.class);
-		System.out.println(ac);
-		List<Calendar> a=mlcvp.getAttendance("18060405", "2019-02-20");
-		System.out.println(a);
+//		CommunityServiceImpl mlcvp;
+//		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
+//		mlcvp = ac.getBean("communityServiceImpl", CommunityServiceImpl.class);
+//		System.out.println(ac);
+		//int a=mlcvp.changeReadStatus("18060404","1");
+		//System.out.println(a);
 		
 
 

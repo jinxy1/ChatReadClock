@@ -17,9 +17,12 @@
 		count(1) from Reading_plancontent B join
 		Reading_detail rd1 on
 		B.ChapterId=rd1.id where b.staffCode=#{staffCode}
-		and b.clockDate&lt;=aa.clockDate AND rd1.bookId=aa.bookId
-		) rid from (select 0 bookId,ID,0 AS PID,'' AS
-		clockDate,CONCAT('',clockBook) AS clockBook from books
+		and
+		b.clockDate&lt;=aa.clockDate AND rd1.bookId=aa.bookId
+		) rid from
+		(select 0 bookId,ID,0 AS PID,'' AS
+		clockDate,CONCAT('',clockBook) AS
+		clockBook from books
 		UNION ALL
 		select
 		rd.bookId,
@@ -27,7 +30,8 @@
 		bb.id as bookID,
 		rp.clockDate as
 		clockDate,
-		CONCAT(rp.clockDate,' ', rd.clockDirectory) AS DATACLOCK
+		CONCAT(rp.clockDate,' ',
+		rd.clockDirectory) AS DATACLOCK
 		from
 		(select @rowno:=100) t join
 		Reading_plancontent rp on 1=1
@@ -42,7 +46,8 @@
 		rp.staffCode=dp.人员编码
 		where
 		rp.staffCode=#{staffCode} and rd.bookID is not null
-		ORDER BY clockDate) aa ORDER BY aa.id
+		ORDER BY clockDate)
+		aa ORDER BY aa.id
 	</select>
 
 

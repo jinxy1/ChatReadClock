@@ -12,12 +12,14 @@ public class CommunityAcceptInfo implements Serializable{
 	private Integer infoId;
 	private String infoAcceptType;
 	private String infoAcceptName;
-	public CommunityAcceptInfo(Integer id, Integer infoId, String infoAcceptType, String infoAcceptName) {
+	private String infoStatus;
+	CommunityAcceptInfo(Integer id, Integer infoId, String infoAcceptType, String infoAcceptName, String infoStatus) {
 		super();
 		this.id = id;
 		this.infoId = infoId;
 		this.infoAcceptType = infoAcceptType;
 		this.infoAcceptName = infoAcceptName;
+		this.infoStatus = infoStatus;
 	}
 	public CommunityAcceptInfo() {
 		super();
@@ -26,7 +28,7 @@ public class CommunityAcceptInfo implements Serializable{
 	@Override
 	public String toString() {
 		return "CommunityAcceptInfo [id=" + id + ", infoId=" + infoId + ", infoAcceptType=" + infoAcceptType
-				+ ", infoAcceptName=" + infoAcceptName + "]";
+				+ ", infoAcceptName=" + infoAcceptName + ", infoStatus=" + infoStatus + "]";
 	}
 	public Integer getId() {
 		return id;
@@ -51,5 +53,11 @@ public class CommunityAcceptInfo implements Serializable{
 	}
 	public void setInfoAcceptName(String infoAcceptName) {
 		this.infoAcceptName = infoAcceptName;
+	}
+	public String getInfoStatus() {
+		return infoStatus;
+	}
+	public void setInfoStatus(String infoStatus) {
+		this.infoStatus = infoStatus;
 	}
 }

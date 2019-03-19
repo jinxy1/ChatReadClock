@@ -11,14 +11,16 @@ public class CommunityInfoType implements Serializable{
 	private Integer id;
 	private String typeName;
 	private String typeImg;
+	private int unreadCount;
 	public CommunityInfoType() {
 		super();
 	}
-	public CommunityInfoType(Integer id, String typeName, String typeImg) {
+	CommunityInfoType(Integer id, String typeName, String typeImg, int unreadCount) {
 		super();
 		this.id = id;
 		this.typeName = typeName;
 		this.typeImg = typeImg;
+		this.unreadCount = unreadCount;
 	}
 	public Integer getId() {
 		return id;
@@ -40,7 +42,14 @@ public class CommunityInfoType implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "MessageType [id=" + id + ", typeName=" + typeName + ", typeImg=" + typeImg + "]";
+		return "CommunityInfoType [id=" + id + ", typeName=" + typeName + ", typeImg=" + typeImg + ", unreadCount="
+				+ unreadCount + "]";
+	}
+	public int getUnreadCount() {
+		return unreadCount;
+	}
+	public void setUnreadCount(int unreadCount) {
+		this.unreadCount = unreadCount;
 	}
 	
 
