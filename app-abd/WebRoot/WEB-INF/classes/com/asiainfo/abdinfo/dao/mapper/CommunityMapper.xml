@@ -44,15 +44,15 @@
      
      
      <!-- 根据人员编码查找部门ID -->
-     <select id="selectDepID" resultType="java.util.Map">
+  <!--    <select id="selectDepID" resultType="java.util.Map">
        SELECT id,部门 dep FROM datacenter_personnel  WHERE 人员编码=#{staffCode}
-     </select>
+     </select> -->
      
      <!-- 根据部门ID查询他的全部父级 -->
-     <select id="selectLevelID" resultMap="java.util.Map">
+     <!-- <select id="selectLevelID" resultMap="java.util.Map">
      select levelID from department2 where ID=#{id}
      </select>
-     
+      -->
      
      
 	

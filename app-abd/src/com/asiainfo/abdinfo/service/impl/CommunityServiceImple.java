@@ -67,8 +67,8 @@ public class CommunityServiceImple implements CommunityService{
 		return communityDao.selectTypeName();
 	}
 
-	@Override
-	public void getDepID(String staffCode) {
+//	@Override
+//	public void getDepID(String staffCode) {
 		//判断这个人的部门ID
 //		List<Map> depId=communityDao.selectDepID(staffCode);
 //		System.out.println(depId);
@@ -79,7 +79,7 @@ public class CommunityServiceImple implements CommunityService{
 //		}
 //		System.out.println(communityDao.selectDepID(staffCode));
 		
-	}	
+//	}	
 	
 	
 }

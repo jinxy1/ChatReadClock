@@ -30,6 +30,6 @@ public interface CommunityService {
 	 * @param staffCode
 	 * @return
 	 */
-	void getDepID(String staffCode);
+//	void getDepID(String staffCode);
 
 }

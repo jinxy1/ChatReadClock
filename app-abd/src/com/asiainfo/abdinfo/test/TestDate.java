@@ -20,7 +20,7 @@ public class TestDate {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
 		mlcvp = ac.getBean("communityServiceImple", CommunityServiceImple.class);
 		System.out.println();
-		mlcvp.getDepID("18060405");
+//		mlcvp.getDepID("18060405");
 
 
 	}

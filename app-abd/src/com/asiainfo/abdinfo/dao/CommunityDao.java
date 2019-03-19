@@ -48,10 +48,10 @@ public interface CommunityDao {
 	 * 根据人员编码查询部门
 	 * @return
 	 */
-	List<Map<String, Object>> selectDepID(@Param(value="staffCode") String staffCode);
-	
-	
-	int selectLevelID(@Param(value="id") Integer id);
+//	List<Map<String, Object>> selectDepID(@Param(value="staffCode") String staffCode);
+//	
+//	
+//	int selectLevelID(@Param(value="id") Integer id);
 
 }
 
