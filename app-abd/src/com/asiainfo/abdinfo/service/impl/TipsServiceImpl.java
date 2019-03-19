@@ -1,6 +1,7 @@
 package com.asiainfo.abdinfo.service.impl;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,17 +42,16 @@ public class TipsServiceImpl implements ITipsService{
 		Menus menusCustom=(Menus)JSON.parseObject(customStr,Menus.class);
 		map.put("customcontent", menusCustom.getContent());
 		map.put("customtype", menusCustom.getType());
+		List<Menus> list=new ArrayList<>();
 		num2=tipsDao.updateCustomContent(map);
 		if (sixDiligences.size()==0) {
 			for (Object object : tipsArray) {
 				String str=object.toString();
 				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-				String type=menus.getType();
-				String content=menus.getContent();
-				map.put("type", type);
-				map.put("content", content);
-				num=tipsDao.addTipsDailyfeeling(map);//添加今日感想，今日善行，今日反省，感恩其他
+				list.add(menus);
 			};
+			map.put("listAddM", list);
+			tipsDao.addTipsDailyfeeling(map);
 		}else {
 			for (Object object : tipsArray) {
 				String str=object.toString();
@@ -61,7 +61,6 @@ public class TipsServiceImpl implements ITipsService{
 				map.put("type", type);
 				map.put("content", content);
 				num=tipsDao.updateTipsDailyfeeling(map);
-				
 			};
 		}
 		tipsDao.deleteOwes_content(map);

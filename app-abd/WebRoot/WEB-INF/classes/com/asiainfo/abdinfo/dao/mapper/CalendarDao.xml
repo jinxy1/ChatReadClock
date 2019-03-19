@@ -21,7 +21,7 @@
 	
 	<!-- 日历模块 -->
 	<select id="selectCalendarContent" resultMap="calendar">
-		 SELECT pROJECT,CONTENT,ICON,stutas FROM CALENDAR_PROJECT WHERE STAFF_CODE=#{staffCode} AND DATE=#{date}
+		SELECT pROJECT,CONTENT,ICON,stutas FROM CALENDAR_PROJECT WHERE STAFF_CODE=#{staffCode} AND DATE=#{date}
 		UNION ALL
 		SELECT '【读书感悟】' as project,ReadingFeeling as content, 'book' as icon ,CASE WHEN ReadingFeeling is NULL  OR ReadingFeeling=''  THEN '' else '已读' END from reading_plancontent WHERE staffCode=#{staffCode} and ClockDate=#{date} 
 		UNION ALL
@@ -39,7 +39,7 @@
 	
 	<!-- 将考勤模块单独拿出来 -->
 	<select id="selectAttendance" resultType="String">
-	 SELECT 时间  as content from dakajilu WHERE 工号=#{staffCode} AND 日期=#{date}
+	 SELECT 时间  as content from dakajilu WHERE 工号=#{staffCode} AND 日期=#{date} ORDER BY 时间
 	</select>
 	
 	<!-- 判断指定日期是否有读书内容 -->

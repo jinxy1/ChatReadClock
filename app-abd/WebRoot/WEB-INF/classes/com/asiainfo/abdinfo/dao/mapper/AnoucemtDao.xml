@@ -3,6 +3,7 @@
 <mapper namespace="com.asiainfo.abdinfo.dao.AnoucemtDao">
 	<!-- 公告内容 -->
 	<select id="nowdaytitle" resultType="com.asiainfo.abdinfo.po.Announcement">
-		SELECT * FROM `announcement` WHERE startday&lt;=#{nowday} and endday>=#{nowday}
+		SELECT * FROM `announcement`
+		WHERE startday&lt;=#{nowday} and endday>=#{nowday}
 	</select>
 </mapper>

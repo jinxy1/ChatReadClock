@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,188 +7,201 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>团队介绍</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 <link rel="stylesheet" type="text/css" href="css/swiper.min.css">
-    <style type="text/css">
-        *, *:before, *:after {
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-        }
-        .swiper-container {
-            width: 100%;
-            padding-top: 10px;
-            padding-bottom: 30px;
-        }
-        .swiper-slide {
-            background-position: center;
-            background-size: cover;
-            width: 240px;
-            height: 320px;
+<style type="text/css">
+*, *:before, *:after {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+}
 
-        }
+body {
+	margin: 0;
+	padding: 0;
+}
 
-        .swiper-slide a{
-            color:#1e347b;
-            font-size:16px;
-            text-decoration:none;
-            display:block;
-            text-align:center;
-            height:100%;
-        }
-        .swiper-slide h1{
-            position:absolute;
-            bottom:0;
-            width:100%;
-            font-size:18px;
-            font-weight:normal;
-            background:#900;
-            padding-bottom: 0;
-            margin:0;
-            height:38px;
-            line-height:38px;
-            background: rgba(255, 255, 255, 0.4) none repeat scroll 0 0;
+.swiper-container {
+	width: 100%;
+	padding-top: 10px;
+	padding-bottom: 30px;
+}
 
-        }
+.swiper-slide {
+	background-position: center;
+	background-size: cover;
+	width: 240px;
+	height: 320px;
+}
 
-        .mui-bar {
-            position: fixed;
-            z-index: 10;
-            right: 0;
-            left: 0;
-            height: 44px;
-            padding-right: 10px;
-            padding-left: 10px;
-            border-bottom: 0;
-            background-color: #f7f7f7;
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-        }
+.swiper-slide a {
+	color: #1e347b;
+	font-size: 16px;
+	text-decoration: none;
+	display: block;
+	text-align: center;
+	height: 100%;
+}
 
-        .mui-bar-nav {
-            top: 0;
-        }
-        .t-line {
-            position: relative;
-        }
-        .t-line:before {
-            content: " ";
-            position: absolute;
-            left: 0;
-            top: 0;
-            right: 0;
-            height: 1px;
-            border-top: 1px solid rgba(207, 207, 207, 0.95);
-            color: rgba(207, 207, 207, 0.95);
-            -webkit-transform-origin: 0 0;
-            transform-origin: 0 0;
-            -webkit-transform: scaleY(0.501);
-            transform: scaleY(0.501);
-        }
+.swiper-slide h1 {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	font-size: 18px;
+	font-weight: normal;
+	background: #900;
+	padding-bottom: 0;
+	margin: 0;
+	height: 38px;
+	line-height: 38px;
+	background: rgba(255, 255, 255, 0.4) none repeat scroll 0 0;
+}
 
-        .b-line {
-            position: relative;
-        }
-        .b-line:before {
-            content: " ";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            right: 0;
-            height: 1px;
-            border-bottom: 1px solid rgba(207, 207, 207, 0.95);
-            color: rgba(207, 207, 207, 0.95);
-            -webkit-transform-origin: 0 100%;
-            transform-origin: 0 100%;
-            -webkit-transform: scaleY(0.501);
-            transform: scaleY(0.501);
-        }
-        .mui-title {
-            font-size: 17px;
-            font-weight: normal;
-            line-height: 44px;
-            position: absolute;
-            display: block;
-            width: 100%;
-            margin: 0 -10px;
-            padding: 0;
-            text-align: center;
-            white-space: nowrap;
-            color: #000;
-        }
-        .mui-bar .mui-title {
-            right: 40px;
-            left: 40px;
-            display: inline-block;
-            overflow: hidden;
-            width: auto;
-            margin: 0;
-            text-overflow: ellipsis;
-        }
-        .mui-title-text{
-            text-align:center;
-            color:#888;
-            font-size:14px;
-        }
+.mui-bar {
+	position: fixed;
+	z-index: 10;
+	right: 0;
+	left: 0;
+	height: 44px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border-bottom: 0;
+	background-color: #f7f7f7;
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+}
 
-        .mui-bar-tab {
-            bottom: 0;
-            display: table;
-            width: 100%;
-            height: 50px;
-            padding: 0;
-            table-layout: fixed;
-            border-top: 0;
-            border-bottom: 0;
-            -webkit-touch-callout: none;
-        }
-        .mui-bar-tab .aui-tab-item {
-            display: table-cell;
-            overflow: hidden;
-            width: 1%;
-            height: 50px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-            color: #707070;
-            text-decoration:none;
-        }
-        .mui-icon {
-            font-family: Muiicons;
-            font-size: 24px;
-            font-weight: 400;
-            font-style: normal;
-            line-height: 1;
-            display: inline-block;
-            text-decoration: none;
-            -webkit-font-smoothing: antialiased;
-        }
-        .mui-bar .mui-icon {
-            font-size: 24px;
-            position: relative;
-            z-index: 20;
-            padding-top: 10px;
-            padding-bottom: 10px;
-        }
-        .mui-bar-tab .aui-tab-item .mui-icon {
-            top: 4px;
-            width: 19px;
-            height: 19px;
-            padding-top: 0;
-            padding-bottom: 0;
-        }
-        .mui-bar-tab .aui-tab-item .mui-icon~.mui-tab-label {
-            font-size: 12px;
-            display: block;
-            overflow: hidden;
-            text-overflow: ellipsis;
+.mui-bar-nav {
+	top: 0;
+}
 
-        }
-        /*.mui-icon-home {
+.t-line {
+	position: relative;
+}
+
+.t-line:before {
+	content: " ";
+	position: absolute;
+	left: 0;
+	top: 0;
+	right: 0;
+	height: 1px;
+	border-top: 1px solid rgba(207, 207, 207, 0.95);
+	color: rgba(207, 207, 207, 0.95);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: scaleY(0.501);
+	transform: scaleY(0.501);
+}
+
+.b-line {
+	position: relative;
+}
+
+.b-line:before {
+	content: " ";
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	height: 1px;
+	border-bottom: 1px solid rgba(207, 207, 207, 0.95);
+	color: rgba(207, 207, 207, 0.95);
+	-webkit-transform-origin: 0 100%;
+	transform-origin: 0 100%;
+	-webkit-transform: scaleY(0.501);
+	transform: scaleY(0.501);
+}
+
+.mui-title {
+	font-size: 17px;
+	font-weight: normal;
+	line-height: 44px;
+	position: absolute;
+	display: block;
+	width: 100%;
+	margin: 0 -10px;
+	padding: 0;
+	text-align: center;
+	white-space: nowrap;
+	color: #000;
+}
+
+.mui-bar .mui-title {
+	right: 40px;
+	left: 40px;
+	display: inline-block;
+	overflow: hidden;
+	width: auto;
+	margin: 0;
+	text-overflow: ellipsis;
+}
+
+.mui-title-text {
+	text-align: center;
+	color: #888;
+	font-size: 14px;
+}
+
+.mui-bar-tab {
+	bottom: 0;
+	display: table;
+	width: 100%;
+	height: 50px;
+	padding: 0;
+	table-layout: fixed;
+	border-top: 0;
+	border-bottom: 0;
+	-webkit-touch-callout: none;
+}
+
+.mui-bar-tab .aui-tab-item {
+	display: table-cell;
+	overflow: hidden;
+	width: 1%;
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	color: #707070;
+	text-decoration: none;
+}
+
+.mui-icon {
+	font-family: Muiicons;
+	font-size: 24px;
+	font-weight: 400;
+	font-style: normal;
+	line-height: 1;
+	display: inline-block;
+	text-decoration: none;
+	-webkit-font-smoothing: antialiased;
+}
+
+.mui-bar .mui-icon {
+	font-size: 24px;
+	position: relative;
+	z-index: 20;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.mui-bar-tab .aui-tab-item .mui-icon {
+	top: 4px;
+	width: 19px;
+	height: 19px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.mui-bar-tab .aui-tab-item .mui-icon ~.mui-tab-label {
+	font-size: 12px;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+/*.mui-icon-home {
             background-image: url('data:image/png;base64,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');
             background-size:19px;
             background-repeat:no-repeat;
@@ -222,122 +235,124 @@
             background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFoAAABaCAYAAAA4qEECAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTM4IDc5LjE1OTgyNCwgMjAxNi8wOS8xNC0wMTowOTowMSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTcgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NkI5MDQ3NkEyODkxMTFFN0E4NzVFRTg5MkVFRjFGQ0UiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NkI5MDQ3NkIyODkxMTFFN0E4NzVFRTg5MkVFRjFGQ0UiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBODJDQ0VGRjI4OTAxMUU3QTg3NUVFODkyRUVGMUZDRSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBODJDQ0YwMDI4OTAxMUU3QTg3NUVFODkyRUVGMUZDRSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PjQuDCwAAAmDSURBVHja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');
 
         }*/
-        .mui-active .mui-tab-label{
-            color:#da1e38;
-        }
-        .mui-sou{
-            text-align:center;
-            width:140px;
-            margin:0 auto;
-        }
-        .mui-sou img{
-            width:100%;
-            height:100%;
-            display:block;
-            border:none;
-        }
+.mui-active .mui-tab-label {
+	color: #da1e38;
+}
 
-        .box-line {
-            position: relative;
-        }
-        .box-line:before {
-            content: " ";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 200%;
-            height: 200%;
-            border: 1px solid rgba(207, 207, 207, 0.95);
-            border-radius: 5px;
-            color: rgba(207, 207, 207, 0.95);
-            -webkit-transform-origin: 0 0;
-            transform-origin: 0 0;
-            -webkit-transform: scale(0.501);
-            transform: scale(0.501);
-        }
-    </style>
+.mui-sou {
+	text-align: center;
+	width: 140px;
+	margin: 0 auto;
+}
+
+.mui-sou img {
+	width: 100%;
+	height: 100%;
+	display: block;
+	border: none;
+}
+
+.box-line {
+	position: relative;
+}
+
+.box-line:before {
+	content: " ";
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200%;
+	height: 200%;
+	border: 1px solid rgba(207, 207, 207, 0.95);
+	border-radius: 5px;
+	color: rgba(207, 207, 207, 0.95);
+	-webkit-transform-origin: 0 0;
+	transform-origin: 0 0;
+	-webkit-transform: scale(0.501);
+	transform: scale(0.501);
+}
+</style>
 </head>
 <body>
-<header class="mui-bar mui-bar-nav aui-header b-line">
-    <h1 class="mui-title">数据中心</h1>
-</header>
-<div class="mui-title-text">
-    <p>数据创造价值。
-    创新从不止步。</p>
-</div>
-<div class="swiper-container">
-    <div class="swiper-wrapper">
-        <div class="swiper-slide" style="background-image:url(img/hql.jpg)">
-            <a href="#" target="_blank">
-                <h1>韩启龙</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/whc.jpg)">
-            <a href="#" target="b">
-                <h1>王海成</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/jxy.jpg)">
-            <a href="#">
-                <h1>进晓宇</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/xy.jpg)">
-            <a href="#">
-                <h1>薛银</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/ljc.jpg)">
-            <a href="#">
-                <h1>刘建成</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/bxs.jpg)">
-            <a href="#">
-                <h1>鲍雪松</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/xmg.jpg)">
-            <a href="#">
-                <h1>刑梦鸽</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/wt.jpg)">
-            <a href="#">
-                <h1>王童</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/lzy.jpg)">
-            <a href="#">
-                <h1>李子莹</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/dmd.jpg)">
-            <a href="#">
-                <h1>杜明达</h1>
-            </a>
-        </div>
-        <div class="swiper-slide" style="background-image:url(img/bsw.jpg)">
-            <a href="#">
-                <h1>包思文</h1>
-            </a>
-        </div>
+	<header class="mui-bar mui-bar-nav aui-header b-line">
+	<h1 class="mui-title">数据中心</h1>
+	</header>
+	<div class="mui-title-text">
+		<p>数据创造价值。 创新从不止步。</p>
+	</div>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide" style="background-image: url(img/hql.jpg)">
+				<a href="#" target="_blank">
+					<h1>韩启龙</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/whc.jpg)">
+				<a href="#" target="b">
+					<h1>王海成</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/jxy.jpg)">
+				<a href="#">
+					<h1>进晓宇</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/xy.jpg)">
+				<a href="#">
+					<h1>薛银</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/ljc.jpg)">
+				<a href="#">
+					<h1>刘建成</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/bxs.jpg)">
+				<a href="#">
+					<h1>鲍雪松</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/xmg.jpg)">
+				<a href="#">
+					<h1>刑梦鸽</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/wt.jpg)">
+				<a href="#">
+					<h1>王童</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/lzy.jpg)">
+				<a href="#">
+					<h1>李子莹</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/dmd.jpg)">
+				<a href="#">
+					<h1>杜明达</h1>
+				</a>
+			</div>
+			<div class="swiper-slide" style="background-image: url(img/bsw.jpg)">
+				<a href="#">
+					<h1>包思文</h1>
+				</a>
+			</div>
 
-        <div class="swiper-slide" style="background-image:url(img/df.jpg)">
-            <a href="#">
-                <h1>代菲</h1>
-            </a>
-        </div>
-        <!--<div class="swiper-slide" style="background-image:url(img/22.jpg)">
+			<div class="swiper-slide" style="background-image: url(img/df.jpg)">
+				<a href="#">
+					<h1>代菲</h1>
+				</a>
+			</div>
+			<!--<div class="swiper-slide" style="background-image:url(img/22.jpg)">
             <a href="#">
                 <h1>唐嫣</h1>
             </a>
         </div> -->
 
-    </div>
-</div>
-<!--<div class="mui-sou box-line"><img src="img/sou.png" alt=""></div>-->
-<!--<nav class="mui-bar mui-bar-tab">
+		</div>
+	</div>
+	<!--<div class="mui-sou box-line"><img src="img/sou.png" alt=""></div>-->
+	<!--<nav class="mui-bar mui-bar-tab">
     <div class="t-line">
         <a href="#" class="aui-tab-item ">
             <span class="mui-icon mui-icon-home"></span>
@@ -362,8 +377,8 @@
     </div>
 
 </nav>-->
-<script src="js/swiper.min.js"></script>
-<script type="text/javascript">
+	<script src="js/swiper.min.js"></script>
+	<script type="text/javascript">
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
         effect: 'coverflow',

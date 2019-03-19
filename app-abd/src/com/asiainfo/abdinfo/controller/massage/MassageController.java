@@ -14,10 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.asiainfo.abdinfo.common.JsonUtils;
 import com.asiainfo.abdinfo.common.ResponseUtils;
 import com.asiainfo.abdinfo.po.Massage;
 import com.asiainfo.abdinfo.po.PageBean;
+import com.asiainfo.abdinfo.po.User;
+import com.asiainfo.abdinfo.service.ICommunityService;
 import com.asiainfo.abdinfo.service.IMassageService;
 import com.asiainfo.abdinfo.service.IStutasService;
 import com.asiainfo.abdinfo.utils.mybatis.paginator.domain.PageBounds;
@@ -29,6 +32,8 @@ public class MassageController{
 	private IMassageService iMassageService;
 	@Resource
 	private IStutasService stutasService;
+	@Resource
+	private ICommunityService communityService;
 	/**查询信息流*/
 	@RequestMapping(value="massage.do")
 	@ResponseBody
@@ -60,11 +65,12 @@ public class MassageController{
 	/**统计未读信息流个数*/
 	@RequestMapping(value="massageCount.do")
 	@ResponseBody
-	public void findMassageCount(HttpServletRequest request, HttpServletResponse response,HttpSession session){
+	public void findMassageCount(String user,HttpServletRequest request, HttpServletResponse response,HttpSession session){
 		String staffCode=request.getParameter("staffCode");
+		User users=JSON.parseObject(user,User.class);
 		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("staffCode", staffCode);
-		Integer countMassage=iMassageService.findCount(map);
+		Integer countMassage=communityService.getunlessMsgCount(users);
 		Integer countFabulous=stutasService.selectFabulousNum(map);
 		List<Integer> count=new ArrayList<Integer>();
 		count.add(countMassage);

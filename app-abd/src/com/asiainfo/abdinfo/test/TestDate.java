@@ -11,8 +11,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.asiainfo.abdinfo.po.Calendar;
 import com.asiainfo.abdinfo.po.Community;
 import com.asiainfo.abdinfo.service.impl.CommunityServiceImple;
-import com.asiainfo.abdinfo.service.impl.LinkageHomeImple;
-import com.asiainfo.abdinfo.service.impl.ReadClockImple;
 
 public class TestDate {
 
@@ -23,31 +21,11 @@ public class TestDate {
 		mlcvp = ac.getBean("communityServiceImple", CommunityServiceImple.class);
 		System.out.println();
 		mlcvp.getDepID("18060405");
-	}
 
+
+	}
 	
-	@Test
-	public void test1() {
-		boolean flag = true;
-		int i = 1;
-		while (flag) {
-			System.out.println("fdkjfhjkd");
-			i++;
-			if (i > 10) {
-				break;
-			}
-		}
-	}
 
-	@Test
-	public void test3() {
-		String a = "24:05:30";
-		String b = "11:05:06";
-		System.out.println(a + b);
-		// dateConversion(a);
-		int c = 0;
-		intConversion(c);
-	}
 
 	private String intConversion(int str) {
 		if (str == 0) {
@@ -61,11 +39,5 @@ public class TestDate {
 		return total;
 	}
 
-	@Test
-	public void test4() {
-		String a = "start,start,startHref";
-		a.split(",");
-		System.out.println(a.split(","));
-	}
-
+	
 }

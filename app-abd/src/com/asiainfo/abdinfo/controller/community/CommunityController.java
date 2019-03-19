@@ -1,8 +1,8 @@
+
 package com.asiainfo.abdinfo.controller.community;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,14 +19,21 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.asiainfo.abdinfo.po.Community;
+import com.asiainfo.abdinfo.po.User;
+import com.asiainfo.abdinfo.po.community.CommunityInfoRead;
+import com.asiainfo.abdinfo.service.ICommunityService;
 import com.asiainfo.abdinfo.service.impl.CommunityServiceImple;
-
+import com.asiainfo.abdinfo.utils.mybatis.paginator.domain.PageBounds;
 @Controller
 public class CommunityController {
 
 	@Autowired
 	private CommunityServiceImple communityServiceImple;
 
+
+	@Autowired
+	private ICommunityService iCommunityService;
+	
 	@ResponseBody
 	@RequestMapping(value = "communityDep.do", method = RequestMethod.POST)
 	public List<String> CommunityDep() {
@@ -60,7 +67,7 @@ public class CommunityController {
 			System.out.println("原文件的名称为" + fileName);
 			// DSC_0154 - 副本.JPG
 			// 判断文件的类型
-			type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".") + 1, fileName.length())
+			type = fileName.indexOf(".") != -1 ? fileName.substring(fileName.lastIndexOf(".")  +1, fileName.length())
 					: null;
 			if (type != null) {
 				if ("PNG".equals(type.toUpperCase()) || "GIF".equals(type.toUpperCase())
@@ -70,15 +77,15 @@ public class CommunityController {
 					System.out.println(realPath);
 
 					// 自定义文件的名字
-					String trueFileName = String.valueOf(System.currentTimeMillis()) + fileName;
+					String trueFileName = String.valueOf(System.currentTimeMillis())+  fileName;
 
 					System.out.println(trueFileName);
-					File fie = new File(realPath + "onloadImg");
+					File fie = new File(realPath+  "onloadImg");
 					if(!fie.exists()){
 						fie.mkdirs();
 					}
 
-					path = realPath + File.separator + "onloadImg" + File.separator + trueFileName;
+					path = realPath + File.separator + "onloadImg"+  File.separator + trueFileName;
 					System.out.println("存放图片文件的路径:" + path);
 					// 转存文件到指定的路径
 					file.transferTo(new File(path));
@@ -101,6 +108,45 @@ public class CommunityController {
     public List<String> typeName(){
     	return communityServiceImple.getTypeName();
     }
+	
+	@RequestMapping(value="getCommunityInfoType.do")
+	@ResponseBody
+	public Map<String, Object> getCommunityInfoType(String user,String typeName,HttpServletRequest request) throws InterruptedException{
+		//Thread.sleep(2000);
+		String pagestr=request.getParameter("page");
+		String limitstr=request.getParameter("limit");
+		String infoTitle=request.getParameter("infoTitle");
+		User users=new User();
+		if (user.length()!=0) {
+			users=JSON.parseObject(user,User.class);
+		}
+		int page=Integer.parseInt(pagestr);
+		int limit=Integer.parseInt(limitstr);
+		PageBounds pb = new PageBounds(page,limit);
+		return iCommunityService.getCommunityMsType(users,typeName,pb,infoTitle);
+	}
+	@RequestMapping(value="changeReadStatus.do")
+	@ResponseBody
+	public Integer changeReadStatus(String communityInfoReadStr){
+		CommunityInfoRead communityInfoRead=JSON.parseObject(communityInfoReadStr,CommunityInfoRead.class);
+		Integer status=iCommunityService.changeReadStatus(communityInfoRead);
+		return status;
+	}
+	@RequestMapping(value="getReadCount.do")
+	@ResponseBody
+	public Integer getReadCount(String communityInfoReadStr){
+		CommunityInfoRead communityInfoRead=JSON.parseObject(communityInfoReadStr,CommunityInfoRead.class);
+		Integer status=iCommunityService.getReadCount(communityInfoRead);
+		return status;
+	}
+	
+	@RequestMapping(value="getUnlessCount.do")
+	@ResponseBody
+	public Integer getUnlessCount(String user){
+		User users=JSON.parseObject(user,User.class);
+		return iCommunityService.getunlessMsgCount(users);
+	}
+	
 
 
 }

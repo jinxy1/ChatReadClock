@@ -146,13 +146,13 @@ public class LinkageHomeImple implements linkageHomeService{
 
 	
     //将String型 转化为int 型
-	private int dateConversion(String str){
+	/*private int dateConversion(String str){
 		int a=Integer.parseInt(str.substring(0,2))*60*60;
 		int b =Integer.parseInt(str.substring(3,5))*60;
 		int c=Integer.parseInt(str.substring(6,8));
 		int tatal=a+b+c;
 		return tatal;
-	}
+	}*/
 
 	
 	//将int类型转化为String型
