@@ -34,7 +34,7 @@ public interface CommunityDao {
 	 * 查询类型的名称
 	 * @return
 	 */
-	List<String> selectTypeName();
+	List<String> selectTypeName(@Param(value="staffCode") String staffCode);
 	
 	
 	/**
@@ -48,10 +48,48 @@ public interface CommunityDao {
 	 * 根据人员编码查询部门
 	 * @return
 	 */
-//	List<Map<String, Object>> selectDepID(@Param(value="staffCode") String staffCode);
-//	
-//	
-//	int selectLevelID(@Param(value="id") Integer id);
+	int selectDepID(@Param(value="staffCode") String staffCode);
+	
+    /**
+     * 根据部门ID查询他的全部父级
+     * @param id
+     * @return
+     */
+	Map<String, String> selectLevelID(@Param(value="id") Integer id);
+	
+
+	
+	/**
+	 *  首先根据部门名称找到上一级部门id 
+	 * @param staffCode
+	 * @return
+	 */
+	int selectOnid(@Param(value="department") String department);
+	
+	
+	/**
+	 *  首先根据部门id找到上一级部门id 
+	 * @param staffCode
+	 * @return
+	 */
+	int selectOnid(@Param(value="department") Integer department);
+	
+	
+	
+	/**
+	 *  <!-- 根据部门找到部门ID -->
+	 * @param dep
+	 * @return
+	 */
+	int selectDepdepId(@Param(value="dep") String dep);
+	
+	
+	
+	/**
+	 * 根据部门id判断该部门是否是基层部门 
+	 */
+	List<String> selectDepBoolean(@Param(value="depID") Integer depID);
+	
 
 }
 

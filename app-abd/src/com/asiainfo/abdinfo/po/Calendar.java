@@ -16,18 +16,21 @@ public class Calendar implements Serializable{
 	private String stutas;
 	
 	
-
-	public String getStutas() {
-		return stutas;
-	}
-
-	public void setStutas(String stutas) {
-		this.stutas = stutas;
-	}
-
 	public Calendar() {
 		super();
 	}
+	
+	
+
+	public Calendar(String project, List<String> contents, String icon, String stutas) {
+		super();
+		this.project = project;
+		this.contents = contents;
+		this.icon = icon;
+		this.stutas = stutas;
+	}
+
+
 
 	public Calendar(String project, List<String> contents, String icon) {
 		super();
@@ -58,6 +61,14 @@ public class Calendar implements Serializable{
 
 	public void setIcon(String icon) {
 		this.icon = icon;
+	}
+	
+	public String getStutas() {
+		return stutas;
+	}
+
+	public void setStutas(String stutas) {
+		this.stutas = stutas;
 	}
 
 	@Override

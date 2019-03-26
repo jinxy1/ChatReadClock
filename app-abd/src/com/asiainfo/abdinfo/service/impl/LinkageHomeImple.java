@@ -1,12 +1,17 @@
 package com.asiainfo.abdinfo.service.impl;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import com.asiainfo.abdinfo.common.CurrentTime;
 import com.asiainfo.abdinfo.dao.CalendarDao;
 import com.asiainfo.abdinfo.dao.LinkageHomeDao;
 import com.asiainfo.abdinfo.po.Calendar;
@@ -34,15 +39,8 @@ public class LinkageHomeImple implements linkageHomeService{
 	 */
 	@Override
 	public List<Calendar> selectCalendarContent(String staffCode, String date) {
-//		List<Calendar> cal=calendarDao.selectCalendarContent( staffCode,  date);
-//		System.out.println(cal);
 		List<Calendar> attend=getAttendance( staffCode,  date);
-//		for(Calendar c:cal){
-//			attend.add(c);
-//		}
-//		System.out.println(attend);
 		return attend;
-		
 	}
   
 	/**
@@ -51,13 +49,25 @@ public class LinkageHomeImple implements linkageHomeService{
 	@Override
 	public List<Calendar> getAttendance(String staffCode, String date) {
 		long startTime=System.currentTimeMillis();
+		String beforeDay=CurrentTime.getSpecifiedDayBefore(date);
+		Calendar  beforeCalendar=calendarDao.selectBefore(staffCode,beforeDay);  //查询出前一天的日期
 		
-		List<String>  calendarTime=calendarDao.selectAttendance(staffCode, date);                        //打卡(按指纹)记录        若空未打卡    若不为空打卡
+		System.out.println(beforeCalendar);
+		
+		System.out.println();
+		
+		List<String> downWorkListfdf=new ArrayList<String>();
+		if(beforeCalendar==null){
+			 beforeCalendar=new Calendar(beforeDay.substring(8, 10)+"号打卡下班时间",downWorkListfdf,"moonRound","");
+		}else{
+			beforeCalendar.setIcon("moonRound");
+		}
+
+		List<String>  calendarTime=calendarDao.selectAttendance(staffCode, date);     //打卡(按指纹)记录        若空未打卡    若不为空打卡
 		System.out.println(calendarTime.size());
 		List<Calendar>  calendar=new ArrayList<Calendar>();    //存放上下班的集合
 		Calendar goWork=new Calendar();          //存放上班的对象
 		Calendar downWork=new Calendar();          //存放下班的对象
-		
 		
 		goWork.setProject("上班时间");
 		downWork.setProject("下班时间");
@@ -84,10 +94,8 @@ public class LinkageHomeImple implements linkageHomeService{
 					   //下班	
 						minDate="";
 						maxDate=calendarTime.get(i);
-					
 					}
 				}else{
-					
 					System.out.println(calendarTime.get(i).compareTo("12:00:00"));
 					
 					//若有多条打卡记录
@@ -108,25 +116,16 @@ public class LinkageHomeImple implements linkageHomeService{
 							
 						}
 					}
-					
-					
-					
 				}
-
 			}
 			goWorkList.add(minDate);
 			downWorkList.add(maxDate);
 		}else{           //未打卡
-//			if(holiday.size()!=0){  //放假
-//				
-//			}else{       //不放假
-//			}
 			int minDate=0;
 			int maxDate=0;
 			goWorkList.add(intConversion(minDate));
 			downWorkList.add(intConversion(maxDate));
-//			goWork.setStutas("未打卡");
-//			downWork.setStutas("未打卡");
+
 		}
 		
 		goWork.setContents(goWorkList);
@@ -135,10 +134,10 @@ public class LinkageHomeImple implements linkageHomeService{
 		List<Calendar> cal=calendarDao.selectCalendarContent( staffCode,  date);
 		cal.add(0,goWork);
 		cal.add(downWork);
-//		calendar.add(goWork);
-//		calendar.add(downWork);
+		cal.add(0,beforeCalendar);
 
-	  
+
+	    System.out.println(cal);
 	    long begtinTime=System.currentTimeMillis();
 	    System.out.println("--------------考勤所用时间-------------------"+(begtinTime-startTime));
 	    return cal;
@@ -178,7 +177,23 @@ public class LinkageHomeImple implements linkageHomeService{
 	}
 
 	
+//	[
+//	Calendar [project=22, contents=[08:23:26, 18:30:20], icon=null, stutas=3], 
+//	 Calendar [project=23, contents=[08:24:01, 18:12:27], icon=null, stutas=6]
+//	 ]	
+	
+	
+	
+
+
+	
+	 
+	
 
 
 
 }
+
+
+
+

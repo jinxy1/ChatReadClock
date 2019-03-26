@@ -30,12 +30,6 @@ public class TestMethod {
 	}
 	
 	
-	@Test
-	public void Test1(){
-
-		
-        
-
-	}
+	
 
 }

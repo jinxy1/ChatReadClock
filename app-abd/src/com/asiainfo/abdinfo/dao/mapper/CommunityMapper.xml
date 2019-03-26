@@ -30,7 +30,10 @@
      
       <!-- 查询类型名称 -->
      <select id="selectTypeName" resultType="String">
-     SELECT typeName FROM flow_type
+		select bb.typeName from flow_permisssion aa 
+		LEFT JOIN flow_type bb ON aa.foreign_flow_type=bb.id
+		WHERE aa.staffCode=#{staffCode}
+		ORDER BY aa.foreign_flow_type
      </select>
      
       <!-- 插入其他 -->
@@ -43,16 +46,42 @@
      </insert>
      
      
-     <!-- 根据人员编码查找部门ID -->
-  <!--    <select id="selectDepID" resultType="java.util.Map">
-       SELECT id,部门 dep FROM datacenter_personnel  WHERE 人员编码=#{staffCode}
-     </select> -->
+     
+     <!-- 根据人员编码查出id 以及部门id -->
+     <select id="selectDepID" resultType="Integer">
+      SELECT id FROM datacenter_personnel  WHERE 人员编码=#{staffCode}
+     </select>
+     
+     
+ 
      
      <!-- 根据部门ID查询他的全部父级 -->
-     <!-- <select id="selectLevelID" resultMap="java.util.Map">
-     select levelID from department2 where ID=#{id}
-     </select>
-      -->
+   <select id="selectLevelID" resultType="java.util.Map">
+     select levelid ,部门  dep  from department2 where ID=#{id}
+   </select> 
+   
+   
+   <!-- 首先根据部门找到上一级部门id -->
+   <select id="selectOnid"  resultType="Integer">
+    select levelid from department2 WHERE `部门`=#{department}
+   </select>
+   
+   
+   <!-- 根据部门找到部门ID -->
+   <select id="selectDepdepId" resultType="Integer">
+   select ID from department2 WHERE `部门`=#{dep}
+   </select>
+   
+   
+   <!--根据部门id判断该部门是否是基层部门  -->
+   <select id="selectDepBoolean" resultType="String">
+   select 部门 from department2 WHERE levelid=#{depID}
+   </select>
+   
+
+   
+   
+
      
      
 	

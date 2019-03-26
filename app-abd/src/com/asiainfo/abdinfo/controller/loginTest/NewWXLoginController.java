@@ -20,7 +20,7 @@ import com.asiainfo.abdinfo.utils.Login.HttpRequest;
  
 
 @Controller
-public class WXLoginController {
+public class NewWXLoginController {
 	
 	//final Base64.Encoder encoder = Base64.getEncoder();
 	
@@ -28,7 +28,7 @@ public class WXLoginController {
 	private NewLoginService newLoginService;
 	
 	
-    @RequestMapping(value = "/decodeUserInfo.do", method=RequestMethod.POST)  
+    @RequestMapping(value = "/decodeUserInfoNew.do", method=RequestMethod.POST)  
     @ResponseBody  
     public Map<String,Object> decodeUserInfo(@RequestParam(value="encryptedData") String encryptedData, @RequestParam(value="iv")String iv,@RequestParam(value="code") String code) {  
     System.out.println(encryptedData+iv+code);
@@ -88,11 +88,21 @@ public class WXLoginController {
     //////////////// 2、对encryptedData加密数据进行AES解密 ////////////////  
     try {  
         String result = AesCbcUtil.decrypt(encryptedData, session_key, iv, "UTF-8");  
+        System.out.println("===========result=================");
+        System.out.println(result);
+        System.out.println("===========result=================");
+        
+        
         if (null != result && result.length() > 0) {  
             map.put("status", 1);  
             map.put("msg", "解密成功");  
  
             JSONObject userInfoJSON = new JSONObject(result);  
+            
+            System.out.println(userInfoJSON);
+            
+            
+            
             Map<String,Object> userInfo = new HashMap<String,Object>();  
             userInfo.put("openId", userInfoJSON.get("openId"));  
             userInfo.put("nickName", "");  
@@ -123,4 +133,16 @@ public class WXLoginController {
         e.printStackTrace();  
     }       	return map;  
 	}
+    
+    
+    private void _3rd_session(){
+    	
+    }
+    
+    
+    
+    
+    
+    
+    
 }

@@ -22,7 +22,7 @@ public interface CommunityService {
 	void insertInfoImage(Integer infoId,String infoImg);
 	
 	
-	List<String> getTypeName();
+	List<String>getTypeName(String staffCode);
 	
 	
 	/**
@@ -30,6 +30,13 @@ public interface CommunityService {
 	 * @param staffCode
 	 * @return
 	 */
-//	void getDepID(String staffCode);
+	List<String> getDepID(String staffCode);
+	
+	
+	
+	public void  getOnid(String department);
+	
+	//根据部门查询部门id
+	int getDepdepId( String dep,List<String> list);
 
 }

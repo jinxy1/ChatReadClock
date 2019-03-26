@@ -105,8 +105,9 @@ public class CommunityController {
 
 	@ResponseBody
 	@RequestMapping(value = "typeName.do", method = RequestMethod.POST)
-    public List<String> typeName(){
-    	return communityServiceImple.getTypeName();
+    public List<String> typeName(HttpServletRequest request){
+		String staffCode=request.getParameter("staffCode");
+    	return communityServiceImple.getTypeName(staffCode);
     }
 	
 	@RequestMapping(value="getCommunityInfoType.do")
@@ -148,5 +149,12 @@ public class CommunityController {
 	}
 	
 
-
+	
+    //根据staffCode查询他所有的部门
+	@RequestMapping(value="getDepment.do",method = RequestMethod.POST)
+	@ResponseBody
+	public List<String> getDep(String staffCode){
+		return communityServiceImple.getDepID(staffCode);
+	}
+	
 }

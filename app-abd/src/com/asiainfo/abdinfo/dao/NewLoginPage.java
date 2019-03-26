@@ -36,6 +36,8 @@ public interface NewLoginPage {
 	 */
 	List<NewLogin> findNewUser(@Param(value="openId") String openId);
 	
+	
+	
 	/**
 	 * 用于展示用户的感想
 	 */

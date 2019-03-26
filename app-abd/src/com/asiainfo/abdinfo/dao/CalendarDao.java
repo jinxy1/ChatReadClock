@@ -20,6 +20,7 @@ public interface CalendarDao {
 	
 	
 	
+	
 	/**
 	 * 考勤模块
 	 * @param staffCode
@@ -27,6 +28,15 @@ public interface CalendarDao {
 	 * @return
 	 */
 	List<String> selectAttendance(@Param(value="staffCode")String staffCode, @Param(value="date") String date);
+	
+	
+	/**
+	 * 查询前一天的日期
+	 * @param staffCode
+	 * @param date
+	 * @return
+	 */
+	Calendar selectBefore(@Param(value="staffCode")String staffCode, @Param(value="beforeDay") String beforeDay);
 	
 	
 	/**
