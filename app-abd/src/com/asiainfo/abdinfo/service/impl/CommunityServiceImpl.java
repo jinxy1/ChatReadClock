@@ -27,6 +27,7 @@ public class CommunityServiceImpl implements ICommunityService{
 	public Map<String, Object> getCommunityMsType(User user,String typeName,PageBounds pb,String infoTitle) {
 		List<CommunityInfoType> communityInfoTypes=icommunityDao.getCommunityMsgType();
 		List<CommunityInfoType> unlessMsgCount =icommunityDao.getUnlessMsgCount(user);
+		String authority=icommunityDao.getAuthority(user.getStaffCode());
 		for (CommunityInfoType communityInfoType : communityInfoTypes) {
 			for (CommunityInfoType InfoType : unlessMsgCount) {
 				if (InfoType.getTypeName().equals(communityInfoType.getTypeName())) {
@@ -51,6 +52,7 @@ public class CommunityServiceImpl implements ICommunityService{
 		map.put("communityInfoTypes", communityInfoTypes);
 		map.put("pageBean", pageBean);
 		map.put("unreadCount", unreadCount);
+		map.put("authority", authority);
 		return map;
 	}
 	/**更改未读信息的状态*/

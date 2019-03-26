@@ -76,4 +76,8 @@
 		and (SELECT status from flow_info_read fir where fir.infoId=fi.id and fir.staffCode=#{user.staffCode}) IS null 
 		GROUP BY typeName
 	</select>
+	
+	<select id="getAuthority" resultType="String">
+    	select role from authority where staffCode=#{staffCode}
+    </select>
 </mapper>

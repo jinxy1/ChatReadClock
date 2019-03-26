@@ -18,7 +18,7 @@ public class CommunityServiceImple implements CommunityService {
 
 	@Autowired
 	private CommunityDao communityDao;
-
+ 
 	@Override
 	public List<String> getCommunityDep() {
 
@@ -90,8 +90,8 @@ public class CommunityServiceImple implements CommunityService {
 	}
 
 	// 根据部门查询部门id
-	@Override
-	public int getDepdepId(String dep, List<String> list) {
+//	@Override
+//	public int getDepdepId(String dep, List<String> list) {
 
 //		long beginTime = System.currentTimeMillis();
 //		// step1 根据部门查询部门ID
@@ -161,7 +161,7 @@ public class CommunityServiceImple implements CommunityService {
 //
 //		long endTime = System.currentTimeMillis();
 //		System.out.println("输入部门所用时长为" + (endTime - beginTime));
-		return 0;
-	}
+//		return 0;
+//	}
 
 }

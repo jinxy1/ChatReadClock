@@ -56,6 +56,7 @@
  
      
      <!-- 根据部门ID查询他的全部父级 -->
+
    <select id="selectLevelID" resultType="java.util.Map">
      select levelid ,部门  dep  from department2 where ID=#{id}
    </select> 
@@ -81,6 +82,15 @@
 
    
    
+
+
+     <!-- <select id="selectLevelID" resultMap="java.util.Map">
+     select levelID from department2 where ID=#{id}
+     </select>
+      -->
+      
+      <!-- 查询 权限-->
+      
 
      
      

@@ -14,7 +14,7 @@ public interface CommunityDao {
 	/**
 	 * 查询所有的部门
 	 * @return
-	 */
+	 */ 
 	List<String> selectCommunityDep();
 	
 	

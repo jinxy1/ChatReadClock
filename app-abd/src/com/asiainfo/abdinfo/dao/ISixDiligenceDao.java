@@ -7,6 +7,7 @@ import com.asiainfo.abdinfo.po.Custom_reflection;
 import com.asiainfo.abdinfo.po.Menus;
 import com.asiainfo.abdinfo.po.SixDiligence;
 import com.asiainfo.abdinfo.po.SixList;
+import com.asiainfo.abdinfo.po.Types;
 import com.asiainfo.abdinfo.po.Works;
 public interface ISixDiligenceDao {
 	
@@ -24,4 +25,6 @@ public interface ISixDiligenceDao {
 	public List<SixList> find(Map<String, Object> map);//查询六项精进"今日感想","今日反省","今日善行","感恩其他"
 	
 	public List<Custom_reflection> findMyDay(Map<String, Object> map);//我的页面查新感想、精进等内容
+	
+	public List<Types> types(Map<String, Object> map);
 }

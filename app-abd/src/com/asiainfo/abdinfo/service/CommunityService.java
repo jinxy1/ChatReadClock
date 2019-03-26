@@ -2,8 +2,6 @@ package com.asiainfo.abdinfo.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.asiainfo.abdinfo.po.Community;
 
 public interface CommunityService {
@@ -15,7 +13,7 @@ public interface CommunityService {
 	
 	
 	/**
-	 * 插入圖片
+	 * 插入圖片 
 	 * @param infoId
 	 * @param infoImg
 	 */
@@ -37,6 +35,6 @@ public interface CommunityService {
 	public void  getOnid(String department);
 	
 	//根据部门查询部门id
-	int getDepdepId( String dep,List<String> list);
+//	int getDepdepId( String dep,List<String> list);
 
 }

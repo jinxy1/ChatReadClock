@@ -2,25 +2,26 @@ package com.asiainfo.abdinfo.service.impl;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.asiainfo.abdinfo.dao.ISixDiligenceDao;
 import com.asiainfo.abdinfo.dao.ITipsDao;
 import com.asiainfo.abdinfo.po.Menus;
-import com.asiainfo.abdinfo.po.SixDiligence;
+import com.asiainfo.abdinfo.po.Types;
 import com.asiainfo.abdinfo.po.User;
 import com.asiainfo.abdinfo.po.Works;
 import com.asiainfo.abdinfo.service.ITipsService;
 
 @Service("ITipsService")
+
 public class TipsServiceImpl implements ITipsService{
 	
 	@Resource
@@ -30,62 +31,111 @@ public class TipsServiceImpl implements ITipsService{
 	private ISixDiligenceDao sixDiligenceDao;
 	/**添加今日感想、反省、善行、工作总结等内容*/
 	@Override
-	public Map<String, Integer> addTipsDailyfeeling(Map<String, Object> map) {
+	@Transactional
+	public int addTipsDailyfeeling(Map<String, Object> map) {
 		
-		List<SixDiligence> sixDiligences=sixDiligenceDao.findSixDiligence(map);
-		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
-		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));//感恩内容
+		try {
+			List<Menus> list=new ArrayList<>();
+			List<Types> types=sixDiligenceDao.types(map);
+			JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
+			if (types.size()==0) {
+				for (Object object : tipsArray) {
+					String str=object.toString();
+					Menus menus=(Menus)JSON.parseObject(str,Menus.class);
+					if (!menus.getContent().equals("")) {
+						list.add(menus);
+					}
+				};
+				if (list.size()!=0) {
+					map.put("listAddM", list);
+					tipsDao.addTipsDailyfeeling(map);
+				}
+			}else{
+				for (Object object : tipsArray) {
+					int i=0;
+					String str=object.toString();
+					Menus menus=(Menus)JSON.parseObject(str,Menus.class);
+					for (Types type : types) {
+						if (type.getType().equals(menus.getType())) {
+							i++;
+							if (!type.getContent().equals(menus.getContent())) {
+								map.put("type", menus.getType());
+								map.put("content", menus.getContent());
+								tipsDao.updateTipsDailyfeeling(map);
+							}
+						}
+					};
+					if (i==0&&!menus.getContent().equals("")) {
+						list.add(menus);
+					}
+				};
+				if (list.size()!=0) {
+					map.put("listAddM", list);
+					tipsDao.addTipsDailyfeeling(map);
+				};
+			}
+		} catch (RuntimeException e) {
+			throw new RuntimeException(e);
+		}
+		return 0;
+	}
+	/**更新自主内容*/
+	@Override
+	public int addCustom_reflection(Map<String, Object> map){
 		String customStr=(String)map.get("customcontent");
-		int num=0;
-		int num1=0;
-		int num2=0;
+		//
 		Menus menusCustom=(Menus)JSON.parseObject(customStr,Menus.class);
 		map.put("customcontent", menusCustom.getContent());
 		map.put("customtype", menusCustom.getType());
-		List<Menus> list=new ArrayList<>();
-		num2=tipsDao.updateCustomContent(map);
-		if (sixDiligences.size()==0) {
-			for (Object object : tipsArray) {
+		tipsDao.updateCustomContent(map);
+		return 0;
+	}
+	/**添加感恩*/
+	@Override
+	@Transactional
+	public int addOwn(Map<String, Object> map){
+		JSONArray jsonArray=JSONArray.parseArray((String)map.get("menus"));//感恩内容
+		List<Menus> list=tipsDao.getOwes_content(map);
+		List<Menus> menu=new ArrayList<>();
+		if (list.size()==0) {
+			for (Object object : jsonArray) {
 				String str=object.toString();
+				System.out.println(str);
 				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-				list.add(menus);
+				if (!menus.getPers().equals("")&&!menus.getDetail().equals("")) {
+					menu.add(menus);
+				}
 			};
-			map.put("listAddM", list);
-			tipsDao.addTipsDailyfeeling(map);
-		}else {
-			for (Object object : tipsArray) {
-				String str=object.toString();
-				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-				String type=menus.getType();
-				String content=menus.getContent();
-				map.put("type", type);
-				map.put("content", content);
-				num=tipsDao.updateTipsDailyfeeling(map);
-			};
-		}
-		tipsDao.deleteOwes_content(map);
-		for (Object object : jsonArray) {
-			String str=object.toString();
-			System.out.println(str);
-			Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-			String per=menus.getPers();
-			String detail=menus.getDetail();
-			Integer id=menus.getId();
-			String staffCodeOther=menus.getStaffCodeOther();
-			map.put("per", per);
-			map.put("detail", detail);
-			map.put("id", id);
-			map.put("staffCodeOther", staffCodeOther);
-			if(per.length()!=0){
-				num1=tipsDao.addTipsOwes_content(map);
+			if (menu.size()!=0) {
+				map.put("menu", menu);
+				tipsDao.addTipsOwes_content(map);
 			}
-		};
-		
-		Map<String, Integer> numMap=new HashMap<String, Integer>();
-		numMap.put("num", num);
-		numMap.put("num1", num1);
-		numMap.put("num2", num2);
-		return numMap;
+		}else{
+			for (Object object : jsonArray) {
+				int i=0;
+				String str=object.toString();
+				System.out.println(str);
+				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
+				for (Menus menuList : list) {
+					if (menuList.getPers().equals(menus.getPers())) {
+						i++;
+						if (!menus.getDetail().equals("")) {
+							map.put("menu", menus);
+							tipsDao.updateOwes_content(map);
+						}
+					}
+				}
+				if (i==0&&!menus.getPers().equals("")&&!menus.getDetail().equals("")) {
+					menu.add(menus);
+				}
+			};
+			
+			if(menu.size()!=0){
+				map.put("menu", menu);
+				tipsDao.addTipsOwes_content(map);
+			}
+		}
+		return 0;
 	}
 	/**查询所有人的姓名信息用于模糊查询*/
 	@Override

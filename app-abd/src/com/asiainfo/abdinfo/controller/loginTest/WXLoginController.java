@@ -107,6 +107,7 @@ public class WXLoginController {
 			}
             map.put("userInfo", userInfo);  
             System.out.println(newLoginService.getUser(userInfo));
+            System.out.println("--------------------");
             if(newLoginService.getUser(userInfo).size()==0){
         	   newLoginService.insertUser(userInfo);      	   
         	}

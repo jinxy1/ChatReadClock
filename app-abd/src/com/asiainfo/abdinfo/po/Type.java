@@ -48,5 +48,10 @@ public class Type implements Serializable{
 	public void setStutas(String stutas) {
 		this.stutas = stutas;
 	}
+	@Override
+	public String toString() {
+		return "Type [Customtype=" + Customtype + ", Customcontent=" + Customcontent + ", date=" + date + ", stutas="
+				+ stutas + "]";
+	}
 	
 }
