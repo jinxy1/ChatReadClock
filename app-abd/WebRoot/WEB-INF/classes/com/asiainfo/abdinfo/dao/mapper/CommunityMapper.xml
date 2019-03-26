@@ -53,6 +53,9 @@
      select levelID from department2 where ID=#{id}
      </select>
       -->
+      
+      <!-- 查询 权限-->
+      
      
      
 	

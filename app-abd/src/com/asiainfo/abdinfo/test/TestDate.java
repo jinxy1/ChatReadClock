@@ -1,15 +1,9 @@
 package com.asiainfo.abdinfo.test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.alibaba.fastjson.JSONObject;
-import com.asiainfo.abdinfo.po.Calendar;
-import com.asiainfo.abdinfo.po.Community;
 import com.asiainfo.abdinfo.service.impl.CommunityServiceImple;
 
 public class TestDate {
@@ -21,23 +15,9 @@ public class TestDate {
 		mlcvp = ac.getBean("communityServiceImple", CommunityServiceImple.class);
 		System.out.println();
 //		mlcvp.getDepID("18060405");
-
+		System.out.println(mlcvp);
+		System.out.println(ac);
 
 	}
-	
-
-
-	private String intConversion(int str) {
-		if (str == 0) {
-			return "";
-		}
-		int a = str / 60 / 60; // 时
-		int b = str / 60 % 60; // 分
-		int c = str % 60; // 秒
-		String total = a + ":" + b + ":" + c;
-		System.out.println(total);
-		return total;
-	}
-
 	
 }

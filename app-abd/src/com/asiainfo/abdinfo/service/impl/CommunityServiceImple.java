@@ -2,7 +2,6 @@ package com.asiainfo.abdinfo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class CommunityServiceImple implements CommunityService{
 	
 	@Autowired
 	private CommunityDao communityDao;
-
+ 
 	@Override
 	public List<String> getCommunityDep() {
 		

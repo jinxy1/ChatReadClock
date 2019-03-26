@@ -2,8 +2,6 @@ package com.asiainfo.abdinfo.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 import com.asiainfo.abdinfo.po.Community;
 
 public interface CommunityService {
@@ -15,7 +13,7 @@ public interface CommunityService {
 	
 	
 	/**
-	 * 插入圖片
+	 * 插入圖片 
 	 * @param infoId
 	 * @param infoImg
 	 */

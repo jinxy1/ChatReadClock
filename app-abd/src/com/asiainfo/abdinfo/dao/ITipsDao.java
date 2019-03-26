@@ -3,6 +3,7 @@ package com.asiainfo.abdinfo.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.asiainfo.abdinfo.po.Menus;
 import com.asiainfo.abdinfo.po.User;
 
 public interface ITipsDao {
@@ -25,6 +26,8 @@ public interface ITipsDao {
 	public int updateWorkSummary(Map<String, Object> map);/**根据id更新工作总结*/
 	public int addWorkPlan(Map<String, Object> map);/**添加工作计划*/
 	public int updateWorkStutas(Map<String, Object> map);/**修改工作状态*/
+	public List<Menus> getOwes_content(Map<String, Object> map);/**查询当天是否插入感恩*/
+	public int updateOwes_content(Map<String, Object> map);/**更新感恩人信息*/
 	
 
 }

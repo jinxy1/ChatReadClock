@@ -2,7 +2,6 @@ package com.asiainfo.abdinfo.test;
 
 
 import org.junit.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -18,7 +17,7 @@ public class TestMethod {
 		ApplicationContext context = new ClassPathXmlApplicationContext("classpath:applicationContext.xml");
 		CommunityDao Dao= (CommunityDao) context.getBean("CommunityDao");
 	
-
+		System.out.println(context);
 		Community comm=new Community();
 		comm.setContent("1");
 		comm.setTitle("232");

@@ -22,5 +22,6 @@ public interface ICommunityDao {
 	public Integer getReadInfo(CommunityInfoRead communityInfoRead);
 	public Integer addReadInfo(CommunityInfoRead communityInfoRead);
 	public List<CommunityInfoType> getUnlessMsgCount(@Param("user") User user);
+	public String getAuthority(@Param("staffCode") String staffCode);
 	
 }

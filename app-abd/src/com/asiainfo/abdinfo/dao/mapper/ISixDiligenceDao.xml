@@ -44,7 +44,7 @@
 		<result property="department" column="department" />
 		<result property="staffName" column="staffName" />
 		<collection property="types" column="types"
-			ofType="com.asiainfo.abdinfo.po.Menus" javaType="ArrayList">
+			ofType="com.asiainfo.abdinfo.po.Types" javaType="ArrayList">
 			<result property="type" column="types" />
 			<result property="content" column="content" />
 		</collection>
@@ -62,7 +62,10 @@
 			order by r.date desc
 		</if>
 	</select>
-
+	<!-- 用于判断感想等内容是插入还是删除 -->
+	<select id="types" resultType="Types">
+		select r.types as type,r.content from Reading_reflection r where staffCode=#{staffCode} and date=#{date}
+	</select>
 	<!-- 查询自主内容 -->
 	<resultMap type="com.asiainfo.abdinfo.po.Menus" id="Customcontent">
 		<id property="id" column="id" />
@@ -199,7 +202,7 @@
 		where  staffCode=#{staffCode} and date=#{date}
 		union all
 		select '精进' type,date,types Customtype,content Customcontent,3 num,1 from Reading_reflection 
-		where staffCode=#{staffCode} and date=#{date}
+		where staffCode=#{staffCode} and date=#{date} 
 		union all
 		SELECT '感恩' type,date,owePerson Customtype,oweDetails Customcontent,2 num,1 from owes_content 
 		where staffCode=#{staffCode} and date=#{date}

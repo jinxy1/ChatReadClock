@@ -25,7 +25,7 @@ public class TipsController {
 	/**添加工作总结、感想、感恩、反省读书感悟等内容*/
 	@RequestMapping(value="/addtips.do")
 	@ResponseBody
-	public Map<String, Integer> addTips( HttpServletRequest request,HttpServletResponse response) throws ParseException{
+	public int addTips( HttpServletRequest request,HttpServletResponse response) throws ParseException{
 		String department=request.getParameter("department");//部门
 		String staffCode=request.getParameter("staffCode");//人员编码
 		String tips=request.getParameter("tips");//今日感想等信息
@@ -42,16 +42,10 @@ public class TipsController {
 		map.put("menus", menus);
 		map.put("customcontent", customcontent);
 		map.put("workList", workList);
-		Map<String, Integer> numMap = new HashMap<String, Integer>();
-		try {
-			numMap = tipsService.addTipsDailyfeeling(map);
-		} catch (Exception e) {
-			numMap.put("num", 0);
-			e.printStackTrace();
-			return numMap;
-			
-		}
-		return numMap;
+		tipsService.addTipsDailyfeeling(map);
+		tipsService.addCustom_reflection(map);
+		tipsService.addOwn(map);
+		return 0;
 	}
 	
 	/**添加工作总结*/

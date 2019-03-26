@@ -11,6 +11,15 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 	<!-- 自动扫描 --> 
 	<context:component-scan base-package="com.asiainfo" />
+	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:conf/jdbc.properties</value>  
+				<value>classpath:conf/rabbitMQ.properties</value>  
+			</list>
+		</property>
+	</bean>
+	<import resource="rabbitmq.xml" /> -->
 	<!-- 引入配置文件 -->
 	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:conf/jdbc.properties" />
@@ -52,7 +61,8 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-	<tx:annotation-driven  transaction-manager="transactionManager" />
+	<!-- <tx:annotation-driven  transaction-manager="transactionManager" /> -->
+	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 	
 
 </beans>

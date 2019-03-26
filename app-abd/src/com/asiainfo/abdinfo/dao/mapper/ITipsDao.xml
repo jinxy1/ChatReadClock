@@ -18,11 +18,7 @@
 			(#{department},#{menu.type},#{menu.content},#{staffCode},#{time},now())
 		</foreach>
 	</insert>
-	<!-- 感恩的具体人 -->
-	<insert id="addTipsOwes_content" parameterType="java.util.Map">
-		insert into owes_content (department,staffCode,date,owePerson,oweDetails,id,staffCodeOther,createTime) VALUES
-		(#{department},#{staffCode},#{time},#{per},#{detail},#{id},#{staffCodeOther},now())
-	</insert>
+	
 	<!-- 更新感想、反省等信息 -->
 	<update id="updateTipsDailyfeeling" parameterType="java.util.Map">
 		update Reading_reflection set content=#{content},createTime=now()
@@ -39,10 +35,28 @@
 	<delete id="deleteTipsOwes_content">
 		delete from owes_content where new_id=#{id}
 	</delete>
+	<!-- 感恩的具体人 -->
+	<insert id="addTipsOwes_content" parameterType="java.util.Map">
+		insert into owes_content (department,staffCode,date,owePerson,oweDetails,id,createTime) VALUES
+		<foreach collection="menu" item="menus" separator=",">
+			(#{department},#{staffCode},#{time},#{menus.pers},#{menus.detail},#{menus.id},now())
+		</foreach>
+	</insert>
 	<!-- 再次提交删除之前的感恩信息，添加当前的感恩信息 -->
 	<delete id="deleteOwes_content">
 		delete from owes_content where staffCode=#{staffCode} and date=#{date}
 	</delete>
+	<!-- 查询感恩人信息 -->
+	<select id="getOwes_content" resultType="com.asiainfo.abdinfo.po.Menus">
+		select owePerson pers,oweDetails detail from owes_content where staffCode=#{staffCode} and date=#{date}
+	</select>
+	<update id="updateOwes_content">
+		update owes_content set oweDetails=#{menu.detail} 
+		where staffCode=#{staffCode} and date=#{date} and owePerson=#{menu.pers}
+	</update>
+	
+	
+	
 	<!-- 查询个人信息 -->
 	<select id="findTips" parameterType="java.util.Map"  resultMap="user">
 		<if test="staffCode==null" >
