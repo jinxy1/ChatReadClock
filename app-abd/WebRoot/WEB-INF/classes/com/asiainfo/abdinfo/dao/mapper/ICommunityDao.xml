@@ -49,7 +49,7 @@
 	</resultMap>
 	<!-- 查询每条信息流对应的图片信息 -->
 	<select id="getImg" resultType="String">
-		select CONCAT('https://www.datacenterlab.cn/onloadImg/',infoImg) infoImg from flow_info_img where infoId=#{id}
+		select CONCAT('http://localhost:8080/app-abd//onloadImg/',infoImg) infoImg from flow_info_img where infoId=#{id}
 		
 	</select>
 	
