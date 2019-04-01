@@ -107,6 +107,9 @@ public class CommunityController {
 	@RequestMapping(value = "typeName.do", method = RequestMethod.POST)
     public List<String> typeName(HttpServletRequest request){
 		String staffCode=request.getParameter("staffCode");
+		System.out.println(staffCode);
+		System.out.println("++++++++++++++++++++++++++++++++++++++++++");
+		System.out.println(communityServiceImple.getTypeName(staffCode));
     	return communityServiceImple.getTypeName(staffCode);
     }
 	

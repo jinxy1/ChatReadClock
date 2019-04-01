@@ -12,11 +12,12 @@
 	<!-- 自动扫描 --> 
 	<context:component-scan base-package="com.asiainfo" />
 	<!-- <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="locations">
+		<property name="location">
 			<list>
 				<value>classpath:conf/jdbc.properties</value>  
 				<value>classpath:conf/rabbitMQ.properties</value>  
 			</list>
+			  
 		</property>
 	</bean>
 	<import resource="rabbitmq.xml" /> -->

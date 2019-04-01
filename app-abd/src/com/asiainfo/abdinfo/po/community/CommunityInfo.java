@@ -19,22 +19,33 @@ public class CommunityInfo implements Serializable{
 	private String infoSendStaffCode;
 	private Personnel personnel;
 	private List<String> communityImgInfo;
+	private List<CommunityPublisherInfo> publisherInfo;
 	private CommunityInfoRead communityInfoRead;
 	private CommunityAcceptInfo acceptInfo;
+	private String typeImg;
 	public CommunityInfo() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
 	@Override
 	public String toString() {
+		final int maxLen = 10;
 		return "CommunityInfo [id=" + id + ", typeName=" + typeName + ", infoTitle=" + infoTitle + ", infoContent="
 				+ infoContent + ", infoCurrentTime=" + infoCurrentTime + ", infoSendStaffCode=" + infoSendStaffCode
-				+ ", personnel=" + personnel + ", communityImgInfo=" + communityImgInfo + ", communityInfoRead="
-				+ communityInfoRead + ", acceptInfo=" + acceptInfo + "]";
+				+ ", personnel=" + personnel + ", communityImgInfo="
+				+ (communityImgInfo != null ? communityImgInfo.subList(0, Math.min(communityImgInfo.size(), maxLen))
+						: null)
+				+ ", publisherInfo="
+				+ (publisherInfo != null ? publisherInfo.subList(0, Math.min(publisherInfo.size(), maxLen)) : null)
+				+ ", communityInfoRead=" + communityInfoRead + ", acceptInfo=" + acceptInfo + ", typeImg=" + typeImg
+				+ "]";
 	}
-	CommunityInfo(Integer id, String typeName, String infoTitle, String infoContent, String infoCurrentTime,
+
+	public CommunityInfo(Integer id, String typeName, String infoTitle, String infoContent, String infoCurrentTime,
 			String infoSendStaffCode, Personnel personnel, List<String> communityImgInfo,
-			CommunityInfoRead communityInfoRead, CommunityAcceptInfo acceptInfo) {
+			List<CommunityPublisherInfo> publisherInfo, CommunityInfoRead communityInfoRead,
+			CommunityAcceptInfo acceptInfo, String typeImg) {
 		super();
 		this.id = id;
 		this.typeName = typeName;
@@ -44,9 +55,12 @@ public class CommunityInfo implements Serializable{
 		this.infoSendStaffCode = infoSendStaffCode;
 		this.personnel = personnel;
 		this.communityImgInfo = communityImgInfo;
+		this.publisherInfo = publisherInfo;
 		this.communityInfoRead = communityInfoRead;
 		this.acceptInfo = acceptInfo;
+		this.typeImg = typeImg;
 	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -110,6 +124,20 @@ public class CommunityInfo implements Serializable{
 	}
 	public void setAcceptInfo(CommunityAcceptInfo acceptInfo) {
 		this.acceptInfo = acceptInfo;
+	}
+	public List<CommunityPublisherInfo> getPublisherInfo() {
+		return publisherInfo;
+	}
+	public void setPublisherInfo(List<CommunityPublisherInfo> publisherInfo) {
+		this.publisherInfo = publisherInfo;
+	}
+
+	public String getTypeImg() {
+		return typeImg;
+	}
+
+	public void setTypeImg(String typeImg) {
+		this.typeImg = typeImg;
 	}
 	
 

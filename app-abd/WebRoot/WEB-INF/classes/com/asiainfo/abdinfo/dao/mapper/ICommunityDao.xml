@@ -10,12 +10,14 @@
 	<!-- 根据条件获取社区信息 -->
 	<select id="getCommunityMsg"  resultMap="communityMsg">
 		<bind name="pattern" value="'%'+infoTitle+ '%'" />
-		SELECT fi.id,fi.infoTitle,fi.infoContent,fi.infoCurrentTime,fi.infoSendStaffCode,fi.typeName,
+		SELECT ft.typeImg,fi.id,fi.infoTitle,fi.infoContent,fi.infoCurrentTime,fi.infoSendStaffCode,fi.typeName,
 		(SELECT status from flow_info_read fir where fir.infoId=fi.id and fir.staffCode=#{user.staffCode}) status,
-		dp.姓名,dp.部门,dp.事业部
+		dp.姓名,dp.部门,dp.事业部,fit.infoTypeName,fit.infoTypeContent
 		from flow_info fi
 		INNER JOIN flow_info_accept fia ON fi.id=fia.infoId
+		INNER JOIN flow_type ft ON ft.typeName=fi.typeName
 		INNER JOIN datacenter_personnel dp on fi.infoSendStaffCode=dp.人员编码
+		LEFT JOIN flow_info_type fit on fit.infoId=fi.id
 		where infoAcceptName in (#{user.staffCode},#{user.department} 
 		,#{user.BU},'公司')
 		<if test="typeName!='全部'">
@@ -33,6 +35,7 @@
 		<id property="id" column="id"/>
 		<result property="infoTitle" column="infoTitle"/>
 		<result property="typeName" column="typeName"/>
+		<result property="typeImg" column="typeImg"/>
 		<result property="infoContent" column="infoContent"/>
 		<result property="infoCurrentTime" column="infoCurrentTime"/>
 		<association property="personnel" javaType="com.asiainfo.abdinfo.po.Personnel">
@@ -44,7 +47,11 @@
 			<result property="status" column="status"/>
 		</association>
 		<collection property="communityImgInfo" ofType="string" column="id"
-		select="com.asiainfo.abdinfo.dao.ICommunityDao.getImg">
+			select="com.asiainfo.abdinfo.dao.ICommunityDao.getImg">
+		</collection>
+		<collection property="publisherInfo" ofType="com.asiainfo.abdinfo.po.community.CommunityPublisherInfo" column="id">
+			<result property="infoTypeName" column="infoTypeName"/>
+			<result property="infoTypeContent" column="infoTypeContent"/>
 		</collection>
 	</resultMap>
 	<!-- 查询每条信息流对应的图片信息 -->
@@ -72,7 +79,7 @@
 		INNER JOIN datacenter_personnel dp on fi.infoSendStaffCode=dp.人员编码 
 		where infoAcceptName in (#{user.staffCode},#{user.department} 
 		,#{user.BU},'公司') 
-		AND fi.typeName in ('系统信息','个人信息','兴趣爱好','百利新闻','兴趣爱好','心里测评','其他') 
+		AND fi.typeName in (SELECT typeName from flow_type) 
 		and (SELECT status from flow_info_read fir where fir.infoId=fi.id and fir.staffCode=#{user.staffCode}) IS null 
 		GROUP BY typeName
 	</select>

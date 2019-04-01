@@ -1,6 +1,5 @@
 package com.asiainfo.abdinfo.test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -16,15 +15,10 @@ public class TestDate {
 	public void test() {
 		CommunityServiceImple mlcvp;
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
+		System.out.println(ac);
 		mlcvp = ac.getBean("communityServiceImple", CommunityServiceImple.class);
-		System.out.println();
-
-		List a=new ArrayList<String>();
-		a.add("华东部");
-		a.add("18060407");
-		a.add("高中升学辅导事业二部");
-	
-
+		List<String> aa=mlcvp.getTypeName("18060405");
+		System.out.println(aa);
 	}
 	
 
@@ -36,6 +30,7 @@ public class TestDate {
 		ApplicationContext ac = new ClassPathXmlApplicationContext("conf/spring-mvc.xml", "conf/spring-mybatis.xml");
 		mlcvp = ac.getBean("killProcessService", KillProcessImple.class);
 		mlcvp.killProcess();
+		System.out.println(ac);
 	}
 	
 		

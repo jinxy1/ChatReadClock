@@ -76,7 +76,7 @@
 		UPDATE
 		Reading_plancontent
 		SET actualReading =
-		now(),timeLength=#{timeLength},ReadingFeeling=#{feeling},num=#{num}
+		now(),update_date=now(),timeLength=#{timeLength},ReadingFeeling=#{feeling},num=#{num}
 		WHERE staffCode=#{staffCode}
 		and clockDate=#{clockDate}
 	</update>

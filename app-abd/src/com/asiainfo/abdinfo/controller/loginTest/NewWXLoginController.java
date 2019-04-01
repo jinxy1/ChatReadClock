@@ -19,7 +19,7 @@ import com.asiainfo.abdinfo.utils.Login.HttpRequest;
 
  
 
-@Controller
+@Controller 
 public class NewWXLoginController {
 	
 	//final Base64.Encoder encoder = Base64.getEncoder();
@@ -134,10 +134,6 @@ public class NewWXLoginController {
     }       	return map;  
 	}
     
-    
-    private void _3rd_session(){
-    	
-    }
     
     
     
