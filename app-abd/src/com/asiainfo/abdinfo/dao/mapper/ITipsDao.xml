@@ -106,4 +106,12 @@
 	<delete id="deleteById">
 		delete from work_plan where id=#{id}
 	</delete>
+	
+	
+	<!-- <select id="a" resultType="com.asiainfo.abdinfo.po.Types">
+		select staffCode as type,clockDate as content from reading_plancontent GROUP BY staffCode,clockDate HAVING COUNT(staffCode)>1
+	</select>
+	<delete id="b">
+		delete from reading_plancontent where staffCode=#{staffCode} and clockDate=#{clockDate} and readingFeeling is null and clockDate &lt; '2019-04-01'
+	</delete> -->
 </mapper>

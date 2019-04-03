@@ -189,6 +189,9 @@
 		<if test="bumen=='11'">
 			事业部=(select 事业部 from datacenter_personnel where 人员编码=#{staffCodeMy}) 
 		</if>
+		<if test="bumen!='11' and bumen!=12">
+			人员编码 =''
+		</if>
 	</select>
 	
 	<resultMap type="com.asiainfo.abdinfo.po.Custom_reflection" id="findMy_day">
