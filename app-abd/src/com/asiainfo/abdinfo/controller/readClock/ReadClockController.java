@@ -3,12 +3,15 @@ package com.asiainfo.abdinfo.controller.readClock;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.asiainfo.abdinfo.common.CurrentTime;
 import com.asiainfo.abdinfo.common.EmojiUtil;
 import com.asiainfo.abdinfo.common.JsonUtils;
@@ -87,7 +90,7 @@ public class ReadClockController {
 		//根据openIdc查询用户名
 		List<NewLogin> login=newLoginService.getNewUser(openId);
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("staffCode", login.get(0).getStaffCode());
+		map.put("staffCode", login.size()==0?"":login.get(0).getStaffCode());
 		List<ReadClock> list=readClockService.getReadIndex1(map);
 		ResponseUtils.renderJson(response, JsonUtils.toJson(list));
 	}

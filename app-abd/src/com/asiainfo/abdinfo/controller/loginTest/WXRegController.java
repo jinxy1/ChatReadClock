@@ -92,7 +92,11 @@ public class WXRegController {
 		public void getNewUser( HttpServletRequest request, HttpServletResponse response) {
 			String openId= request.getParameter("openId");
 			List<NewLogin>  nn=newLoginService.getNewUser(openId);
-			ResponseUtils.renderJson(response, JsonUtils.toJson(nn.get(0).getStaffCode()));	
+			String staffCode="";
+			if(nn.size()!=0){
+				staffCode=nn.get(0).getStaffCode();
+			}
+			ResponseUtils.renderJson(response, JsonUtils.toJson(staffCode));	
 		}
 	 
 	 

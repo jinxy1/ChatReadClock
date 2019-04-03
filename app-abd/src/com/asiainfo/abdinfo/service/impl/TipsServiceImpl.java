@@ -34,49 +34,46 @@ public class TipsServiceImpl implements ITipsService{
 	@Transactional
 	public int addTipsDailyfeeling(Map<String, Object> map) {
 		
-		try {
-			List<Menus> list=new ArrayList<>();
-			List<Types> types=sixDiligenceDao.types(map);
-			JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
-			if (types.size()==0) {
-				for (Object object : tipsArray) {
-					String str=object.toString();
-					Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-					if (!menus.getContent().equals("")) {
-						list.add(menus);
-					}
-				};
-				if (list.size()!=0) {
-					map.put("listAddM", list);
-					tipsDao.addTipsDailyfeeling(map);
+		List<Menus> list=new ArrayList<>();
+		List<Types> types=sixDiligenceDao.types(map);
+		JSONArray tipsArray=JSONArray.parseArray((String)map.get("tips"));//感想、感性、感恩其他
+		if (types.size()==0) {
+			for (Object object : tipsArray) {
+				String str=object.toString();
+				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
+				if (!menus.getContent().equals("")) {
+					list.add(menus);
 				}
-			}else{
-				for (Object object : tipsArray) {
-					int i=0;
-					String str=object.toString();
-					Menus menus=(Menus)JSON.parseObject(str,Menus.class);
-					for (Types type : types) {
-						if (type.getType().equals(menus.getType())) {
-							i++;
-							if (!type.getContent().equals(menus.getContent())) {
-								map.put("type", menus.getType());
-								map.put("content", menus.getContent());
-								tipsDao.updateTipsDailyfeeling(map);
-							}
+			};
+			if (list.size()!=0) {
+				map.put("listAddM", list);
+				tipsDao.addTipsDailyfeeling(map);
+			}
+		}else{
+			for (Object object : tipsArray) {
+				int i=0;
+				String str=object.toString();
+				Menus menus=(Menus)JSON.parseObject(str,Menus.class);
+				for (Types type : types) {
+					if (type.getType().equals(menus.getType())) {
+						i++;
+						if (!type.getContent().equals(menus.getContent())) {
+							map.put("type", menus.getType());
+							map.put("content", menus.getContent());
+							tipsDao.updateTipsDailyfeeling(map);
 						}
-					};
-					if (i==0&&!menus.getContent().equals("")) {
-						list.add(menus);
 					}
 				};
-				if (list.size()!=0) {
-					map.put("listAddM", list);
-					tipsDao.addTipsDailyfeeling(map);
-				};
-			}
-		} catch (RuntimeException e) {
-			throw new RuntimeException(e);
+				if (i==0&&!menus.getContent().equals("")) {
+					list.add(menus);
+				}
+			};
+			if (list.size()!=0) {
+				map.put("listAddM", list);
+				tipsDao.addTipsDailyfeeling(map);
+			};
 		}
+		
 		return 0;
 	}
 	/**更新自主内容*/
@@ -162,18 +159,18 @@ public class TipsServiceImpl implements ITipsService{
 	}
 	@Override
 	public int addWorkSummary(Map<String, Object> map) {
-			Works works=(Works)JSON.parseObject(map.get("workList").toString(),Works.class);
-			map.put("work", works);
-			System.out.println(map.get("codeStr").toString());
-			if (map.get("codeStr").toString().equals("1")) {
-				tipsDao.addWorkPlan(map);
-			}else{
-				if (works.getId()!=null) {
-					tipsDao.updateWorkSummary(map);
-				}else {
-					tipsDao.addWorkSummary(map);
-				}
+		Works works=(Works)JSON.parseObject(map.get("workList").toString(),Works.class);
+		map.put("work", works);
+		System.out.println(map.get("codeStr").toString());
+		if (map.get("codeStr").toString().equals("1")) {
+			tipsDao.addWorkPlan(map);
+		}else{
+			if (works.getId()!=null) {
+				tipsDao.updateWorkSummary(map);
+			}else {
+				tipsDao.addWorkSummary(map);
 			}
+		}
 		return 0;
 	}
 	@Override

@@ -42,10 +42,15 @@ public class TipsController {
 		map.put("menus", menus);
 		map.put("customcontent", customcontent);
 		map.put("workList", workList);
-		tipsService.addTipsDailyfeeling(map);
-		tipsService.addCustom_reflection(map);
-		tipsService.addOwn(map);
-		return 0;
+		try {
+			tipsService.addTipsDailyfeeling(map);
+			tipsService.addCustom_reflection(map);
+			tipsService.addOwn(map);
+		} catch (Exception e) {
+			return 0;
+			
+		}
+		return 1;
 	}
 	
 	/**添加工作总结*/
